@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -130,6 +138,84 @@
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Area.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Banner.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Blog.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category_blog.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category_Movie.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Config.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbONlineMallManagement.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbONlineMallManagement.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbONlineMallManagement.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbONlineMallManagement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbONlineMallManagement.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Event.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Feedback.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Movie.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Room.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sale.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Screening.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Screening_seat.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Seat.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Service.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Shop.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Shop_Product.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -3343,6 +3429,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\DbONlineMallManagement.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DbONlineMallManagement.Context.cs</LastGenOutput>
+      <DependentUpon>DbONlineMallManagement.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\DbONlineMallManagement.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DbONlineMallManagement.edmx</DependentUpon>
+      <LastGenOutput>DbONlineMallManagement.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\client\assets\css\Flaticon.eot" />
@@ -3476,6 +3572,13 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <EntityDeploy Include="Models\DbONlineMallManagement.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DbONlineMallManagement.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DbONlineMallManagement.edmx.diagram">
+      <DependentUpon>DbONlineMallManagement.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3526,7 +3629,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -3540,6 +3642,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
