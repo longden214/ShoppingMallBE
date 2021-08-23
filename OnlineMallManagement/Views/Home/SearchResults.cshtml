@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "SearchResults";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Breadcrumbs-->
+<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="/Content/client/images/backgrounds/background-01-1920-900.jpg">
+    <div class="parallax-content">
+        <div class="bg-overlay-darker">
+            <div class="container-wide section-34 section-md-60 section-lg-top-130 section-lg-bottom-155">
+                <div class="d-none d-lg-block">
+                    <div class="h1 breadcrumbs-custom-title">Search results</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-34 bg-selago">
+    <div class="container">
+        <ul class="list-inline list-inline-12 list-inline-icon breadcrumbs-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li class="active">Search results</li>
+        </ul>
+    </div>
+</section>
+<div class="page-content section-80 section-md-120">
+    <!-- Search Results-->
+    <section>
+        <div class="container">
+            <div class="row justify-content-center row-30">
+                <div class="col-lg-6">
+                    <!--RD Search-->
+                    <form class="form-inline-custom form-search form-search-blog rd-search" action="search-results.html" method="GET">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="form-label form-search-label" for="blog-classic-form-search-widget">Search...</label>
+                                <input class="form-search-input form-control null" id="blog-classic-form-search-widget" type="text" name="s" autocomplete="off">
+                            </div>
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary form-search-submit" type="submit">search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12">
+                    <div class="rd-search-results"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

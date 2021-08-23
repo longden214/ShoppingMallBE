@@ -1,0 +1,215 @@
+﻿
+@{
+    ViewBag.Title = "MovieCheckout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section MovieCss{
+    <link rel="stylesheet" href="~/Content/client/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/client/assets/css/all.min.css">
+    <link rel="stylesheet" href="~/Content/client/assets/css/animate.css">
+    <link rel="stylesheet" href="~/Content/client/assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/Content/client/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/client/assets/css/odometer.css">
+    <link rel="stylesheet" href="~/Content/client/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/client/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Content/client/assets/css/nice-select.css">
+    <link rel="stylesheet" href="~/Content/client/assets/css/main.css">
+}
+
+@section MovieScripts{
+    <script src="~/Content/client/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/client/assets/js/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/client/assets/js/plugins.js"></script>
+    <script src="~/Content/client/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/client/assets/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/client/assets/js/magnific-popup.min.js"></script>
+    <script src="~/Content/client/assets/js/owl.carousel.min.js"></script>
+    <script src="~/Content/client/assets/js/wow.min.js"></script>
+    <script src="~/Content/client/assets/js/countdown.min.js"></script>
+    <script src="~/Content/client/assets/js/odometer.min.js"></script>
+    <script src="~/Content/client/assets/js/viewport.jquery.js"></script>
+    <script src="~/Content/client/assets/js/nice-select.js"></script>
+    <script src="~/Content/client/assets/js/main.js"></script>
+}
+
+<div class="page-content">
+
+    <section class="details-banner hero-area bg_img seat-plan-banner"
+             data-background="/Content/client/assets/images/banner/banner04.jpg"
+             style="background-image: url(/Content/client/assets/images/banner/banner04.jpg&quot;);">
+        <div class="container">
+            <div class="details-banner-wrapper">
+                <div class="details-banner-content style-two">
+                    <h3 class="title" style="color: #fff">Venus</h3>
+                    <div class="tags">
+                        <a href="#0">City Walk</a>
+                        <a href="#0">English - 2D</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-title bg-one">
+        <div class="container">
+            <div class="page-title-area">
+                <div class="item md-order-1">
+                    <a href="movie-ticket-plan.html" class="custom-button back-button">
+                        <i class="flaticon-double-right-arrows-angles"></i>back
+                    </a>
+                </div>
+                <div class="item date-item" style="color: #d0dbff; ">
+                    <span class="date" style="color: #d0dbff; ">MON, SEP 09 2020</span>
+                    <select class="select-bar">
+                        <option value="sc1">09:40</option>
+                        <option value="sc2">13:45</option>
+                        <option value="sc3">15:45</option>
+                        <option value="sc4">19:50</option>
+                    </select>
+                </div>
+                <div class="item">
+                    <h5 class="title" style="color: #fff; ">05:00</h5>
+                    <p style="color: #d0dbff; ">Mins Left</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="movie-facility padding-bottom padding-top" style="
+            background-color: #001232;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8" style="text-align: left;">
+
+                    <div class="checkout-widget checkout-contact">
+                        <h5 class="title" style="color: #fff; ">Share your Contact  Details </h5>
+                        <form class="checkout-contact-form">
+                            <div class="form-group">
+                                <input type="text" placeholder="Full Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter your Mail">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter your Phone Number ">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Continue" class="custom-button">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="checkout-widget checkout-contact">
+                        <h5 class="title" style="color: #fff; ">Promo Code </h5>
+                        <form class="checkout-contact-form">
+                            <div class="form-group">
+                                <input type="text" placeholder="Please enter promo code">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Verify" class="custom-button">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="checkout-widget checkout-card mb-0">
+                        <h5 class="title" style="color: #fff; ">Payment Option </h5>
+                        <ul class="payment-option">
+                            <li class="active">
+                                <a href="#0">
+                                    <img src="~/Content/client/assets/images/payment/card.png" alt="payment">
+                                    <span>Credit Card</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0">
+                                    <img src="~/Content/client/assets/images/payment/card.png" alt="payment">
+                                    <span>Debit Card</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0">
+                                    <img src="~/Content/client/assets/images/payment/paypal.png" alt="payment">
+                                    <span>paypal</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <h6 class="subtitle" style="color: #fff; ">Enter Your Card Details </h6>
+                        <form class="payment-card-form" style="color: #d0dbff; ">
+                            <div class="form-group w-100">
+                                <label for="card1">Card Details</label>
+                                <input type="text" id="card1">
+                                <div class="right-icon">
+                                    <i class="flaticon-lock"></i>
+                                </div>
+                            </div>
+                            <div class="form-group w-100">
+                                <label for="card2"> Name on the Card</label>
+                                <input type="text" id="card2">
+                            </div>
+                            <div class="form-group">
+                                <label for="card3">Expiration</label>
+                                <input type="text" id="card3" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="card4">CVV</label>
+                                <input type="text" id="card4" placeholder="CVV">
+                            </div>
+                            <div class="form-group check-group">
+                                <input id="card5" type="checkbox" checked="">
+                                <label for="card5">
+                                    <span class="title">QuickPay</span>
+                                    <span class="info">Save this card information to my Boleto  account and make faster payments.</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="custom-button" value="make payment">
+                            </div>
+                        </form>
+                        <p class="notice">
+                            By Clicking "Make Payment" you agree to the <a href="#0">terms and conditions</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="booking-summery bg-one">
+                        <h4 class="title" style="color: #fff; ">booking summery</h4>
+                        <ul>
+                            <li>
+                                <h6 class="subtitle" style="color: #fff; ">Venus</h6>
+                                <span class="info">English-2d</span>
+                            </li>
+
+                            <li>
+                                <h6 class="subtitle" style="color: #fff; ">Day</h6>
+                                <span class="info">10 SEP TUE</span>
+                            </li>
+                            <li>
+                                <h6 class="subtitle" style="color: #fff; ">Times</h6>
+                                <span class="info">11:00 PM</span>
+                            </li>
+                            <li>
+                                <h6 class="subtitle" style="color: #fff; ">Seats</h6>
+                                <span class="info">D7,D8</span>
+                            </li>
+                            <li>
+                                <h6 class="subtitle mb-0" style="color: #fff; "><span>Tickets  Price</span><span>$150</span></h6>
+                            </li>
+                        </ul>
+
+                        <ul>
+                            <li>
+                                <span class="info"><span>price</span><span>$207</span></span>
+                                <br>
+                                <span class="info"><span>vat</span><span>$15</span></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="proceed-area  text-center">
+                        <h6 class="subtitle" style="color: #fff; "><span>Amount Payable</span><span>$222</span></h6>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
