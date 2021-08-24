@@ -51,10 +51,18 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Intercom, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Intercom.Dotnet.Client.2.1.1\lib\net452\Intercom.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RestSharp, Version=106.5.4.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.5.4\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -1916,6 +1924,7 @@
     <Content Include="Content\admin\assets\css\dragula.min.css" />
     <Content Include="Content\admin\assets\css\style.css" />
     <Content Include="Content\admin\assets\css\toastr.min.css" />
+    <Content Include="Content\admin\assets\js\controllers\AccountController.js" />
     <Content Include="Content\admin\assets\js\dragula.min.js" />
     <Content Include="Content\admin\assets\js\plugins\ckeditor\adapters\jquery.js" />
     <Content Include="Content\admin\assets\js\plugins\ckeditor\build-config.js" />
@@ -3557,6 +3566,7 @@
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_login.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
     <None Include="Content\client\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\client\fonts\fontawesome-webfont.svg" />
     <None Include="Content\client\fonts\fontawesome-webfont.ttf" />

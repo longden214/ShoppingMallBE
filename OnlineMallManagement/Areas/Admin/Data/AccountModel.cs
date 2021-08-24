@@ -42,10 +42,10 @@ namespace OnlineMallManagement.Areas.Admin.Data
 
     public class LoginViewModel
     {
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Vui lòng nhập tên tài khoản!")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "UserName cannot be empty!")]
         public string username { set; get; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Vui lòng nhập mật khẩu!")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Passwords cannot be empty!")]
         public string password { set; get; }
         public bool RememberMe { set; get; }
     }

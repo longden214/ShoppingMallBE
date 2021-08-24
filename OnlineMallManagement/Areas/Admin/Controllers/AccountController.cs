@@ -2,6 +2,7 @@
 using OnlineMallManagement.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,12 +19,23 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            var name = HttpContext.Application["uName"].ToString();
+            ViewBag.Admin = dbContext.Admins.FirstOrDefault(x => x.UserName == name);
+
             return View();
         }
 
         public ActionResult Login()
         {
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Clear();
+            HttpContext.Application.Clear();
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpPost]
@@ -41,15 +53,79 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
                     Session["username"] = data.FirstOrDefault().UserName;
                     Session["id"] = data.FirstOrDefault().Id;
 
+                    HttpContext.Application["uName"] = data.FirstOrDefault().UserName;
+                    HttpContext.Application["uId"] = data.FirstOrDefault().Id;
+                    HttpContext.Application["displayName"] = data.FirstOrDefault().DisplayName;
+
                     return RedirectToAction("Index", "Dashboard");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Tài khoản không chính xác!");
+                    ModelState.AddModelError("", "Incorrect account!");
                 }
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditAccount(Models.Admin model)
+        {
+            
+            var uid = Convert.ToInt32(HttpContext.Application["uId"].ToString());
+            var item = dbContext.Admins.Find(uid);
+            item.UserName = model.UserName;
+            item.DisplayName = model.DisplayName;
+            item.Email = model.Email;
+            item.Phone = model.Phone;
+            dbContext.Entry(item).State = EntityState.Modified;
+            try
+            {
+                HttpContext.Application["displayName"] = model.DisplayName;
+                dbContext.SaveChanges();
+
+                return Json(new { success = true, displayName = model.DisplayName });
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(Models.Admin model)
+        {
+            var uid = Convert.ToInt32(HttpContext.Application["uId"].ToString());
+            var item = dbContext.Admins.Find(uid);
+            item.Password = new AccountModel().MD5Hash(model.Password);
+            dbContext.Entry(item).State = EntityState.Modified;
+            try
+            {
+                dbContext.SaveChanges();
+
+                return Json(new { success = true });
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult ValidationPassword(string pass)
+        {
+            var uid = Convert.ToInt32(HttpContext.Application["uId"].ToString());
+            var _pass = new AccountModel().MD5Hash(pass);
+
+            var data = dbContext.Admins.Where(x => x.Id == uid && x.Password == _pass).ToList();
+            if (data.Count() > 0)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false });
+            }
         }
     }
 }
