@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+
+<div class="content-header row">
+    <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h2 class="content-header-title float-left mb-0">Cinema Management</h2>
+                <div class="breadcrumb-wrapper">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Movies</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Genre Movie
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+    </div>
+</div>
+<div class="content-body">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Add new movie genre</h4>
+                </div>
+                <div class="card-body">
+                    <form class="form form-vertical">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <input type="hidden" id="category-id" class="form-control" value="0">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="first-name-icon">Genre</label>
+                                    <div class="input-group input-group-merge">
+                                        <input type="text" id="category-name" class="form-control" name="name" placeholder="Name">
+                                    </div>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="email-id-icon">Slug</label>
+                                    <div class="input-group input-group-merge">
+                                        <input type="text" id="category-slug" class="form-control" name="slug" placeholder="Slug">
+                                    </div>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="email-id-icon">Meta Title</label>
+                                    <div class="input-group input-group-merge">
+                                        <input type="text" id="category-meta-title" class="form-control" name="meta-title" placeholder="Meta title">
+                                    </div>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="email-id-icon">Meta Keyword</label>
+                                    <div class="input-group input-group-merge">
+                                        <input type="text" id="category-meta-keyword" class="form-control" name="meta-keyword" placeholder="Meta keyword">
+                                    </div>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="email-id-icon">Meta Description</label>
+                                    <div class="input-group input-group-merge">
+                                        <input type="text" id="category-meta-description" class="form-control" name="meta-description" placeholder="Meta description">
+                                    </div>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="reset" class="btn btn-primary mr-1 waves-effect waves-float waves-light" id="btn-add-category">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card card-datatable table-responsive">
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row d-flex justify-content-between align-items-center m-1">
+                        <div class="col-lg-6 d-flex align-items-center">
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center justify-content-lg-end flex-lg-nowrap flex-wrap pr-lg-1 p-0">
+                            <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                                <span>Search</span>
+                                <label>
+                                    <input type="search" class="form-control" id="category-search" placeholder="Search Invoice" aria-controls="DataTables_Table_0">
+                                </label>
+                            </div>
+                            <div class="invoice_status ml-sm-2"></div>
+                        </div>
+                    </div>
+                    <table class="invoice-list-table table dataTable no-footer dtr-column category_table" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                        <thead>
+                            <tr role="row">
+                                <th class="control sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="display: none;"></th>
+                                <th class="sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 46px;" aria-sort="descending" aria-label="#: activate to sort column ascending">#</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 270px;" aria-label="Client: activate to sort column ascending">Genre</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 200px;" aria-label="Total: activate to sort column ascending">Slug</th>
+                                <th class="cell-fit sorting_disabled" rowspan="1" colspan="1" style="width: 80px;" aria-label="Actions">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div id="category-navigation">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination mt-2" style="justify-content: center;">
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/mustache.min.js"></script>
+    <script src="~/Content/admin/assets/js/controllers/CategoryMovieController.js"></script>
+}

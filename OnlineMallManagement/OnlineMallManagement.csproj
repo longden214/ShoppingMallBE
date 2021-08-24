@@ -138,6 +138,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryMovieController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Data\AccountModel.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -1925,6 +1926,7 @@
     <Content Include="Content\admin\assets\css\style.css" />
     <Content Include="Content\admin\assets\css\toastr.min.css" />
     <Content Include="Content\admin\assets\js\controllers\AccountController.js" />
+    <Content Include="Content\admin\assets\js\controllers\CategoryMovieController.js" />
     <Content Include="Content\admin\assets\js\dragula.min.js" />
     <Content Include="Content\admin\assets\js\plugins\ckeditor\adapters\jquery.js" />
     <Content Include="Content\admin\assets\js\plugins\ckeditor\build-config.js" />
@@ -3567,6 +3569,7 @@
     <Content Include="Areas\Admin\Views\Shared\_login.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryMovie\Index.cshtml" />
     <None Include="Content\client\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\client\fonts\fontawesome-webfont.svg" />
     <None Include="Content\client\fonts\fontawesome-webfont.ttf" />
