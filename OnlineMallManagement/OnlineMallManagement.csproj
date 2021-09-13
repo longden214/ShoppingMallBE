@@ -45,6 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CKFinder, Version=2.6.0.2792, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Admin\Downloads\ckfinder\bin\Release\CKFinder.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -55,6 +59,9 @@
       <HintPath>..\packages\Intercom.Dotnet.Client.2.1.1\lib\net452\Intercom.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp, Version=106.5.4.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.5.4\lib\net452\RestSharp.dll</HintPath>
     </Reference>
@@ -138,10 +145,33 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AreaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BannerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryBlogController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryMovieController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ConfigController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContactController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EventsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GalleryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MovieController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SalesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ScreeningController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SeatController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ServicesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ShopController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Shop_ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Data\AccountModel.cs" />
+    <Compile Include="Areas\Admin\Data\BlogViewModel.cs" />
+    <Compile Include="Areas\Admin\Data\MovieViewModel.cs" />
+    <Compile Include="Areas\Admin\Data\ScreeningViewModel.cs" />
+    <Compile Include="Areas\Admin\Data\SeatViewModel.cs" />
+    <Compile Include="Areas\Admin\Data\UserViewModel.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -153,15 +183,21 @@
     <Compile Include="Models\Admin.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminRole.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Area.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AreaMetaData.cs" />
     <Compile Include="Models\Banner.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Blog.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\CategoryBlogMeta.cs" />
     <Compile Include="Models\Category_blog.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
@@ -192,15 +228,25 @@
     <Compile Include="Models\Event.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EventsMetaData.cs" />
     <Compile Include="Models\Feedback.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FeedbackViewModel.cs" />
+    <Compile Include="Models\gallery.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Movie.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Movie_type.cs">
+      <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Order.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PaypalConfiguration.cs" />
+    <Compile Include="Models\PaypalLogger.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
@@ -210,9 +256,11 @@
     <Compile Include="Models\Sale.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SalesMetaData.cs" />
     <Compile Include="Models\Screening.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ScreeningViewClient.cs" />
     <Compile Include="Models\Screening_seat.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
@@ -222,12 +270,16 @@
     <Compile Include="Models\Service.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ServicesMetaData.cs" />
     <Compile Include="Models\Shop.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShopMetaData.cs" />
     <Compile Include="Models\Shop_Product.cs">
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Shop_ProductMetaData.cs" />
+    <Compile Include="Models\UserRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1923,11 +1975,25 @@
     <Content Include="Content\admin\app-assets\vendors\js\vendors.min.js" />
     <Content Include="Content\admin\app-assets\vendors\js\waves\waves.min.js" />
     <Content Include="Content\admin\assets\css\dragula.min.css" />
+    <Content Include="Content\admin\assets\css\flatpickr.min.css" />
+    <Content Include="Content\admin\assets\css\jquery.bootstrap-touchspin.css" />
+    <Content Include="Content\admin\assets\css\select2.min.css" />
     <Content Include="Content\admin\assets\css\style.css" />
     <Content Include="Content\admin\assets\css\toastr.min.css" />
+    <Content Include="Content\admin\assets\js\Banner.js" />
+    <Content Include="Content\admin\assets\js\Config.js" />
     <Content Include="Content\admin\assets\js\controllers\AccountController.js" />
+    <Content Include="Content\admin\assets\js\controllers\BlogController.js" />
     <Content Include="Content\admin\assets\js\controllers\CategoryMovieController.js" />
+    <Content Include="Content\admin\assets\js\controllers\gallery.js" />
+    <Content Include="Content\admin\assets\js\controllers\MovieController.js" />
+    <Content Include="Content\admin\assets\js\controllers\RoomController.js" />
+    <Content Include="Content\admin\assets\js\controllers\ScreeningController.js" />
+    <Content Include="Content\admin\assets\js\controllers\SeatController.js" />
+    <Content Include="Content\admin\assets\js\controllers\UserController.js" />
     <Content Include="Content\admin\assets\js\dragula.min.js" />
+    <Content Include="Content\admin\assets\js\flatpickr.js" />
+    <Content Include="Content\admin\assets\js\jquery.bootstrap-touchspin.js" />
     <Content Include="Content\admin\assets\js\plugins\ckeditor\adapters\jquery.js" />
     <Content Include="Content\admin\assets\js\plugins\ckeditor\build-config.js" />
     <Content Include="Content\admin\assets\js\plugins\ckeditor\ckeditor.js" />
@@ -3070,6 +3136,7 @@
     <Content Include="Content\admin\assets\js\plugins\ckfinder\skins\v1\uipanel.css" />
     <Content Include="Content\admin\assets\js\plugins\ckfinder\translations.txt" />
     <Content Include="Content\admin\assets\js\scripts.js" />
+    <Content Include="Content\admin\assets\js\select2.min.js" />
     <Content Include="Content\admin\assets\js\toastr.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -3099,8 +3166,11 @@
     <Content Include="Content\client\assets\css\odometer.css" />
     <Content Include="Content\client\assets\css\owl.carousel.min.css" />
     <Content Include="Content\client\assets\css\owl.theme.default.min.css" />
+    <Content Include="Content\client\assets\images\background\cinema-bg.jpg" />
     <Content Include="Content\client\assets\images\banner\banner03.jpg" />
     <Content Include="Content\client\assets\images\banner\banner04.jpg" />
+    <Content Include="Content\client\assets\images\banner\bnMovie.jpg" />
+    <Content Include="Content\client\assets\images\banner\moviebaner2.jpg" />
     <Content Include="Content\client\assets\images\cast\cast01.jpg" />
     <Content Include="Content\client\assets\images\cast\cast02.jpg" />
     <Content Include="Content\client\assets\images\cast\cast03.jpg" />
@@ -3207,7 +3277,10 @@
     <Content Include="Content\client\assets\webfonts\fa-solid-900.svg" />
     <Content Include="Content\client\css\bootstrap.css" />
     <Content Include="Content\client\css\fonts.css" />
+    <Content Include="Content\client\css\map\magiczoomplus.css" />
+    <Content Include="Content\client\css\map\style.css" />
     <Content Include="Content\client\css\normalize.min.css" />
+    <Content Include="Content\client\css\paymentAlert.css" />
     <Content Include="Content\client\css\reset.min.css" />
     <Content Include="Content\client\css\style.css" />
     <Content Include="Content\client\images\backgrounds\background-01-1920-900.jpg" />
@@ -3431,10 +3504,15 @@
     <Content Include="Content\client\js\3ts2ksMwXvKRuG480KNifJ2_JNM.js" />
     <Content Include="Content\client\js\4o300efCt-CXoq1JEC-sVReFz48.js" />
     <Content Include="Content\client\js\classie.min.js" />
+    <Content Include="Content\client\js\contact.js" />
     <Content Include="Content\client\js\core.min.js" />
     <Content Include="Content\client\js\list.min.js" />
+    <Content Include="Content\client\js\Map\magiczoomplus.js" />
+    <Content Include="Content\client\js\Map\map.js" />
     <Content Include="Content\client\js\modernizr.min.js" />
+    <Content Include="Content\client\js\MovieController.js" />
     <Content Include="Content\client\js\script.js" />
+    <Content Include="Content\client\template\mail-invoice.html" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
@@ -3444,8 +3522,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\DbONlineMallManagement.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DbONlineMallManagement.Context.cs</LastGenOutput>
       <DependentUpon>DbONlineMallManagement.edmx</DependentUpon>
+      <LastGenOutput>DbONlineMallManagement.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\DbONlineMallManagement.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -3570,6 +3648,49 @@
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CategoryMovie\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Movie\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Movie\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Movie\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Room\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Seat\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Screening\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Screening\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Screening\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Area\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Area\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Area\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Area\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Services\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Services\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Services\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Services\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Events\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Events\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Events\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Events\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Sales\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Sales\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Sales\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Sales\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop_Product\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop_Product\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop_Product\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop_Product\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Banner\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\Index.cshtml" />
+    <Content Include="Content\client\css\FoodMansory.css" />
+    <Content Include="Areas\Admin\Views\CategoryBlog\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryBlog\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryBlog\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryBlog\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Gallery\Index.cshtml" />
     <None Include="Content\client\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\client\fonts\fontawesome-webfont.svg" />
     <None Include="Content\client\fonts\fontawesome-webfont.ttf" />
@@ -3607,6 +3728,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\mustache.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -3642,9 +3764,15 @@
     <Content Include="Views\Service\ShopSingle.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\ServiceUnavailable.cshtml" />
+    <Content Include="Views\Checkout\Failure.cshtml" />
+    <Content Include="Views\Checkout\Success.cshtml" />
+    <Content Include="Views\Shared\TopHeader.cshtml" />
+    <Content Include="Views\Shared\BottomFooter.cshtml" />
+    <Content Include="Views\Shared\SEOWeb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

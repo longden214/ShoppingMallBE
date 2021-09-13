@@ -1,0 +1,160 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@section scripts{
+    <script src="~/Content/admin/assets/js/controllers/gallery.js"></script>
+    <script src="~/Scripts/mustache.min.js"></script>
+}
+
+<div class="content-header row">
+    <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h2 class="content-header-title float-left mb-0">Gallery Management</h2>
+                <div class="breadcrumb-wrapper">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Gallery
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+    </div>
+</div>
+<div class="content-body">
+    <!-- Kick start -->
+    <div class="card">
+
+        <div class="card-body">
+            <div class="row d-flex justify-content-between align-items-center m-1">
+                <div class="col-lg-6 d-flex align-items-center">
+                    <div class="dataTables_length" id="DataTables_Table_0_length">
+                        <label>
+                            Show
+                            <select id="DataTables_gallery_length" aria-controls="DataTables_Table_0" class="custom-select form-control">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </label>
+                    </div>
+                    @if (User.IsInRole("User") || User.IsInRole("Admin"))
+                    {
+                        <div class="dt-action-buttons text-xl-right text-lg-left text-lg-right text-left ">
+                            <div class="dt-buttons">
+                                <button class="dt-button btn btn-primary btn-add-record ml-2" onclick="return showModel();" tabindex="0" aria-controls="DataTables_Table_0" type="button"><span>Add Record</span></button>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <table id="gallery_table" class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Status</th>
+                        @if (User.IsInRole("User") || User.IsInRole("Admin"))
+                        {
+                            <th>Action</th>
+                        }
+                    </tr>
+                </thead>
+
+                <tbody class="tbody">
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-between mx-2 row">
+                <div class="col-sm-12 col-md-12">
+                    <div class="dataTables_paginate paging_simple_numbers" id="gallery_paginate">
+                        <ul class="pagination" style="justify-content: center;">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    </div>
+                    <div class="modal-body">
+                        <form id="register-form">
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <br />
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="edit-img-banner" placeholder="Button on right" aria-describedby="button-addon2">
+
+                                    <button class="btn btn-outline-primary waves-effect" id="btn-image-banner" type="button">File</button>
+                                </div>
+                                <small id="vimage" class="text-danger"></small>
+                            </div>
+
+                            <div class="custom-control custom-checkbox form-group">
+                                <input type="checkbox" name="status" class="custom-control-input" value="true" id="Status" checked>
+                                <label class="custom-control-label" for="Status">Status</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnUpdate" onclick=" Add()">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--/ Kick start -->
+</div>
+
+
+<script id="gallary-list" type="x-tmpl-mustache">
+    <tr role="row" class="odd" id="gallery_{{Id}}">
+        <td class=" control" tabindex="0" style="display: none;"></td>
+        <td class="sorting_1"><a class="font-weight-bold" href="javascript:void(0);"> {{Id}}</a></td>
+        <td>
+            <div class="d-flex justify-content-left align-items-center">
+                <div class="avatar-wrapper">
+                    <div class="avatar-content-row" style="background-image: url('{{Image}}');"> </div>
+                </div>
+
+            </div>
+        </td>
+        <td>
+            {{{Status}}}
+        </td>
+        @if (User.IsInRole("User") || User.IsInRole("Admin"))
+        {
+        <td>
+            <div class="dropdown">
+                <button type="button" class="btn btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                </button>
+                <div class="dropdown-menu" style="">
+
+                    <a class="dropdown-item btn-delete-movie" href="javascript:void(0);" data-id="{{Id}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        <span>Delete</span>
+                    </a>
+                    <a class="dropdown-item btn-change-status-movie" href="javascript:void(0);" data-id="{{Id}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <span>Status</span>
+                    </a>
+                </div>
+            </div>
+        </td>
+        }
+    </tr>
+</script>

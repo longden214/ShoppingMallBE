@@ -5,12 +5,12 @@
 }
 
 <!-- Breadcrumbs-->
-<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="/Content/client/images/backgrounds/background-01-1920-900.jpg">
+<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="@ViewBag.Banner.Image">
     <div class="parallax-content">
         <div class="bg-overlay-darker">
             <div class="container-wide section-34 section-md-60 section-lg-top-130 section-lg-bottom-155">
                 <div class="d-none d-lg-block">
-                    <div class="h1 breadcrumbs-custom-title">Sales</div>
+                    <div class="h1 breadcrumbs-custom-title">@ViewBag.Banner.description</div>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
 <section class="section-34 bg-selago">
     <div class="container">
         <ul class="list-inline list-inline-12 list-inline-icon breadcrumbs-list">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li class="active">Sales</li>
         </ul>
     </div>
@@ -90,108 +90,43 @@
                 <h3>Actual Sales</h3>
             </div>
             <div class="row justify-content-sm-center offset-top-35 offset-lg-top-55">
-                <div class="col-sm-6 col-xl-4">
-                    <!-- Product-->
-                    <div class="product product-horizontal product-horizontal-xs product-horizontal-hovered">
-                        <div class="product-left bg-bermuda">
-                            <div>
-                                <h3 class="text-white">70%</h3>
-                                <p class="text-white offset-top-0 offset-lg-top-10"><span class="font-italic">from</span> <span class="font-weight-bold">Sep 11</span> <br> <span class="font-italic">to</span> <span class="font-weight-bold">Oct 1</span></p>
+                @{ var i = 1; }
+
+                @foreach (var item in ViewBag.Sales)
+                {
+                    var isOffsetTop = i > 1 ? "offset-top-30" : "";
+                    var isOffsetLgTop = (i == 3 || i == 2) ? "offset-sm-top-0" : "";
+
+                    <div class="col-sm-6 col-xl-4 @isOffsetTop @isOffsetLgTop">
+                        <!-- Product-->
+                        <div class="product product-horizontal product-horizontal-xs product-horizontal-hovered">
+                            <div class="product-left bg-bermuda">
+                                <div>
+
+                                    <h3 class="text-white">@item.Sale1 %</h3>
+                                    <p class="text-white offset-top-0 offset-lg-top-10">
+                                        <span class="font-italic">from</span>
+                                        <span class="font-weight-bold">@item.StartDate.ToString("MMM, dd")</span>
+                                        <br>
+                                        <span class="font-italic">to</span> <span class="font-weight-bold">@item.EndDate.ToString("MMM, dd")</span>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-body bg-default">
-                            <div class="d-lg-inline-block"><a href="#"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-01-93x85.png" width="93" height="85" alt=""></a></div>
-                            <div class="d-lg-inline-block inset-lg-left-35 inset-xl-left-15 inset-xxl-left-35 text-left offset-top-20 offset-lg-top-0">
-                                <p>Original is one of the largest international fashion companies.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-4 offset-top-30 offset-sm-top-0">
-                    <!-- Product-->
-                    <div class="product product-horizontal product-horizontal-xs product-horizontal-hovered">
-                        <div class="product-left bg-bermuda">
-                            <div>
-                                <h3 class="text-white">20%</h3>
-                                <p class="text-white offset-top-0 offset-lg-top-10"><span class="font-italic">from</span> <span class="font-weight-bold">Sep 11</span> <br> <span class="font-italic">to</span> <span class="font-weight-bold">Oct 1</span></p>
-                            </div>
-                        </div>
-                        <div class="product-body bg-default">
-                            <div class="d-lg-inline-block"><a href="#"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-02-104x65.png" width="104" height="65" alt=""></a></div>
-                            <div class="d-lg-inline-block inset-lg-left-35 inset-xl-left-15 inset-xxl-left-35 text-left offset-top-20 offset-lg-top-0">
-                                <p>Andrew Jones Studio is a jewelry store located at Audrey Mall.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-4 offset-top-30 offset-xl-top-0">
-                    <!-- Product-->
-                    <div class="product product-horizontal product-horizontal-xs product-horizontal-hovered">
-                        <div class="product-left bg-bermuda">
-                            <div>
-                                <h3 class="text-white">35%</h3>
-                                <p class="text-white offset-top-0 offset-lg-top-10"><span class="font-italic">from</span> <span class="font-weight-bold">Sep 11</span> <br> <span class="font-italic">to</span> <span class="font-weight-bold">Oct 1</span></p>
-                            </div>
-                        </div>
-                        <div class="product-body bg-default">
-                            <div class="d-lg-inline-block"><a href="#"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-03-93x71.png" width="93" height="71" alt=""></a></div>
-                            <div class="d-lg-inline-block inset-lg-left-35 inset-xl-left-15 inset-xxl-left-35 text-left offset-top-20 offset-lg-top-0">
-                                <p>Sam Records offers a wide variety of affordable music CDs <span class="d-lg-none d-xxl-inline-block">available at our mall.</span></p>
+                            <div class="product-body bg-default">
+                                <div class="d-lg-inline-block">
+                                    <a href="@Url.Action("SaleSingle","Home",new { id = item.Sale_id })">
+                                        <img class="img-semi-transparent-inverse" src="@item.Shop.Logo" width="104" height="65" alt="">
+                                    </a>
+                                </div>
+                                <div class="d-lg-inline-block inset-lg-left-35 inset-xl-left-15 inset-xxl-left-35 text-left offset-top-20 offset-lg-top-0">
+                                    <p>@item.slug</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-6 col-xl-4 offset-top-30">
-                    <!-- Product-->
-                    <div class="product product-horizontal product-horizontal-xs product-horizontal-hovered">
-                        <div class="product-left bg-bermuda">
-                            <div>
-                                <h3 class="text-white">50%</h3>
-                                <p class="text-white offset-top-0 offset-lg-top-10"><span class="font-italic">from</span> <span class="font-weight-bold">Sep 11</span> <br> <span class="font-italic">to</span> <span class="font-weight-bold">Oct 1</span></p>
-                            </div>
-                        </div>
-                        <div class="product-body bg-default">
-                            <div class="d-lg-inline-block"><a href="#"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-04-91x82.png" width="91" height="82" alt=""></a></div>
-                            <div class="d-lg-inline-block inset-lg-left-35 inset-xl-left-15 inset-xxl-left-35 text-left offset-top-20 offset-lg-top-0">
-                                <p>Authentic creates clothes for the modern women who like to look stylish.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-4 offset-top-30">
-                    <!-- Product-->
-                    <div class="product product-horizontal product-horizontal-xs product-horizontal-hovered">
-                        <div class="product-left bg-bermuda">
-                            <div>
-                                <h3 class="text-white">25%</h3>
-                                <p class="text-white offset-top-0 offset-lg-top-10"><span class="font-italic">from</span> <span class="font-weight-bold">Sep 11</span> <br> <span class="font-italic">to</span> <span class="font-weight-bold">Oct 1</span></p>
-                            </div>
-                        </div>
-                        <div class="product-body bg-default">
-                            <div class="d-lg-inline-block"><a href="#"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-05-84x70.png" width="84" height="70" alt=""></a></div>
-                            <div class="d-lg-inline-block inset-lg-left-35 inset-xl-left-15 inset-xxl-left-35 text-left offset-top-20 offset-lg-top-0">
-                                <p>Bellerose had embellished beautiful journey in the personalized gifts industry.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-4 offset-top-30">
-                    <!-- Product-->
-                    <div class="product product-horizontal product-horizontal-xs product-horizontal-hovered">
-                        <div class="product-left bg-bermuda">
-                            <div>
-                                <h3 class="text-white">40%</h3>
-                                <p class="text-white offset-top-0 offset-lg-top-10"><span class="font-italic">from</span> <span class="font-weight-bold">Sep 11</span> <br> <span class="font-italic">to</span> <span class="font-weight-bold">Oct 1</span></p>
-                            </div>
-                        </div>
-                        <div class="product-body bg-default">
-                            <div class="d-lg-inline-block"><a href="#"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-06-81x79.png" width="81" height="79" alt=""></a></div>
-                            <div class="d-lg-inline-block inset-lg-left-35 inset-xl-left-15 inset-xxl-left-35 text-left offset-top-20 offset-lg-top-0">
-                                <p>Colombo has slowly grown to five retail furniture stores including Audrey Mall.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                    i++;
+                }
             </div>
         </div>
     </section>

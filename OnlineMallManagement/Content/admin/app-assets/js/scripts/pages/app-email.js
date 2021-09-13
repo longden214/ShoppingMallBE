@@ -208,13 +208,6 @@ $(function () {
     });
   }
 
-  // Email Right sidebar toggle
-  if (emailUserList.find('li').length) {
-    emailUserList.find('li').on('click', function (e) {
-      emailDetails.toggleClass('show');
-    });
-  }
-
   // Add class active on click of sidebar list
   if (listGroupMsg.find('a').length) {
     listGroupMsg.find('a').on('click', function () {
@@ -222,14 +215,6 @@ $(function () {
         listGroupMsg.find('a').removeClass('active');
       }
       $(this).addClass('active');
-    });
-  }
-
-  // Email detail view back button click
-  if (goBack.length) {
-    goBack.on('click', function (e) {
-      e.stopPropagation();
-      emailDetails.removeClass('show');
     });
   }
 

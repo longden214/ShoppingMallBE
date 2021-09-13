@@ -17,7 +17,7 @@ namespace OnlineMallManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category_Movie()
         {
-            this.Movies = new HashSet<Movie>();
+            this.Movie_type = new HashSet<Movie_type>();
         }
     
         public int Cate_id { get; set; }
@@ -30,6 +30,6 @@ namespace OnlineMallManagement.Models
         public string Meta_description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Movie> Movies { get; set; }
+        public virtual ICollection<Movie_type> Movie_type { get; set; }
     }
 }

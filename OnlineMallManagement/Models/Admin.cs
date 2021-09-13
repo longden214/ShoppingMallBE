@@ -17,7 +17,7 @@ namespace OnlineMallManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Admin()
         {
-            this.Roles = new HashSet<Role>();
+            this.AdminRoles = new HashSet<AdminRole>();
         }
     
         public int Id { get; set; }
@@ -28,6 +28,6 @@ namespace OnlineMallManagement.Models
         public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<AdminRole> AdminRoles { get; set; }
     }
 }

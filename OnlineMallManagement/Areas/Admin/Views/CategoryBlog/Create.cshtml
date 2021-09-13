@@ -1,0 +1,89 @@
+﻿@model OnlineMallManagement.Models.Category_blog
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <section id="basic-vertical-layouts">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Create Area</h4>
+                    </div>
+                    <div class="card-body">
+                        <form class="form form-horizontal">
+                            <div class="row">
+                                <div class="col-sm-12" style="text-align">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="col-12">
+                                        <div class="mb-1 row">
+                                            <div class="col-12">
+                                                <label>Name</label>
+                                                <br />
+                                                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control",@id = "categoryBlog_name" } })
+                                                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-1 row">
+                                            <div class="col-sm-12">
+                                                <label>Slug</label>
+                                                @Html.EditorFor(model => model.slug, new { htmlAttributes = new { @class = "form-control", @id = "categoryBlog_slug", @readonly="readonly" } })
+                                                @Html.ValidationMessageFor(model => model.slug, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-1 row">
+                                            <div class="col-sm-12">
+                                                <label>Meta_title</label>
+                                                <br />
+                                                @Html.EditorFor(model => model.Meta_title, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Meta_title, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-1 row">
+                                            <div class="col-sm-12">
+                                                <label>Meta_keyword</label>
+                                                <br />
+                                                @Html.EditorFor(model => model.Meta_keyword, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Meta_keyword, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-1 row">
+                                            <div class="col-sm-12">
+                                                <label>Meta_description</label>
+                                                @Html.EditorFor(model => model.Meta_description, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Meta_description, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9 offset-sm-0">
+                                        <button type="submit" class="btn btn-primary me-1 waves-effect waves-float waves-light">Submit</button>
+                                        <button type="reset" class="btn btn-outline-secondary waves-effect">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/admin/assets/js/scripts.js"></script>
+}

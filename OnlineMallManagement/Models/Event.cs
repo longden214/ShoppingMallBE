@@ -16,12 +16,9 @@ namespace OnlineMallManagement.Models
     {
         public int Event_id { get; set; }
         public int Shop_ShoId { get; set; }
-        public System.DateTime Date { get; set; }
-        public System.TimeSpan StartTime { get; set; }
         public double Price { get; set; }
         public string Title { get; set; }
         public string Descriptions { get; set; }
-        public System.TimeSpan EndTime { get; set; }
         public string Image { get; set; }
         public string Address { get; set; }
         public string slug { get; set; }
@@ -31,6 +28,8 @@ namespace OnlineMallManagement.Models
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<bool> Status { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
     
         public virtual Shop Shop { get; set; }
     }

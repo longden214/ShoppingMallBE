@@ -15,7 +15,7 @@ namespace OnlineMallManagement.Models
     public partial class Screening_seat
     {
         public int ShowSeat_id { get; set; }
-        public int Seat_IdSeat { get; set; }
+        public Nullable<int> Seat_IdSeat { get; set; }
         public int Screening_Id { get; set; }
         public int Order_OrderId { get; set; }
         public Nullable<bool> Status { get; set; }

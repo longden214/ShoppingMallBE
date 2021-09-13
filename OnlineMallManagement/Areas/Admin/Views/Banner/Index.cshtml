@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@section scripts{
+    <script src="~/Content/admin/assets/js/Banner.js"></script>
+}
+
+<div class="content-header row">
+    <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h2 class="content-header-title float-left mb-0">Banner Management</h2>
+                <div class="breadcrumb-wrapper">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Banner
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+
+    </div>
+</div>
+
+<div class="content-body">
+    <div class="row" id="basic-table">
+        <div class="col-12">
+            <div class="card">
+                <div class="row d-flex justify-content-between align-items-center m-1">
+                    <div class="col-lg-6 d-flex align-items-center">
+                        <div class="card-header">
+                            <h4 class="card-title">Banner List</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-flex align-items-center justify-content-lg-end flex-lg-nowrap flex-wrap pr-lg-1 p-0">
+                        <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                            <span>Search</span>
+                            <label>
+                                <input data-v-32017d0f="" type="text" placeholder="Search..." class="d-inline-block mr-1 form-control" id="__BVID__1641">
+                            </label>
+                        </div>
+                        <div class="invoice_status ml-sm-2"></div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Image</th>
+                                <th>page</th>
+                                <th>link</th>
+                                <th>Order By</th>
+                                <th>Status</th>
+                                @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                                {
+                                    <th>Option</th>
+                                }
+                                </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+            </div>
+            <div class="modal-body">
+                <form id="register-form">
+
+                    <div class="form-group" hidden>
+                        <label for="BannerId">ID</label>
+                        <input type="text" class="form-control" id="ID" placeholder="Id" disabled="disabled" />
+                        <small hidden class="text-danger">The First Name field is required</small>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label for="BannerId">ID</label>
+                        <input type="text" class="form-control" id="Statusvad" placeholder="Id" disabled="disabled" />
+                        <small hidden class="text-danger">The First Name field is required</small>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label for="BannerId">ID</label>
+                        <input type="text" class="form-control" id="IDorderValidate" placeholder="Id" disabled="disabled" />
+                        <small hidden class="text-danger">The First Name field is required</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <br />
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="edit-img-banner" placeholder="Button on right" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-primary waves-effect" id="btn-image-banner" type="button">File</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="link">Link</label>
+                        <input type="text" class="form-control" id="link" placeholder="Link" />
+                        <small id="vlink" class="text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" id="description" placeholder="Description" />
+                        <small id="vdescription" class="text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="OrderBy">OrderBy</label>
+                        <input type="text" class="form-control" id="OrderBy" placeholder="OrderBy" />
+                        <small id="vorderby" class="text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="page">Page</label>
+                        <input type="text" class="form-control" id="page" placeholder="Page" />
+                        <small id="vpage" class="text-danger"></small>
+                    </div>
+
+                    <div class="custom-control custom-checkbox form-group">
+                        <input type="checkbox" name="status" class="custom-control-input" value="true" id="Status">
+                        <label class="custom-control-label" for="Status">Status</label>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+﻿@model OnlineMallManagement.Models.Service
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div class="content-body">
+    <section id="basic-horizontal-layouts">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Update Service</h4>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm("Edit", "Services", FormMethod.Post, new { @class = "form form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.ServiceId)
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 col-form-label">
+                                            Service Name
+                                        </div>
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(model => model.ServiceName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ServiceName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 col-form-label">
+                                            Area
+                                        </div>
+                                        <div class="col-sm-9">
+                                            @Html.DropDownList("Service_area", (IEnumerable<SelectListItem>)ViewBag.area_id, "-- Select --", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Service_area, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9 offset-sm-3">
+                                    <button type="submit" class="btn btn-primary mr-1 waves-effect waves-float waves-light">Update</button>
+                                    <button type="reset" class="btn btn-outline-secondary waves-effect">Reset</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div>
+        <a href="@Url.Action("Index","Services")" class="dt-button btn btn-outline-primary waves-effect" tabindex="0" aria-controls="DataTables_Table_0" type="button"><span>Back To List</span></a>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

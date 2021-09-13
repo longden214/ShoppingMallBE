@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Failure";
+    Layout = null;
+}
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+    <link href="~/Content/client/css/paymentAlert.css" rel="stylesheet" />
+</head>
+
+<body style="background-image: url('/Content/client/assets/images/background/cinema-bg.jpg'); ">
+    <div class="card failed">
+        <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+            
+        </div>
+
+        <h1>Payment Failed</h1>
+        <p>Your transaction has failed. Please go<br /> back and try again!</p>
+        <a href="@Url.Action("Index","Home")" class="btn-back">Back to home page</a>
+    </div>
+</body>
+</html>
+

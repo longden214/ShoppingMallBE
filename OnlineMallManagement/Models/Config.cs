@@ -18,7 +18,6 @@ namespace OnlineMallManagement.Models
         public string title { get; set; }
         public string value { get; set; }
         public Nullable<bool> Status { get; set; }
-        public string url { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     }

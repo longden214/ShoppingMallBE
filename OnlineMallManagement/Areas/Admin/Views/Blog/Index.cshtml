@@ -1,0 +1,274 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div class="content-header row">
+    <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h2 class="content-header-title float-left mb-0">Blog Management</h2>
+                <div class="breadcrumb-wrapper">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Blog
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+    </div>
+</div>
+<div class="content-body">
+    <div class="row" id="basic-table">
+        <div class="col-12">
+            <div class="card">
+                <div class="row d-flex justify-content-between align-items-center m-1">
+                    <div class="col-lg-6 d-flex align-items-center">
+                        <div class="dt-action-buttons text-xl-right text-lg-left text-lg-right text-left ">
+                            @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                            {
+                                <div class="dt-buttons">
+                                    <a onclick="clearTextBox()" data-toggle="modal" data-target="#myModal" class="dt-button btn btn-primary btn-add-record waves-effect waves-float waves-light"><span>Add Record</span></a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-flex align-items-center justify-content-lg-end flex-lg-nowrap flex-wrap pr-lg-1 p-0">
+                        <div class="input-group" style="width:auto;">
+                            <input type="text" class="form-control" id="txtSearch" name="SearchString" placeholder="Search..." aria-describedby="button-addon2">
+                            <div class="input-group-append" id="button-addon2">
+                                <button class="btn btn-outline-primary waves-effect" id="search" type="submit" value="Tìm kiếm" onclick="search()"><i data-feather="search"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="invoice_status ml-sm-2"></div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                                {
+                                    <th>Actions</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                        </tbody>
+                    </table>
+
+                    <div class="d-flex justify-content-between mx-2 row mb-1">
+                        <div class="col-sm-12 col-md-12">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination mt-3 justify-content-center" id="load-pagination">
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="blog-edit-wrapper">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="content-header row">
+                                <div class="content-header-left col-md-9 col-12 mb-2">
+                                    <div class="row breadcrumbs-top">
+                                        <div class="col-12">
+                                            <h2 class="content-header-title float-start mb-0">Blog</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Form -->
+                            <form class="mt-2">
+                                <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="mb-2">
+                                            <label class="form-label" for="blog-edit-title">Title</label>
+                                            <input type="text"
+                                                   id="blog-edit-title"
+                                                   class="form-control"
+                                                   placeholder="Title" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="mb-2">
+                                            <label class="form-label" for="fp-default">Blog date</label>
+                                            <input type="text" id="blog-date" class="form-control flatpickr-basic flatpickr-input" placeholder="YYYY-MM-DD" readonly="readonly">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="mb-2">
+                                            <label class="form-label" for="blog-edit-slug">Slug</label>
+                                            <input type="text"
+                                                   id="blog-edit-slug"
+                                                   class="form-control"
+                                                   readonly
+                                                   placeholder="Slug" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <label class="form-label" for="basicSelect">Category blog</label>
+                                        <div class="mb-2">
+                                            <select class="form-select form-control" id="categoryBlogList" name="Category_blog_id">
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="mb-2">
+                                            <label class="form-label" for="blog-edit-title">Meta title</label>
+                                            <input type="text"
+                                                   id="blog-edit-Meta-title"
+                                                   class="form-control"
+                                                   placeholder="Meta title" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-2">
+                                            <label class="form-label" for="blog-edit-title">Meta keyword</label>
+                                            <input type="text"
+                                                   id="blog-edit-Meta-keyword"
+                                                   class="form-control"
+                                                   placeholder="Meta keyword" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-2">
+                                            <label class="form-label" for="blog-edit-title">Meta description</label>
+                                            <input type="text"
+                                                   id="blog-edit-Meta-description"
+                                                   class="form-control"
+                                                   placeholder="Meta description" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-2">
+                                            <label class="form-label" for="blog-edit-title">Description</label>
+                                            <textarea class="form-control" id="blog-edit-description" rows="5" placeholder="Description" name="blog-edit-description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-1">
+                                            <label class="form-label" for="exampleFormControlTextarea1">Content</label>
+                                            <textarea class="form-control" id="blog-content" rows="10" placeholder="Content" name="blog-content"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="image">Image</label>
+                                            <br />
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="edit-blog-img" name="edit-blog-img" placeholder="Button on right" aria-describedby="button-addon2" readonly>
+                                                <button class="btn btn-outline-primary waves-effect" id="btn-blog-image" type="button">File</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="mb-2">
+                                            <label class="form-label">Status</label>
+                                            <br />
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="BlogStatus" id="x" value="true" checked="">
+                                                <label class="form-check-label" for="inlineRadio1">True</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="BlogStatus" id="y" value="false">
+                                                <label class="form-check-label" for="inlineRadio2">False</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 mt-50">
+                                        <button type="button" class="btn btn-primary me-1" id="btnAdd" onclick="return Add();">Save Changes</button>
+                                        <button type="button" class="btn btn-primary me-1" id="btnUpdate" style="display:none;" onclick="return Update();" value="0">Update</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!--/ Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link href="~/Content/admin/assets/css/select2.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/admin/assets/js/scripts.js"></script>
+    <script src="~/Content/admin/assets/js/select2.min.js"></script>
+    <script src="~/Content/admin/assets/js/controllers/BlogController.js"></script>
+    <script>
+        //Load Blog date
+        $('#blog-date').flatpickr({
+            @*minDate: "today",*@
+            dateFormat: "Y-m-d"
+        });
+
+        function Add() {
+            var res = validate();
+            if (res == false) {
+                return false;
+            }
+            var blog = {
+                Description: $('#blog-edit-description').val(),
+                BlogTime: new Date($('#blog-date').val()).toISOString(),
+                Category_blog_id: document.getElementById("categoryBlogList").value,
+                Title: $('#blog-edit-title').val(),
+                Status: document.getElementById('x').checked,
+                slug: $('#blog-edit-slug').val(),
+                Meta_title: $('#blog-edit-Meta-title').val(),
+                Meta_keyword: $('#blog-edit-Meta-keyword').val(),
+                Meta_description: $('#blog-edit-Meta-description').val(),
+                Content: CKEDITOR.instances['blog-content'].getData(),
+                Images: $('#edit-blog-img').val()
+            };
+
+
+            $.ajax({
+                url: "@Url.Action("StoreOrEdit","Blog")",
+                data: JSON.stringify(blog),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    loadData();
+                    $('#myModal').modal('hide');
+                }
+
+            });
+        }
+    </script>
+}

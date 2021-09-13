@@ -26,16 +26,16 @@ namespace OnlineMallManagement.Models
         }
     
         public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<AdminRole> AdminRoles { get; set; }
         public virtual DbSet<Area> Areas { get; set; }
         public virtual DbSet<Banner> Banners { get; set; }
         public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<Category_blog> Category_blog { get; set; }
         public virtual DbSet<Category_Movie> Category_Movie { get; set; }
-        public virtual DbSet<Config> Configs { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Movie> Movies { get; set; }
+        public virtual DbSet<Movie_type> Movie_type { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
@@ -46,5 +46,8 @@ namespace OnlineMallManagement.Models
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<Shop> Shops { get; set; }
         public virtual DbSet<Shop_Product> Shop_Product { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Config> Configs { get; set; }
+        public virtual DbSet<gallery> galleries { get; set; }
     }
 }

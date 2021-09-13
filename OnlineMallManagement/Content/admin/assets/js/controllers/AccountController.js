@@ -77,7 +77,7 @@ function ValidateAccount() {
     if (_phone === '') {
         $('#account_phone').next().html('Phone cannot be empty!');
         check = false;
-    } else if (!_phone.match(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/)) {
+    } else if (!_phone.match(/^(\+\d)?[0-9\-\(\) ]{5,}$/i)) {
         $('#account_phone').next().html('Invalid phone!');
         check = false;
     } else {

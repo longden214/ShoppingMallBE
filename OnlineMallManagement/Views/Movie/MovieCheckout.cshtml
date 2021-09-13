@@ -33,19 +33,112 @@
     <script src="~/Content/client/assets/js/main.js"></script>
 }
 
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var timer2 = "5:01";
+            var interval = setInterval(function () {
+
+                var timer = timer2.split(':');
+                //by parsing integer, I avoid all extra string processing
+                var minutes = parseInt(timer[0], 10);
+                var seconds = parseInt(timer[1], 10);
+                --seconds;
+                minutes = (seconds < 0) ? --minutes : minutes;
+                seconds = (seconds < 0) ? 59 : seconds;
+                seconds = (seconds < 10) ? '0' + seconds : seconds;
+                //minutes = (minutes < 10) ?  minutes : minutes;
+                $('.countdown').html(minutes + ':' + seconds);
+                if (minutes < 0) clearInterval(interval);
+                //check if both minutes and seconds are 0
+                if ((seconds <= 0) && (minutes <= 0)) {
+                    clearInterval(interval);
+                    $('.back-button').click();
+                }
+
+                timer2 = minutes + ':' + seconds;
+            }, 1000);
+
+            $(".btn-send-info").on('click',function () {
+
+                var customer = {
+                    FullName: $('#customer-fullname').val(),
+                    Phone: $('#customer-phone').val(),
+                    Email: $('#customer-mail').val()
+                };
+
+                if (ValidateContact()) {
+
+                    $.ajax({
+                        url: '@Url.Action("SendInfo", "Checkout")',
+                        type: 'Post',
+                        data: JSON.stringify(customer),
+                        dataType: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        success: function (res) {
+                            $('.checkout-contact-form').css('display', 'none');
+                            $('#checkout__info').html(' Send booking information to ' + $('#customer-fullname').val() + ' / ' + $('#customer-mail').val() + ' / ' + $('#customer-phone').val() + '.');
+                        }
+                    });
+                }
+            });
+
+            $("#payment-paypal").on('click', function () {
+
+                if (ValidateContact()) {
+                    $(".btn-send-info").click();
+                    window.location = '@Url.Action("PaymentWithPaypal","Checkout")';
+                }
+
+            });
+
+            function ValidateContact() {
+                var check = true;
+
+                var name = $('#customer-fullname').val();
+                var phone = $('#customer-phone').val();
+                var email = $('#customer-mail').val();
+
+                if (name == '') {
+                    $('#customer-fullname').next().html('Please enter your fullname.');
+                    check = false;
+                } else {
+                    $('#customer-fullname').next().html('');
+                }
+
+                if (phone == '') {
+                    $('#customer-phone').next().html('Please enter your phone.');
+                    check = false;
+                } else if (!phone.match(/^(\+\d)?[0-9\-\(\) ]{5,}$/i)) {
+                    $('#customer-phone').next().html('Please enter a valid mobile number!');
+                    check = false;
+                } else {
+                    $('#customer-phone').next().html('');
+                }
+
+                if (email == '') {
+                    $('#customer-mail').next().html('Please enter your email address.');
+                    check = false;
+                } else if (!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+                    $('#customer-mail').next().html('Please enter a valid email!');
+                    check = false;
+                } else {
+                    $('#customer-mail').next().html('');
+                }
+
+                return check;
+            }
+        });
+    </script>
+}
+
 <div class="page-content">
 
-    <section class="details-banner hero-area bg_img seat-plan-banner"
-             data-background="/Content/client/assets/images/banner/banner04.jpg"
-             style="background-image: url(/Content/client/assets/images/banner/banner04.jpg&quot;);">
+    <section class="details-banner hero-area bg_img seat-plan-banner" style="background-image: url('@ViewBag.Banner.Image');">
         <div class="container">
             <div class="details-banner-wrapper">
                 <div class="details-banner-content style-two">
-                    <h3 class="title" style="color: #fff">Venus</h3>
-                    <div class="tags">
-                        <a href="#0">City Walk</a>
-                        <a href="#0">English - 2D</a>
-                    </div>
+                    <h3 class="title" style="color: #fff">@ViewBag.MovieName</h3>
                 </div>
             </div>
         </div>
@@ -55,22 +148,18 @@
         <div class="container">
             <div class="page-title-area">
                 <div class="item md-order-1">
-                    <a href="movie-ticket-plan.html" class="custom-button back-button">
+                    <a href="@Url.Action("MovieTicket","Movie",new { id = ViewBag.MovieId })" class="custom-button back-button">
                         <i class="flaticon-double-right-arrows-angles"></i>back
                     </a>
                 </div>
                 <div class="item date-item" style="color: #d0dbff; ">
-                    <span class="date" style="color: #d0dbff; ">MON, SEP 09 2020</span>
-                    <select class="select-bar">
-                        <option value="sc1">09:40</option>
-                        <option value="sc2">13:45</option>
-                        <option value="sc3">15:45</option>
-                        <option value="sc4">19:50</option>
-                    </select>
+                    <span class="date">@ViewBag.Day</span>
+                    <span class="time-bar">@ViewBag.Time</span>
+
                 </div>
                 <div class="item">
-                    <h5 class="title" style="color: #fff; ">05:00</h5>
-                    <p style="color: #d0dbff; ">Mins Left</p>
+                    <h5 class="title countdown" style="color: #fff;">05:00</h5>
+                    <p class="countdown__title" style="color: #d0dbff; ">Mins Left</p>
                 </div>
             </div>
         </div>
@@ -86,87 +175,47 @@
                         <h5 class="title" style="color: #fff; ">Share your Contact  Details </h5>
                         <form class="checkout-contact-form">
                             <div class="form-group">
-                                <input type="text" placeholder="Full Name">
+                                <input type="text" id="customer-fullname" placeholder="Full Name">
+                                <span style="color:red;"></span>
                             </div>
                             <div class="form-group">
-                                <input type="text" placeholder="Enter your Mail">
+                                <input type="text" id="customer-mail" placeholder="Enter your Email">
+                                <span style="color:red;"></span>
                             </div>
                             <div class="form-group">
-                                <input type="text" placeholder="Enter your Phone Number ">
+                                <input type="text" id="customer-phone" placeholder="Enter your Phone Number ">
+                                <span style="color:red;"></span>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Continue" class="custom-button">
+                                <input type="button" value="Continue" class="custom-button btn-send-info">
                             </div>
                         </form>
+                        <span style="color: #d0dbff; " id="checkout__info"> </span>
                     </div>
-                    <div class="checkout-widget checkout-contact">
-                        <h5 class="title" style="color: #fff; ">Promo Code </h5>
-                        <form class="checkout-contact-form">
-                            <div class="form-group">
-                                <input type="text" placeholder="Please enter promo code">
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Verify" class="custom-button">
-                            </div>
-                        </form>
-                    </div>
+                    @*<div class="checkout-widget checkout-contact">
+                            <h5 class="title" style="color: #fff; ">Promo Code </h5>
+                            <form class="checkout-contact-form">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Please enter promo code">
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Verify" class="custom-button">
+                                </div>
+                            </form>
+                        </div>*@
                     <div class="checkout-widget checkout-card mb-0">
                         <h5 class="title" style="color: #fff; ">Payment Option </h5>
                         <ul class="payment-option">
-                            <li class="active">
-                                <a href="#0">
-                                    <img src="~/Content/client/assets/images/payment/card.png" alt="payment">
-                                    <span>Credit Card</span>
-                                </a>
-                            </li>
+                          
+                       
                             <li>
-                                <a href="#0">
-                                    <img src="~/Content/client/assets/images/payment/card.png" alt="payment">
-                                    <span>Debit Card</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#0">
+                                <a href="#0" id="payment-paypal">
                                     <img src="~/Content/client/assets/images/payment/paypal.png" alt="payment">
                                     <span>paypal</span>
                                 </a>
                             </li>
                         </ul>
-                        <h6 class="subtitle" style="color: #fff; ">Enter Your Card Details </h6>
-                        <form class="payment-card-form" style="color: #d0dbff; ">
-                            <div class="form-group w-100">
-                                <label for="card1">Card Details</label>
-                                <input type="text" id="card1">
-                                <div class="right-icon">
-                                    <i class="flaticon-lock"></i>
-                                </div>
-                            </div>
-                            <div class="form-group w-100">
-                                <label for="card2"> Name on the Card</label>
-                                <input type="text" id="card2">
-                            </div>
-                            <div class="form-group">
-                                <label for="card3">Expiration</label>
-                                <input type="text" id="card3" placeholder="MM/YY">
-                            </div>
-                            <div class="form-group">
-                                <label for="card4">CVV</label>
-                                <input type="text" id="card4" placeholder="CVV">
-                            </div>
-                            <div class="form-group check-group">
-                                <input id="card5" type="checkbox" checked="">
-                                <label for="card5">
-                                    <span class="title">QuickPay</span>
-                                    <span class="info">Save this card information to my Boleto  account and make faster payments.</span>
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" class="custom-button" value="make payment">
-                            </div>
-                        </form>
-                        <p class="notice">
-                            By Clicking "Make Payment" you agree to the <a href="#0">terms and conditions</a>
-                        </p>
+              
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -174,37 +223,34 @@
                         <h4 class="title" style="color: #fff; ">booking summery</h4>
                         <ul>
                             <li>
-                                <h6 class="subtitle" style="color: #fff; ">Venus</h6>
-                                <span class="info">English-2d</span>
+                                <h6 class="subtitle" style="color: #fff; ">@ViewBag.MovieName</h6>
+                                <span class="info">@ViewBag.MovieLanguage</span>
                             </li>
 
                             <li>
                                 <h6 class="subtitle" style="color: #fff; ">Day</h6>
-                                <span class="info">10 SEP TUE</span>
+                                <span class="info">@ViewBag.Day</span>
                             </li>
                             <li>
                                 <h6 class="subtitle" style="color: #fff; ">Times</h6>
-                                <span class="info">11:00 PM</span>
+                                <span class="info">@ViewBag.Time</span>
                             </li>
                             <li>
                                 <h6 class="subtitle" style="color: #fff; ">Seats</h6>
-                                <span class="info">D7,D8</span>
-                            </li>
-                            <li>
-                                <h6 class="subtitle mb-0" style="color: #fff; "><span>Tickets  Price</span><span>$150</span></h6>
+                                <span class="info">@ViewBag.Seats</span>
                             </li>
                         </ul>
 
                         <ul>
                             <li>
-                                <span class="info"><span>price</span><span>$207</span></span>
+                                <span class="info"><span>price</span><span>$@ViewBag.SubTotal</span></span>
                                 <br>
-                                <span class="info"><span>vat</span><span>$15</span></span>
+                                <span class="info"><span>vat</span><span>$3</span></span>
                             </li>
                         </ul>
                     </div>
                     <div class="proceed-area  text-center">
-                        <h6 class="subtitle" style="color: #fff; "><span>Amount Payable</span><span>$222</span></h6>
+                        <h6 class="subtitle" style="color: #fff; "><span>Amount Payable</span><span>$@ViewBag.Total</span></h6>
 
                     </div>
                 </div>

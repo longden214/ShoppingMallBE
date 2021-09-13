@@ -9,7 +9,7 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
     [Authorize]
     public class DashboardController : Controller
     {
-        // GET: Admin/Dashboard
+        [Authorize(Roles = "Admin,User,Customer")]
         public ActionResult Index()
         {
             return View();

@@ -33,21 +33,58 @@
     <script src="~/Content/client/assets/js/main.js"></script>
 }
 
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#movie-filter-date-Ticket').flatpickr({
+                minDate: "today",
+                dateFormat: "Y-m-d",
+                defaultDate: "today"
+            });
+
+            $(document).on('click','.seat-plan-wrapper li .movie-schedule .item', function () {
+                $('.window-warning').removeClass('inActive');
+
+                var _showId = $(this).attr("data-showId");
+                var _movieId = $(this).attr("data-movieId");
+
+                $('.seatPlanButton').attr('href', '@Url.Action("MovieSeat", "Movie")?showId=' + _showId + '&movieId=' + _movieId);
+            });
+
+            $("#movie-filter-date-Ticket").on("input", function () {
+                var date = $(this).val();
+
+                $.ajax({
+                    url: '@Url.Action("GetTimes","Movie")',
+                    type: 'GET',
+                    data: { id: '@ViewBag.MovieId', day: date},
+                    dataType: 'json',
+                    success: function (res) {
+                        var html = '';
+                        if (res.timeList.length > 0) {
+                            var data = res.timeList;
+                            $.each(data, function (Url, item) {
+                                html += '<div class="item" data-showId="'+item.Id+'" data-movieId="'+item.MovieId+'">'+ item.Time.slice(0,5) +'</div>'
+                            });
+                        } else {
+                            html += '<span style="color: #dbe2fb;"> This movie is currently not showing. Please choose another date! </span>'
+                        }
+
+                        $('.seat-plan-wrapper .movie-schedule').html(html);
+                    }
+                })
+            });
+        });
+
+    </script>
+}
 
 <div class="page-content">
-
-    <section class="details-banner hero-area bg_img" data-background="/Content/client/assets/images/banner/banner03.jpg"
-             style="background-image: url(/Content/client/assets/images/banner/banner03.jpg);">
+    <section class="details-banner hero-area bg_img" style="background-image: url(); background-image: url('@ViewBag.MovieBanner');">
         <div class="container">
             <div class="details-banner-wrapper">
                 <div class="details-banner-content">
                     <h3 class="title" style="color: #fff">Venus</h3>
-                    <div class="tags">
-                        <a href="#0">English</a>
-                        <a href="#0">Hindi</a>
-                        <a href="#0">Telegu</a>
-                        <a href="#0">Tamil</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -62,13 +99,7 @@
                         <img src="~/Content/client/assets/images/ticket/date.png" alt="ticket">
                     </div>
                     <span class="type">date</span>
-                    <select class="select-bar" style="display: none;">
-                        <option value="26-12-19">23/10/2020</option>
-                        <option value="26-12-19">24/10/2020</option>
-                        <option value="26-12-19">25/10/2020</option>
-                        <option value="26-12-19">26/10/2020</option>
-                    </select>
-
+                    <input type="text" value="" id="movie-filter-date-Ticket" style=" width: 120px; padding-right: 0; padding-left: 15px; " placeholder="Choose" />
                 </div>
             </form>
         </div>
@@ -91,18 +122,22 @@
 
                             </div>
                             <div class="movie-schedule">
-                                <div class="item">
-                                    09:40
-                                </div>
-                                <div class="item">
-                                    13:45
-                                </div>
-                                <div class="item">
-                                    15:45
-                                </div>
-                                <div class="item">
-                                    19:50
-                                </div>
+                                @if (ViewBag.Count > 0)
+                                {
+                                    foreach (var item in ViewBag.Times)
+                                    {
+                                        <div class="item" data-showId="@item.Id" data-movieId="@item.MovieId">
+                                            @item.Time.Remove(5)
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <span style="color: #dbe2fb;">
+                                        This movie is currently not showing. Please choose another date!
+                                    </span>
+                                }
+
                             </div>
                         </li>
 
@@ -126,7 +161,7 @@
         <div class="thumb">
             <img src="~/Content/client/assets/images/movie/seat-plan.png" alt="movie">
         </div>
-        <a href="movie-seat-plan.html" class="custom-button seatPlanButton">
+        <a href="javascript:void(0)" class="custom-button seatPlanButton">
             Seat Plans<i class="fas fa-angle-right"></i>
         </a>
     </div>

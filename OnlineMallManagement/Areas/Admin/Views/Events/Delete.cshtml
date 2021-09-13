@@ -1,0 +1,157 @@
+﻿@model OnlineMallManagement.Models.Event
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div class="content-body">
+    <section id="multiple-column-form">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Delete Event</h4>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm("Delete", "Events", FormMethod.Post, new { @class = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Event_id)
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="prefix">Title</label>
+                                        <input type="text" class="form-control" id="event_name" readonly name="Title" value="@Html.DisplayFor(model=>model.Title)" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="date">Start Date</label>
+                                        <input type="text" id="ev-start-date" class="form-control" value="@Html.DisplayFor(model=>model.StartDate)" placeholder="YYYY-MM-DD HH:MM" readonly name="StartDate">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="time">End Date</label>
+                                        <input type="text" id="ev-end-date" class="form-control" value="@Html.DisplayFor(model=>model.EndDate)" placeholder="YYYY-MM-DD HH:MM" readonly name="EndDate">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="numeral-formatting">Price</label>
+                                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="ShopName">Shop</label>
+                                        @Html.DropDownList("Shop_ShoId", (IEnumerable<SelectListItem>)ViewBag.Shop_Id, "-- Select --", new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="custom-delimiters">Address</label>
+                                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="first-name-vertical">Image</label>
+
+                                        <input type="text" readonly class="form-control" value="@Html.DisplayFor(model=>model.Image)" id="edit-img-event" placeholder="Button on left" aria-describedby="button-addon2" name="Image">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="prefix">Slug</label>
+                                        <input type="text" class="form-control" id="event_slug" readonly value="@Html.DisplayFor(model=>model.slug)" name="slug" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Meta_title">Meta_title</label>
+                                        @Html.EditorFor(model => model.Meta_title, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Meta_keyword">Meta_keyword</label>
+                                        @Html.EditorFor(model => model.Meta_keyword, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <div class="mb-1 ">
+                                            <label for="Meta_description">Meta_description</label>
+                                            @Html.EditorFor(model => model.Meta_description, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <div class="demo-inline-spacing">
+                                            <label for="Status"><b>Status</b></label>
+                                            @Html.RadioButtonFor(x => x.Status, "true") <span>Show</span>
+                                            @Html.RadioButtonFor(x => x.Status, "false") <span>Hide</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Description">Description</label>
+                                        <textarea class="form-control" readonly name="Descriptions" rows="3" placeholder="Description...">@Html.DisplayFor(model=>model.Descriptions)</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary mr-1 waves-effect waves-float waves-light">Delete</button>
+                                    <button type="reset" class="btn btn-outline-secondary waves-effect">Reset</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div>
+        <a href="@Url.Action("Index","Events")" class="dt-button btn btn-outline-primary waves-effect" tabindex="0" aria-controls="DataTables_Table_0" type="button"><span>Back To List</span></a>
+    </div>
+</div>
+
+
+@section Styles {
+    <link href="~/Content/admin/assets/css/flatpickr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Content/admin/app-assets/css/plugins/forms/pickers/form-flat-pickr.css">
+}
+
+@section Scripts {
+
+    <script src="~/Content/admin/assets/js/flatpickr.js"></script>
+    <script src="~/Content/admin/assets/js/scripts.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#ev-start-date').flatpickr({
+            enableTime: true,
+            minDate: "today",
+            dateFormat: "Y-m-d H:i",
+        });
+        $('#ev-end-date').flatpickr({
+            enableTime: true,
+            minDate: "today",
+            dateFormat: "Y-m-d H:i",
+        });
+
+    </script>
+}

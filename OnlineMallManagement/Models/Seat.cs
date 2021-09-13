@@ -22,8 +22,8 @@ namespace OnlineMallManagement.Models
     
         public int IdSeat { get; set; }
         public string SeatName { get; set; }
+        public Nullable<double> price { get; set; }
         public int IdRoom { get; set; }
-        public int type { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     

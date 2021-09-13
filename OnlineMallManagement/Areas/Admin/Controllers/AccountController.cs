@@ -16,7 +16,7 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
         private DBOnlineMallEntities dbContext = new DBOnlineMallEntities();
         private AccountModel accModel = new AccountModel();
 
-        [Authorize]
+        [Authorize(Roles = "Admin,User,Customer")]
         public ActionResult Index()
         {
             var name = HttpContext.Application["uName"].ToString();
@@ -27,6 +27,12 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
 
         public ActionResult Login()
         {
+            var favicon = dbContext.Configs.Find(15).value;
+            ViewBag.Favicon = favicon;
+
+            var logo = dbContext.Configs.Find(16).value;
+            ViewBag.Logo = logo;
+
             return View();
         }
 
@@ -37,6 +43,7 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
             HttpContext.Application.Clear();
             return RedirectToAction("Login", "Account");
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -50,12 +57,14 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
                 if (data.Count() > 0)
                 {
                     FormsAuthentication.SetAuthCookie(model.username, model.RememberMe);
-                    Session["username"] = data.FirstOrDefault().UserName;
-                    Session["id"] = data.FirstOrDefault().Id;
-
+                    
                     HttpContext.Application["uName"] = data.FirstOrDefault().UserName;
                     HttpContext.Application["uId"] = data.FirstOrDefault().Id;
                     HttpContext.Application["displayName"] = data.FirstOrDefault().DisplayName;
+
+
+                    HttpContext.Application["favicon"] = dbContext.Configs.Find(15).value;
+                    HttpContext.Application["logo"] = dbContext.Configs.Find(16).value;
 
                     return RedirectToAction("Index", "Dashboard");
                 }
@@ -68,6 +77,7 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin,User,Customer")]
         [HttpPost]
         public ActionResult EditAccount(Models.Admin model)
         {
@@ -92,6 +102,7 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin,User,Customer")]
         [HttpPost]
         public ActionResult ChangePassword(Models.Admin model)
         {
@@ -111,6 +122,7 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin,User,Customer")]
         [HttpPost]
         public JsonResult ValidationPassword(string pass)
         {
