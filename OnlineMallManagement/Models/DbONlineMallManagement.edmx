@@ -18,9 +18,9 @@
         </EntityType>
         <EntityType Name="AdminRoles">
           <Key>
-            <PropertyRef Name="Role_id" />
-            <PropertyRef Name="Admin_id" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Role_id" Type="int" Nullable="false" />
           <Property Name="Admin_id" Type="int" Nullable="false" />
         </EntityType>
@@ -64,6 +64,7 @@
           <Property Name="Meta_description" Type="varchar(max)" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Images" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Category_blog">
           <Key>
@@ -97,9 +98,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="title" Type="varchar" MaxLength="100" />
-          <Property Name="value" Type="varchar" MaxLength="100" />
+          <Property Name="value" Type="varchar(max)" />
           <Property Name="Status" Type="bit" />
-          <Property Name="url" Type="text" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
@@ -120,12 +120,9 @@
           </Key>
           <Property Name="Event_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Shop_ShoId" Type="int" Nullable="false" />
-          <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Title" Type="varchar(max)" Nullable="false" />
           <Property Name="Descriptions" Type="text" Nullable="false" />
-          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="Image" Type="varchar(max)" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="100" />
           <Property Name="slug" Type="varchar" MaxLength="100" />
@@ -135,6 +132,8 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="Status" Type="bit" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="StartDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -142,10 +141,22 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Content" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Content" Type="varchar(max)" />
+          <Property Name="FBDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="gallery">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="image" Type="varchar(max)" />
+          <Property Name="status" Type="bit" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="Modifidate" Type="datetime" />
         </EntityType>
         <EntityType Name="Movie">
           <Key>
@@ -168,14 +179,16 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="Status" Type="bit" />
+          <Property Name="banner" Type="varchar(max)" />
+          <Property Name="photos" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Movie_type">
           <Key>
-            <PropertyRef Name="cate_movie_id" />
-            <PropertyRef Name="movie_id" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="cate_movie_id" Type="int" Nullable="false" />
-          <Property Name="movie_id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cate_movie_id" Type="int" />
+          <Property Name="movie_id" Type="int" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -235,6 +248,7 @@
           <Property Name="Movie_Id" Type="int" Nullable="false" />
           <Property Name="ScreeningDate" Type="date" Nullable="false" />
           <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Status" Type="bit" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
@@ -242,8 +256,8 @@
           <Key>
             <PropertyRef Name="ShowSeat_id" />
           </Key>
-          <Property Name="ShowSeat_id" Type="int" Nullable="false" />
-          <Property Name="Seat_IdSeat" Type="int" Nullable="false" />
+          <Property Name="ShowSeat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Seat_IdSeat" Type="int" />
           <Property Name="Screening_Id" Type="int" Nullable="false" />
           <Property Name="Order_OrderId" Type="int" Nullable="false" />
           <Property Name="Status" Type="bit" />
@@ -257,8 +271,8 @@
           </Key>
           <Property Name="IdSeat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SeatName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="price" Type="float" />
           <Property Name="IdRoom" Type="int" Nullable="false" />
-          <Property Name="type" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
@@ -354,8 +368,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Movie_type_Category_Movie">
-          <End Role="Category_Movie" Type="Self.Category_Movie" Multiplicity="1" />
+        <Association Name="FK__Movie_typ__cate___5EBF139D">
+          <End Role="Category_Movie" Type="Self.Category_Movie" Multiplicity="0..1" />
           <End Role="Movie_type" Type="Self.Movie_type" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category_Movie">
@@ -366,8 +380,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Movie_type_Movie">
-          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+        <Association Name="FK__Movie_typ__movie__5FB337D6">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="0..1" />
           <End Role="Movie_type" Type="Self.Movie_type" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Movie">
@@ -462,8 +476,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Screening_seat_Seat">
-          <End Role="Seat" Type="Self.Seat" Multiplicity="1" />
+        <Association Name="Screening_seat_seats">
+          <End Role="Seat" Type="Self.Seat" Multiplicity="0..1" />
           <End Role="Screening_seat" Type="Self.Screening_seat" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Seat">
@@ -534,6 +548,7 @@
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="gallery" EntityType="Self.gallery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movie_type" EntityType="Self.Movie_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
@@ -562,11 +577,11 @@
             <End Role="Shop" EntitySet="Shop" />
             <End Role="Events" EntitySet="Events" />
           </AssociationSet>
-          <AssociationSet Name="Movie_type_Category_Movie" Association="Self.Movie_type_Category_Movie">
+          <AssociationSet Name="FK__Movie_typ__cate___5EBF139D" Association="Self.FK__Movie_typ__cate___5EBF139D">
             <End Role="Category_Movie" EntitySet="Category_Movie" />
             <End Role="Movie_type" EntitySet="Movie_type" />
           </AssociationSet>
-          <AssociationSet Name="Movie_type_Movie" Association="Self.Movie_type_Movie">
+          <AssociationSet Name="FK__Movie_typ__movie__5FB337D6" Association="Self.FK__Movie_typ__movie__5FB337D6">
             <End Role="Movie" EntitySet="Movie" />
             <End Role="Movie_type" EntitySet="Movie_type" />
           </AssociationSet>
@@ -598,7 +613,7 @@
             <End Role="Screening" EntitySet="Screening" />
             <End Role="Screening_seat" EntitySet="Screening_seat" />
           </AssociationSet>
-          <AssociationSet Name="Screening_seat_Seat" Association="Self.Screening_seat_Seat">
+          <AssociationSet Name="Screening_seat_seats" Association="Self.Screening_seat_seats">
             <End Role="Seat" EntitySet="Seat" />
             <End Role="Screening_seat" EntitySet="Screening_seat" />
           </AssociationSet>
@@ -631,9 +646,19 @@
           <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Roles" Relationship="Self.AdminRoles" FromRole="Admin" ToRole="Roles" />
           <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AdminRoles" Relationship="Self.AdminRoles_Admin" FromRole="Admin" ToRole="AdminRoles" />
+        </EntityType>
+        <EntityType Name="AdminRole">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_id" Type="Int32" Nullable="false" />
+          <Property Name="Admin_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.AdminRoles_Admin" FromRole="AdminRoles" ToRole="Admin" />
+          <NavigationProperty Name="Role" Relationship="Self.AdminRoles_Roles" FromRole="AdminRoles" ToRole="Roles" />
         </EntityType>
         <EntityType Name="Area">
           <Key>
@@ -677,6 +702,7 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Category_blog" Relationship="Self.Blog_Category_blog" FromRole="Blog" ToRole="Category_blog" />
+          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Category_blog">
           <Key>
@@ -704,19 +730,7 @@
           <Property Name="Meta_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Meta_keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Meta_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Movies" Relationship="Self.Movie_type" FromRole="Category_Movie" ToRole="Movie" />
-        </EntityType>
-        <EntityType Name="Config">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="value" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="Boolean" />
-          <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Movie_type" Relationship="Self.FK__Movie_typ__cate___5EBF139D" FromRole="Category_Movie" ToRole="Movie_type" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -730,39 +744,18 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Orders" Relationship="Self.Order_Customer" FromRole="Customer" ToRole="Order" />
         </EntityType>
-        <EntityType Name="Event">
-          <Key>
-            <PropertyRef Name="Event_id" />
-          </Key>
-          <Property Name="Event_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Shop_ShoId" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="Price" Type="Double" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="slug" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Meta_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Meta_keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Meta_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Shop" Relationship="Self.Events_Shop" FromRole="Events" ToRole="Shop" />
-        </EntityType>
         <EntityType Name="Feedback">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Content" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FBDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
         </EntityType>
         <EntityType Name="Movie">
           <Key>
@@ -785,8 +778,20 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Boolean" />
+          <Property Name="banner" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="photos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Movie_type" Relationship="Self.FK__Movie_typ__movie__5FB337D6" FromRole="Movie" ToRole="Movie_type" />
           <NavigationProperty Name="Screenings" Relationship="Self.Screening_Movie" FromRole="Movie" ToRole="Screening" />
-          <NavigationProperty Name="Category_Movie" Relationship="Self.Movie_type" FromRole="Movie" ToRole="Category_Movie" />
+        </EntityType>
+        <EntityType Name="Movie_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cate_movie_id" Type="Int32" />
+          <Property Name="movie_id" Type="Int32" />
+          <NavigationProperty Name="Category_Movie" Relationship="Self.FK__Movie_typ__cate___5EBF139D" FromRole="Movie_type" ToRole="Category_Movie" />
+          <NavigationProperty Name="Movie" Relationship="Self.FK__Movie_typ__movie__5FB337D6" FromRole="Movie_type" ToRole="Movie" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -812,7 +817,7 @@
           <Property Name="Role_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Admins" Relationship="Self.AdminRoles" FromRole="Roles" ToRole="Admin" />
+          <NavigationProperty Name="AdminRoles" Relationship="Self.AdminRoles_Roles" FromRole="Roles" ToRole="AdminRoles" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -853,6 +858,7 @@
           <Property Name="Movie_Id" Type="Int32" Nullable="false" />
           <Property Name="ScreeningDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Status" Type="Boolean" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Movie" Relationship="Self.Screening_Movie" FromRole="Screening" ToRole="Movie" />
@@ -864,8 +870,8 @@
           <Key>
             <PropertyRef Name="ShowSeat_id" />
           </Key>
-          <Property Name="ShowSeat_id" Type="Int32" Nullable="false" />
-          <Property Name="Seat_IdSeat" Type="Int32" Nullable="false" />
+          <Property Name="ShowSeat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Seat_IdSeat" Type="Int32" />
           <Property Name="Screening_Id" Type="Int32" Nullable="false" />
           <Property Name="Order_OrderId" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Boolean" />
@@ -874,7 +880,7 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Order" Relationship="Self.Screening_seat_Order" FromRole="Screening_seat" ToRole="Order" />
           <NavigationProperty Name="Screening" Relationship="Self.Screening_seat_Screening" FromRole="Screening_seat" ToRole="Screening" />
-          <NavigationProperty Name="Seat" Relationship="Self.Screening_seat_Seat" FromRole="Screening_seat" ToRole="Seat" />
+          <NavigationProperty Name="Seat" Relationship="Self.Screening_seat_seats" FromRole="Screening_seat" ToRole="Seat" />
         </EntityType>
         <EntityType Name="Seat">
           <Key>
@@ -882,12 +888,12 @@
           </Key>
           <Property Name="IdSeat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SeatName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Double" />
           <Property Name="IdRoom" Type="Int32" Nullable="false" />
-          <Property Name="type" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Room" Relationship="Self.Seat_Room" FromRole="Seat" ToRole="Room" />
-          <NavigationProperty Name="Screening_seat" Relationship="Self.Screening_seat_Seat" FromRole="Seat" ToRole="Screening_seat" />
+          <NavigationProperty Name="Screening_seat" Relationship="Self.Screening_seat_seats" FromRole="Seat" ToRole="Screening_seat" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -922,10 +928,10 @@
           <Property Name="Meta_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Events" Relationship="Self.Events_Shop" FromRole="Shop" ToRole="Events" />
           <NavigationProperty Name="Sales" Relationship="Self.Sales_Shop" FromRole="Shop" ToRole="Sales" />
           <NavigationProperty Name="Service" Relationship="Self.Shop_Service" FromRole="Shop" ToRole="Service" />
           <NavigationProperty Name="Shop_Product" Relationship="Self.Shop_Product_Shop" FromRole="Shop" ToRole="Shop_Product" />
+          <NavigationProperty Name="Events" Relationship="DBOnlineMallModel.Events_Shop" FromRole="Shop" ToRole="Event" />
         </EntityType>
         <EntityType Name="Shop_Product">
           <Key>
@@ -940,6 +946,30 @@
           <Property Name="Status" Type="Boolean" />
           <NavigationProperty Name="Shop" Relationship="Self.Shop_Product_Shop" FromRole="Shop_Product" ToRole="Shop" />
         </EntityType>
+        <Association Name="AdminRoles_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="AdminRoles" Type="Self.AdminRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminRoles">
+              <PropertyRef Name="Admin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AdminRoles_Roles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="AdminRoles" Type="Self.AdminRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Role_id" />
+            </Principal>
+            <Dependent Role="AdminRoles">
+              <PropertyRef Name="Role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Service_Area">
           <End Role="Area" Type="Self.Area" Multiplicity="1" />
           <End Role="Service" Type="Self.Service" Multiplicity="*" />
@@ -964,6 +994,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Movie_typ__cate___5EBF139D">
+          <End Role="Category_Movie" Type="Self.Category_Movie" Multiplicity="0..1" />
+          <End Role="Movie_type" Type="Self.Movie_type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Movie">
+              <PropertyRef Name="Cate_id" />
+            </Principal>
+            <Dependent Role="Movie_type">
+              <PropertyRef Name="cate_movie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Order_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
@@ -976,15 +1018,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Events_Shop">
-          <End Role="Shop" Type="Self.Shop" Multiplicity="1" />
-          <End Role="Events" Type="Self.Event" Multiplicity="*" />
+        <Association Name="FK__Movie_typ__movie__5FB337D6">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="0..1" />
+          <End Role="Movie_type" Type="Self.Movie_type" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Shop">
-              <PropertyRef Name="ShoId" />
+            <Principal Role="Movie">
+              <PropertyRef Name="IdMovie" />
             </Principal>
-            <Dependent Role="Events">
-              <PropertyRef Name="Shop_ShoId" />
+            <Dependent Role="Movie_type">
+              <PropertyRef Name="movie_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1072,8 +1114,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Screening_seat_Seat">
-          <End Role="Seat" Type="Self.Seat" Multiplicity="1" />
+        <Association Name="Screening_seat_seats">
+          <End Role="Seat" Type="Self.Seat" Multiplicity="0..1" />
           <End Role="Screening_seat" Type="Self.Screening_seat" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Seat">
@@ -1108,26 +1150,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AdminRoles">
-          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
-          <End Role="Roles" Type="Self.Role" Multiplicity="*" />
-        </Association>
-        <Association Name="Movie_type">
-          <End Role="Category_Movie" Type="Self.Category_Movie" Multiplicity="*" />
-          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="DBOnlineMallEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="AdminRoles" EntityType="Self.AdminRole" />
           <EntitySet Name="Areas" EntityType="Self.Area" />
           <EntitySet Name="Banners" EntityType="Self.Banner" />
           <EntitySet Name="Blogs" EntityType="Self.Blog" />
           <EntitySet Name="Category_blog" EntityType="Self.Category_blog" />
           <EntitySet Name="Category_Movie" EntityType="Self.Category_Movie" />
-          <EntitySet Name="Configs" EntityType="Self.Config" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="Events" EntityType="Self.Event" />
           <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
           <EntitySet Name="Movies" EntityType="Self.Movie" />
+          <EntitySet Name="Movie_type" EntityType="Self.Movie_type" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Rooms" EntityType="Self.Room" />
@@ -1138,6 +1172,14 @@
           <EntitySet Name="Services" EntityType="Self.Service" />
           <EntitySet Name="Shops" EntityType="Self.Shop" />
           <EntitySet Name="Shop_Product" EntityType="Self.Shop_Product" />
+          <AssociationSet Name="AdminRoles_Admin" Association="Self.AdminRoles_Admin">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="AdminRoles" EntitySet="AdminRoles" />
+          </AssociationSet>
+          <AssociationSet Name="AdminRoles_Roles" Association="Self.AdminRoles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="AdminRoles" EntitySet="AdminRoles" />
+          </AssociationSet>
           <AssociationSet Name="Service_Area" Association="Self.Service_Area">
             <End Role="Area" EntitySet="Areas" />
             <End Role="Service" EntitySet="Services" />
@@ -1146,13 +1188,17 @@
             <End Role="Category_blog" EntitySet="Category_blog" />
             <End Role="Blog" EntitySet="Blogs" />
           </AssociationSet>
+          <AssociationSet Name="FK__Movie_typ__cate___5EBF139D" Association="Self.FK__Movie_typ__cate___5EBF139D">
+            <End Role="Category_Movie" EntitySet="Category_Movie" />
+            <End Role="Movie_type" EntitySet="Movie_type" />
+          </AssociationSet>
           <AssociationSet Name="Order_Customer" Association="Self.Order_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="Events_Shop" Association="Self.Events_Shop">
-            <End Role="Shop" EntitySet="Shops" />
-            <End Role="Events" EntitySet="Events" />
+          <AssociationSet Name="FK__Movie_typ__movie__5FB337D6" Association="Self.FK__Movie_typ__movie__5FB337D6">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="Movie_type" EntitySet="Movie_type" />
           </AssociationSet>
           <AssociationSet Name="Screening_Movie" Association="Self.Screening_Movie">
             <End Role="Movie" EntitySet="Movies" />
@@ -1182,7 +1228,7 @@
             <End Role="Screening" EntitySet="Screenings" />
             <End Role="Screening_seat" EntitySet="Screening_seat" />
           </AssociationSet>
-          <AssociationSet Name="Screening_seat_Seat" Association="Self.Screening_seat_Seat">
+          <AssociationSet Name="Screening_seat_seats" Association="Self.Screening_seat_seats">
             <End Role="Seat" EntitySet="Seats" />
             <End Role="Screening_seat" EntitySet="Screening_seat" />
           </AssociationSet>
@@ -1194,15 +1240,69 @@
             <End Role="Shop" EntitySet="Shops" />
             <End Role="Shop_Product" EntitySet="Shop_Product" />
           </AssociationSet>
-          <AssociationSet Name="AdminRoles" Association="Self.AdminRoles">
-            <End Role="Admin" EntitySet="Admins" />
-            <End Role="Roles" EntitySet="Roles" />
+          <EntitySet Name="Events" EntityType="DBOnlineMallModel.Event" />
+          <AssociationSet Name="Events_Shop" Association="DBOnlineMallModel.Events_Shop">
+            <End Role="Shop" EntitySet="Shops" />
+            <End Role="Event" EntitySet="Events" />
           </AssociationSet>
-          <AssociationSet Name="Movie_type" Association="Self.Movie_type">
-            <End Role="Category_Movie" EntitySet="Category_Movie" />
-            <End Role="Movie" EntitySet="Movies" />
-          </AssociationSet>
+          <EntitySet Name="Configs" EntityType="DBOnlineMallModel.Config" />
+          <EntitySet Name="galleries" EntityType="DBOnlineMallModel.gallery" />
         </EntityContainer>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Event_id" />
+          </Key>
+          <Property Name="Event_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Shop_ShoId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Descriptions" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="slug" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Meta_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Meta_keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Meta_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Shop" Relationship="DBOnlineMallModel.Events_Shop" FromRole="Event" ToRole="Shop" />
+        </EntityType>
+        <Association Name="Events_Shop">
+          <End Type="DBOnlineMallModel.Shop" Role="Shop" Multiplicity="1" />
+          <End Type="DBOnlineMallModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="ShoId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Shop_ShoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="value" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="gallery">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+          <Property Name="Modifidate" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1212,12 +1312,21 @@
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="DBOnlineMallModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminRoles">
+            <EntityTypeMapping TypeName="DBOnlineMallModel.AdminRole">
+              <MappingFragment StoreEntitySet="AdminRoles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+                <ScalarProperty Name="Admin_id" ColumnName="Admin_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1249,6 +1358,7 @@
           <EntitySetMapping Name="Blogs">
             <EntityTypeMapping TypeName="DBOnlineMallModel.Blog">
               <MappingFragment StoreEntitySet="Blog">
+                <ScalarProperty Name="Images" ColumnName="Images" />
                 <ScalarProperty Name="BlogId" ColumnName="BlogId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="BlogTime" ColumnName="BlogTime" />
@@ -1293,19 +1403,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Configs">
-            <EntityTypeMapping TypeName="DBOnlineMallModel.Config">
-              <MappingFragment StoreEntitySet="Config">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="value" ColumnName="value" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="url" ColumnName="url" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="DBOnlineMallModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
@@ -1318,32 +1415,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Events">
-            <EntityTypeMapping TypeName="DBOnlineMallModel.Event">
-              <MappingFragment StoreEntitySet="Events">
-                <ScalarProperty Name="Event_id" ColumnName="Event_id" />
-                <ScalarProperty Name="Shop_ShoId" ColumnName="Shop_ShoId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="slug" ColumnName="slug" />
-                <ScalarProperty Name="Meta_title" ColumnName="Meta_title" />
-                <ScalarProperty Name="Meta_keyword" ColumnName="Meta_keyword" />
-                <ScalarProperty Name="Meta_description" ColumnName="Meta_description" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Feedbacks">
             <EntityTypeMapping TypeName="DBOnlineMallModel.Feedback">
               <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="FBDate" ColumnName="FBDate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
@@ -1373,6 +1449,17 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="banner" ColumnName="banner" />
+                <ScalarProperty Name="photos" ColumnName="photos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movie_type">
+            <EntityTypeMapping TypeName="DBOnlineMallModel.Movie_type">
+              <MappingFragment StoreEntitySet="Movie_type">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cate_movie_id" ColumnName="cate_movie_id" />
+                <ScalarProperty Name="movie_id" ColumnName="movie_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1437,6 +1524,7 @@
                 <ScalarProperty Name="Movie_Id" ColumnName="Movie_Id" />
                 <ScalarProperty Name="ScreeningDate" ColumnName="ScreeningDate" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
               </MappingFragment>
@@ -1461,8 +1549,8 @@
               <MappingFragment StoreEntitySet="Seat">
                 <ScalarProperty Name="IdSeat" ColumnName="IdSeat" />
                 <ScalarProperty Name="SeatName" ColumnName="SeatName" />
+                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="IdRoom" ColumnName="IdRoom" />
-                <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
               </MappingFragment>
@@ -1515,22 +1603,51 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AdminRoles" TypeName="DBOnlineMallModel.AdminRoles" StoreEntitySet="AdminRoles">
-            <EndProperty Name="Admin">
-              <ScalarProperty Name="Id" ColumnName="Admin_id" />
-            </EndProperty>
-            <EndProperty Name="Roles">
-              <ScalarProperty Name="Role_id" ColumnName="Role_id" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Movie_type" TypeName="DBOnlineMallModel.Movie_type" StoreEntitySet="Movie_type">
-            <EndProperty Name="Category_Movie">
-              <ScalarProperty Name="Cate_id" ColumnName="cate_movie_id" />
-            </EndProperty>
-            <EndProperty Name="Movie">
-              <ScalarProperty Name="IdMovie" ColumnName="movie_id" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="DBOnlineMallModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Meta_description" ColumnName="Meta_description" />
+                <ScalarProperty Name="Meta_keyword" ColumnName="Meta_keyword" />
+                <ScalarProperty Name="Meta_title" ColumnName="Meta_title" />
+                <ScalarProperty Name="slug" ColumnName="slug" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Shop_ShoId" ColumnName="Shop_ShoId" />
+                <ScalarProperty Name="Event_id" ColumnName="Event_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configs">
+            <EntityTypeMapping TypeName="DBOnlineMallModel.Config">
+              <MappingFragment StoreEntitySet="Config">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="galleries">
+            <EntityTypeMapping TypeName="DBOnlineMallModel.gallery">
+              <MappingFragment StoreEntitySet="gallery">
+                <ScalarProperty Name="Modifidate" ColumnName="Modifidate" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

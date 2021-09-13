@@ -2,15 +2,17 @@
 @{
     ViewBag.Title = "Shops";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var banner = ViewBag.Banner;
 }
 
 <!-- Breadcrumbs-->
-<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="/Content/client/images/backgrounds/background-01-1920-900.jpg">
+<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="@banner.Image">
     <div class="parallax-content">
         <div class="bg-overlay-darker">
             <div class="container-wide section-34 section-md-60 section-lg-top-130 section-lg-bottom-155">
                 <div class="d-none d-lg-block">
-                    <div class="h1 breadcrumbs-custom-title">Shops</div>
+                    <div class="h1 breadcrumbs-custom-title">@banner.page</div>
                 </div>
             </div>
         </div>
@@ -19,8 +21,8 @@
 <section class="section-34 bg-selago">
     <div class="container">
         <ul class="list-inline list-inline-12 list-inline-icon breadcrumbs-list">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="entertainment.html">Services</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="#0">Services</a></li>
             <li class="active">Shops</li>
         </ul>
     </div>
@@ -44,12 +46,10 @@
                                             <button class="isotope-filters-toggle btn btn-primary-outline" data-custom-toggle="isotope-1" data-custom-toggle-disable-on-blur="true">Filter<span class="caret"></span></button>
                                             <ul class="list-sm-inline isotope-filters-list d-lg-block" id="isotope-1">
                                                 <li><a class="active" data-isotope-filter="*" data-isotope-group="gallery" href="#">All Shops</a></li>
-                                                <li><a data-isotope-filter="Clothes" data-isotope-group="gallery" href="#">Clothes</a></li>
-                                                <li><a data-isotope-filter="Jewelry" data-isotope-group="gallery" href="#">Jewelry</a></li>
-                                                <li><a data-isotope-filter="Gifts" data-isotope-group="gallery" href="#">Gifts</a></li>
-                                                <li><a data-isotope-filter="Accessories" data-isotope-group="gallery" href="#">Accessories</a></li>
-                                                <li><a data-isotope-filter="Grocery" data-isotope-group="gallery" href="#">Grocery</a></li>
-                                                <li><a data-isotope-filter="Other" data-isotope-group="gallery" href="#">Other</a></li>
+                                                @foreach (var item in ViewBag.ShopFilter)
+                                                {
+                                                    <li><a data-isotope-filter="@item.ServiceName" data-isotope-group="gallery" href="#">@item.ServiceName</a></li>
+                                                }
                                             </ul>
                                         </li>
                                     </ul>
@@ -59,102 +59,27 @@
                             <div class="col-xl-12 offset-top-60">
                                 <div class="isotope isotope-modern" data-isotope-layout="fitRows" data-isotope-group="gallery">
                                     <div class="row row-40" data-photo-swipe-gallery="gallery">
-                                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="*">
-                                            <!-- Product-->
-                                            <div class="product thumbnail-robben thumbnail-robben-width-none">
-                                                <a href="shop-single.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="~/Content/client/images/products/product-01-360x270.jpg" width="360" height="270" alt=""></span></a>
-                                                <div class="product-body inset-left-10 inset-right-10 offset-top-30">
-                                                    <a href="shop-single.html"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-01-109x100.png" width="109" height="100" alt=""></a>
-                                                    <div class="offset-top-20">
-                                                        <p>Original is one of the largest international fashion companies.</p>
+                                        @foreach (var item in ViewBag.Shops)
+                                        {
+                                            <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="@item.Service.ServiceName">
+                                                <!-- Product-->
+                                                <div class="product thumbnail-robben thumbnail-robben-width-none">
+                                                    <a href="@Url.Action("ShopSingle","Service",new { id = item.ShoId })">
+                                                        <span class="thumbnail-robben-img-wrap">
+                                                            <img class="img-responsive center-block" src="@item.Photo" width="360" height="270" alt="shopPhoto">
+                                                        </span>
+                                                    </a>
+                                                    <div class="product-body inset-left-10 inset-right-10 offset-top-30">
+                                                        <a href="@Url.Action("ShopSingle","Service",new { id = item.ShoId })">
+                                                            <img class="img-semi-transparent-inverse" src="@item.Logo" width="109" height="100" alt="ShopLogo">
+                                                        </a>
+                                                        <div class="offset-top-20">
+                                                            <p>@item.Meta_description</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Gifts">
-                                            <!-- Product-->
-                                            <div class="product thumbnail-robben thumbnail-robben-width-none">
-                                                <a href="shop-single.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="~/Content/client/images/products/product-02-360x270.jpg" width="360" height="270" alt=""></span></a>
-                                                <div class="product-body inset-left-10 inset-right-10 offset-top-30">
-                                                    <a href="shop-single.html"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-02-160x100.png" width="160" height="100" alt=""></a>
-                                                    <div class="offset-top-20">
-                                                        <p>Andrew Jones Studio is a jewelry store located at Audrey Mall, in San Diego.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Jewelry">
-                                            <!-- Product-->
-                                            <div class="product thumbnail-robben thumbnail-robben-width-none">
-                                                <a href="shop-single.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="~/Content/client/images/products/product-03-360x270.jpg" width="360" height="270" alt=""></span></a>
-                                                <div class="product-body inset-left-10 inset-right-10 offset-top-30">
-                                                    <a href="shop-single.html"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-03-132x100.png" width="132" height="100" alt=""></a>
-                                                    <div class="offset-top-20">
-                                                        <p>Sam Records offers a wide variety of affordable music CDs available at our mall.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Clothes">
-                                            <!-- Product-->
-                                            <div class="product thumbnail-robben thumbnail-robben-width-none">
-                                                <a href="shop-single.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="~/Content/client/images/products/product-04-360x270.jpg" width="360" height="270" alt=""></span></a>
-                                                <div class="product-body inset-left-10 inset-right-10 offset-top-30">
-                                                    <a href="shop-single.html"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-04-111x100.png" width="111" height="100" alt=""></a>
-                                                    <div class="offset-top-20">
-                                                        <p>Authentic creates clothes for the modern women who like to look stylish.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Clothes">
-                                            <!-- Product-->
-                                            <div class="product thumbnail-robben thumbnail-robben-width-none">
-                                                <a href="shop-single.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="~/Content/client/images/products/product-05-360x270.jpg" width="360" height="270" alt=""></span></a>
-                                                <div class="product-body inset-left-10 inset-right-10 offset-top-30">
-                                                    <a href="shop-single.html"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-05-120x100.png" width="120" height="100" alt=""></a>
-                                                    <div class="offset-top-20">
-                                                        <p>Bellerose had embellished beautiful journey of over 10 years in the personalized gifts industry.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Accessories">
-                                            <!-- Product-->
-                                            <div class="product thumbnail-robben thumbnail-robben-width-none">
-                                                <a href="shop-single.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="~/Content/client/images/products/product-06-360x270.jpg" width="360" height="270" alt=""></span></a>
-                                                <div class="product-body inset-left-10 inset-right-10 offset-top-30">
-                                                    <a href="shop-single.html"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-06-103x100.png" width="103" height="100" alt=""></a>
-                                                    <div class="offset-top-20">
-                                                        <p>Colombo has slowly grown to five retail furniture stores including Audrey Mall.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Grocery">
-                                            <!-- Product-->
-                                            <div class="product thumbnail-robben thumbnail-robben-width-none">
-                                                <a href="shop-single.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="~/Content/client/images/products/product-07-360x270.jpg" width="360" height="270" alt=""></span></a>
-                                                <div class="product-body inset-left-10 inset-right-10 offset-top-30">
-                                                    <a href="shop-single.html"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-07-158x100.png" width="158" height="100" alt=""></a>
-                                                    <div class="offset-top-20">
-                                                        <p>Wilsons is the leading premium lingerie brand in California.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 isotope-item" data-filter="Other">
-                                            <!-- Product-->
-                                            <div class="product thumbnail-robben thumbnail-robben-width-none">
-                                                <a href="shop-single.html"><span class="thumbnail-robben-img-wrap"><img class="img-responsive center-block" src="~/Content/client/images/products/product-08-360x270.jpg" width="360" height="270" alt=""></span></a>
-                                                <div class="product-body inset-left-10 inset-right-10 offset-top-30">
-                                                    <a href="shop-single.html"><img class="img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-08-134x100.png" width="134" height="100" alt=""></a>
-                                                    <div class="offset-top-20">
-                                                        <p>Over the past 20+ years, Lakewoods has provided skateboarders with top-notch apparel.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        }
                                     </div>
                                 </div>
                             </div>

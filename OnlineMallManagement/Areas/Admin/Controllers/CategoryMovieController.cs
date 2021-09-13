@@ -8,25 +8,27 @@ using System.Web.Mvc;
 
 namespace OnlineMallManagement.Areas.Admin.Controllers
 {
-    [Authorize]
+   
     public class CategoryMovieController : Controller
     {
         private DBOnlineMallEntities dbContext = new DBOnlineMallEntities();
         // GET: Admin/CategoryMovie
+        [Authorize(Roles = "Admin,User,Customer")]
         public ActionResult Index()
         {
             return View();
         }
 
-        [HttpGet]
+        [Authorize(Roles = "Admin,User,Customer")]
         public JsonResult loadData(string search, int? page, int? pageSize)
         {
+            dbContext.Configuration.ProxyCreationEnabled = false;
             if (search == null)
             {
                 search = "";
             }
 
-            var CategoryList = dbContext.Category_Movie.Where(x => x.Name.ToLower().Contains(search.ToLower())).ToList();
+            var CategoryList = dbContext.Category_Movie.Where(x => x.Name.Contains(search)).ToList();
 
             var _pageSize = pageSize ?? 8;
             var pageIndex = page ?? 1;
@@ -53,7 +55,7 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
             return Json(item, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: Admin/Category/Create
+        [Authorize(Roles = "Admin,User")]
         [HttpPost]
         public ActionResult Create(Category_Movie model)
         {
@@ -82,6 +84,7 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
             else
             {
                 model.CreatedDate = DateTime.Now;
+                model.ModifiedDate = DateTime.Now;
                 dbContext.Category_Movie.Add(model);
                 try
                 {
@@ -95,7 +98,7 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
             }
         }
 
-        // POST: Admin/Category/Delete/5
+        [Authorize(Roles = "Admin,User")]
         [HttpPost]
         public ActionResult Delete(int id)
         {

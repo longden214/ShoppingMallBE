@@ -1,16 +1,38 @@
-﻿
+﻿@model IEnumerable<OnlineMallManagement.Models.Blog>
 @{
-    ViewBag.Title = "BlogClassic";
+    ViewBag.Title = "Blog Classic";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section MovieCss{
+    <style>
+        .pagination-classic > li:first-child a {
+            pointer-events: inherit !important;
+            background: #79d5ca !important;
+            border-color: #79d5ca !important;
+        }
+
+        .pagination-classic > li a.icon-default,
+        .pagination-classic > li a.icon-default:hover {
+            color: #b6b6b6 !important;
+            background: #f3f3f3 !important;
+            border-color: #f3f3f3 !important;
+        }
+
+        .pagination-classic > li a:hover {
+            color: #fff;
+            background: #764ebe !important;
+            border-color: #764ebe !important;
+        }
+    </style>
+}
 <!-- Breadcrumbs-->
-<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="/Content/client/images/backgrounds/background-01-1920-900.jpg">
+<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="@ViewBag.Banner.Image">
     <div class="parallax-content">
         <div class="bg-overlay-darker">
             <div class="container-wide section-34 section-md-60 section-lg-top-130 section-lg-bottom-155">
                 <div class="d-none d-lg-block">
-                    <div class="h1 breadcrumbs-custom-title">Blog Classic</div>
+                    <div class="h1 breadcrumbs-custom-title">@ViewBag.Banner.description</div>
                 </div>
             </div>
         </div>
@@ -19,8 +41,8 @@
 <section class="section-34 bg-selago">
     <div class="container">
         <ul class="list-inline list-inline-12 list-inline-icon breadcrumbs-list">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="blog-classic.html">Blog</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="@Url.Action("BlogClassic","Blog")">Blog</a></li>
             <li class="active">Blog Classic</li>
         </ul>
     </div>
@@ -35,103 +57,86 @@
                 <div class="row justify-content-sm-center justify-content-xl-end justify-content-xxl-between">
                     <div class="col-md-10 col-lg-8 col-xxl-7">
                         <div class="inset-lg-right-35 inset-xxl-right-0">
-                            <!-- Post Classic-->
-                            <article class="post post-classic">
-                                <!-- Post media-->
-                                <header class="post-media">
-                                    <a class="thumbnail-classic" href="blog-post.html" target="_self">
-                                        <figure><img width="960" height="550" src="~/Content/client/images/blog/post-01-960x550.jpg" alt=""></figure>
-                                    </a>
-                                </header>
-                                <!-- Post Title-->
-                                <div class="post-title offset-top-30">
-                                    <h3><a href="blog-post.html">Top 3 Reasons to Visit Fashion Day at Any Season</a></h3>
+
+                            @foreach (var item in Model)
+                            {
+                                <div class="offset-top-75">
+                                    <!-- Post Classic-->
+                                    <article class="post post-classic">
+                                        <!-- Post media-->
+                                        <header class="post-media">
+                                            <a class="thumbnail-classic" href="@Url.Action("BlogPost","Blog",new { id = item.BlogId })" target="_self">
+                                                <figure><img width="960" height="550" src="@item.Images" alt="photo"></figure>
+                                            </a>
+                                        </header>
+                                        <!-- Post Title-->
+                                        <div class="post-title offset-top-30">
+                                            <h3><a href="@Url.Action("BlogPost","Blog",new { id = item.BlogId })">@item.Title!</a></h3>
+                                        </div>
+                                        <!-- Post content-->
+                                        <section class="post-content text-left offset-top-5">
+                                            <ul class="list list-inline list-inline-dashed list-inline-20 text-gray-lighter">
+                                                <li>@item.BlogTime.Value.ToString("dd/MM/yyyy")</li>
+                                            </ul>
+                                            <!-- Post Body-->
+                                            <div class="post-body offset-top-20">
+                                                <p>@item.Description</p>
+                                                <div class="offset-top-30"><a class="btn btn-width-175 btn-bermuda" href="@Url.Action("BlogPost","Blog",new { id = item.BlogId })">read more</a></div>
+                                            </div>
+                                        </section>
+                                    </article>
                                 </div>
-                                <!-- Post content-->
-                                <section class="post-content text-left offset-top-5">
-                                    <ul class="list list-inline list-inline-dashed list-inline-20 text-gray-lighter">
-                                        <li>2 days ago</li>
-                                        <li class="font-italic"><a class="text-bermuda" href="#">Articles</a></li>
-                                        <li><span>by <a class="text-bermuda" href="#">Diana Hawkins</a></span></li>
-                                        <li class="p"><a class="text-gray-lighter" href="#">12 Comments</a></li>
-                                    </ul>
-                                    <!-- Post Body-->
-                                    <div class="post-body offset-top-20">
-                                        <p>Regardless of what season it is now, there are always plenty of reasons to visit our mall. In this article, we decided to show you the list of Top 3 reasons to visit Fashion Day. to begin with, people usually visit shopping malls to enjoy variety while shopping, for socialization and for entertainment. People also visit malls because they offer one-stop shopping convenience and save them time.</p>
-                                        <div class="offset-top-30"><a class="btn btn-width-175 btn-bermuda" href="blog-post.html">read more</a></div>
-                                    </div>
-                                </section>
-                            </article>
-                            <div class="offset-top-75">
-                                <!-- Post Classic-->
-                                <article class="post post-classic">
-                                    <!-- Post media-->
-                                    <header class="post-media">
-                                        <a class="thumbnail-classic" href="blog-post.html" target="_self">
-                                            <figure><img width="960" height="550" src="~/Content/client/images/blog/post-02-960x550.jpg" alt=""></figure>
-                                        </a>
-                                    </header>
-                                    <!-- Post Title-->
-                                    <div class="post-title offset-top-30">
-                                        <h3><a href="blog-post.html">Perfect Clothes to Wear When It’s Hot</a></h3>
-                                    </div>
-                                    <!-- Post content-->
-                                    <section class="post-content text-left offset-top-5">
-                                        <ul class="list list-inline list-inline-dashed list-inline-20 text-gray-lighter">
-                                            <li>2 days ago</li>
-                                            <li class="font-italic"><a class="text-bermuda" href="#">Articles</a></li>
-                                            <li><span>by <a class="text-bermuda" href="#">Susan Rose</a></span></li>
-                                            <li class="p"><a class="text-gray-lighter" href="#">12 Comments</a></li>
+                            }
+                            @if (ViewBag.totalShop > 0)
+                            {
+
+                                <div class="text-center text-lg-left offset-top-75 offset-lg-top-90">
+                                    <!-- Classic Pagination-->
+                                    <nav>
+                                        <ul class="pagination-classic">
+
+                                            @{
+                                                int numberPage = ViewBag.numberPage;
+                                                int pageCurrent = ViewBag.pageCurrent;
+                                                if (pageCurrent > 1)
+                                                {
+                                                    int pagePage = pageCurrent - 1;
+
+                                                    <li><a class="icon icon-xs mdi mdi-arrow-left-bold" href="?page=@pagePage"></a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li><a class="icon icon-xs icon-default mdi mdi-arrow-left-bold" href="#0"></a></li>
+                                                }
+
+                                                int i;
+                                                for (i = 1; i <= numberPage; i++)
+                                                {
+                                                    if (i == pageCurrent)
+                                                    {
+                                                        <li class="active"><a href="?page=@i">@i</a></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><a href="?page=@i">@i</a></li>
+                                                    }
+                                                }
+
+                                                if (pageCurrent >= 1 && pageCurrent < numberPage)
+                                                {
+                                                    int nextPage = pageCurrent + 1;
+
+                                                    <li><a class="icon icon-xs mdi mdi-arrow-right-bold" href="?page=@nextPage"></a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li><a class="icon icon-xs icon-default mdi mdi-arrow-right-bold" href="#0"></a></li>
+                                                }
+                                            }
                                         </ul>
-                                        <!-- Post Body-->
-                                        <div class="post-body offset-top-20">
-                                            <p>In the middle of a heatwave, your corporate uniform—the usual blazers, slacks, and button-downs—is the last thing you want to wear to work. What to slip into instead? Lightweight separates, breathable sandals, and sophisticated accessories that help pull your look together. Don’t sweat it: We’ve got five warm weather-friendly outfits that work for your nine-to-five.</p>
-                                            <div class="offset-top-30"><a class="btn btn-width-175 btn-bermuda" href="blog-post.html">read more</a></div>
-                                        </div>
-                                    </section>
-                                </article>
-                            </div>
-                            <div class="offset-top-75">
-                                <!-- Post Classic-->
-                                <article class="post post-classic">
-                                    <!-- Post media-->
-                                    <header class="post-media">
-                                        <a class="thumbnail-classic" href="blog-post.html" target="_self">
-                                            <figure><img width="960" height="550" src="~/Content/client/images/blog/post-03-960x550.jpg" alt=""></figure>
-                                        </a>
-                                    </header>
-                                    <!-- Post Title-->
-                                    <div class="post-title offset-top-30">
-                                        <h3><a href="blog-post.html">Planning Your Weekend? Visit Fashion Day!</a></h3>
-                                    </div>
-                                    <!-- Post content-->
-                                    <section class="post-content text-left offset-top-5">
-                                        <ul class="list list-inline list-inline-dashed list-inline-20 text-gray-lighter">
-                                            <li>2 days ago</li>
-                                            <li class="font-italic"><a class="text-bermuda" href="#">Articles</a></li>
-                                            <li><span>by <a class="text-bermuda" href="#">Andrea Kelly</a></span></li>
-                                            <li class="p"><a class="text-gray-lighter" href="#">12 Comments</a></li>
-                                        </ul>
-                                        <!-- Post Body-->
-                                        <div class="post-body offset-top-20">
-                                            <p>Fashion Day often evokes memories of endless shopping, thrilling rides or concerts. But we found it to be the perfect destination for another activity: a weekend getaway with your friends or family! Here’s an itinerary for a jaunt around the 5.6 million square-foot Mall that will make you and your company want to schedule a trip ASAP.</p>
-                                            <div class="offset-top-30"><a class="btn btn-width-175 btn-bermuda" href="blog-post.html">read more</a></div>
-                                        </div>
-                                    </section>
-                                </article>
-                            </div>
-                            <div class="text-center text-lg-left offset-top-75 offset-lg-top-90">
-                                <!-- Classic Pagination-->
-                                <nav>
-                                    <ul class="pagination-classic">
-                                        <li><a class="icon icon-xs icon-default mdi mdi-arrow-left-bold" href="#"></a></li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a class="icon icon-xs mdi mdi-arrow-right-bold" href="#"></a></li>
-                                    </ul>
-                                </nav>
-                            </div>
+                                    </nav>
+                                </div>
+                            }
                         </div>
                     </div>
                     <div class="col-md-10 col-lg-4 offset-top-60 offset-lg-top-0">
@@ -143,74 +148,17 @@
                                 <h5 class="offset-top-15">Search the Blog</h5>
                                 <div class="offset-top-25 rd-search-blog">
                                     <!-- RD Search Form-->
-                                    <form class="search-form-1 form-search form-search-blog rd-search" action="search-results.html" method="GET">
+                                    <form class="search-form-1 form-search form-search-blog rd-search" action="@Url.Action("BlogClassic","Blog")" method="GET">
                                         <div class="form-wrap">
                                             <label class="form-label form-search-label" for="blog-classic-form-search-widget">Search...</label>
-                                            <input class="form-input form-search-input form-control null" id="blog-classic-form-search-widget" type="text" name="s" autocomplete="off">
+                                            <input class="form-input form-search-input form-control null" id="blog-classic-form-search-widget" type="text" name="SearchString" autocomplete="off">
                                         </div>
                                         <div class="form-button">
                                             <button class="btn btn-primary form-search-submit" type="submit">search</button>
                                         </div>
                                     </form>
                                 </div>
-                                <!-- Archive-->
-                                <div class="offset-top-60 offset-lg-top-90">
-                                    <hr class="divider hr-left-0 bg-bermuda">
-                                    <h5 class="offset-top-15">Archive</h5>
-                                    <div class="row justify-content-sm-center offset-top-30">
-                                        <div class="col-sm-6">
-                                            <div class="inset-sm-left-8">
-                                                <!-- List Marked-->
-                                                <ul class="list list-marked list-marked-icon text-dark">
-                                                    <li><a class="text-primary" href="#">January 2019</a></li>
-                                                    <li><a class="text-primary" href="#">March 2019</a></li>
-                                                    <li><a class="text-primary" href="#">May 2019</a></li>
-                                                    <li><a class="text-primary" href="#">July 2019</a></li>
-                                                    <li><a class="text-primary" href="#">September 2019</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 offset-top-10 offset-sm-top-0 inset-sm-left-8">
-                                            <!-- List Marked-->
-                                            <ul class="list list-marked list-marked-icon text-dark">
-                                                <li><a class="text-primary" href="#">February 2019</a></li>
-                                                <li><a class="text-primary" href="#">April 2019</a></li>
-                                                <li><a class="text-primary" href="#">June 2019</a></li>
-                                                <li><a class="text-primary" href="#">August 2019</a></li>
-                                                <li><a class="text-primary" href="#">October 2019</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Gallery-->
-                                <div class="offset-top-60 offset-lg-top-90">
-                                    <hr class="divider hr-left-0 bg-bermuda">
-                                    <h5 class="offset-top-15 text-left">Gallery</h5>
-                                    <div class="row justify-content-sm-start no-gutters section-gallery-lg-column-offset offset-top-30" data-photo-swipe-gallery="gallery">
-                                        <div class="col-md-10 col-lg-12">
-                                            <div class="row no-gutters justify-content-sm-start" data-lightgallery="group">
-                                                <div class="col-6 col-sm-4 col-lg-6 col-xl-4 inset-xl-left-13 inset-xl-right-13">
-                                                    <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="~/Content/client/images/gallery/portfolio-01-1170x842_original.jpg"><span class="figure"><img width="160" height="160" src="~/Content/client/images/gallery/portfolio-17-640x640.jpg" alt=""><span class="figcaption"><span class="icon icon-xs fa-plus"></span></span></span></a>
-                                                </div>
-                                                <div class="col-6 col-sm-4 col-lg-6 col-xl-4 inset-xl-left-13 inset-xl-right-13 offset-sm-top-0">
-                                                    <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="~/Content/client/images/gallery/portfolio-23-1170x731_original.jpg"><span class="figure"><img width="160" height="160" src="~/Content/client/images/gallery/portfolio-18-640x640.jpg" alt=""><span class="figcaption"><span class="icon icon-xs fa-plus"></span></span></span></a>
-                                                </div>
-                                                <div class="col-6 col-sm-4 col-lg-6 col-xl-4 inset-xl-left-13 inset-xl-right-13 offset-sm-top-0">
-                                                    <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="~/Content/client/images/gallery/portfolio-25-1170x780_original.jpg"><span class="figure"><img width="160" height="160" src="~/Content/client/images/gallery/portfolio-19-640x640.jpg" alt=""><span class="figcaption"><span class="icon icon-xs fa-plus"></span></span></span></a>
-                                                </div>
-                                                <div class="col-6 col-sm-4 col-lg-6 col-xl-4 inset-xl-left-13 inset-xl-right-13 offset-sm-top-0">
-                                                    <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="~/Content/client/images/gallery/portfolio-24-1170x780_original.jpg"><span class="figure"><img width="160" height="160" src="~/Content/client/images/gallery/portfolio-20-640x640.jpg" alt=""><span class="figcaption"><span class="icon icon-xs fa-plus"></span></span></span></a>
-                                                </div>
-                                                <div class="col-6 col-sm-4 col-lg-6 col-xl-4 inset-xl-left-13 inset-xl-right-13 offset-sm-top-0">
-                                                    <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="~/Content/client/images/gallery/portfolio-27-1170x842_original.jpg"><span class="figure"><img width="160" height="160" src="~/Content/client/images/gallery/portfolio-21-640x640.jpg" alt=""><span class="figcaption"><span class="icon icon-xs fa-plus"></span></span></span></a>
-                                                </div>
-                                                <div class="col-6 col-sm-4 col-lg-6 col-xl-4 inset-xl-left-13 inset-xl-right-13 offset-sm-top-0">
-                                                    <!-- Thumbnail Rayen--><a class="thumbnail-rayen" data-lightgallery="item" href="~/Content/client/images/gallery/portfolio-26-1170x807_original.jpg"><span class="figure"><img width="160" height="160" src="~/Content/client/images/gallery/portfolio-22-640x640.jpg" alt=""><span class="figcaption"><span class="icon icon-xs fa-plus"></span></span></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <!-- Categories-->
                                 <div class="offset-top-60 offset-lg-top-90">
                                     <hr class="divider hr-left-0 bg-bermuda">
@@ -220,21 +168,12 @@
                                     <div class="inset-sm-left-8">
                                         <!-- List Marked-->
                                         <ul class="list list-marked list-marked-icon">
-                                            <li><a class="text-primary" href="#">News <span class="text-gray-lighter">(25)</span></a></li>
-                                            <li><a class="text-primary" href="#">Shops <span class="text-gray-lighter">(17)</span></a></li>
-                                            <li><a class="text-primary" href="#">Restaurants & Cafes <span class="text-gray-lighter">(13)</span></a></li>
-                                            <li><a class="text-primary" href="#">Entertainment <span class="text-gray-lighter">(21)</span></a></li>
-                                            <li><a class="text-primary" href="#">Events <span class="text-gray-lighter">(29)</span></a></li>
+                                            @foreach (var item in ViewBag.Category)
+                                            {
+                                                <li><a class="text-primary" href="@Url.Action("BlogClassic","Blog",new { cate = item.Cate_blog_id })">@item.name</a></li>
+                                            }
                                         </ul>
                                     </div>
-                                </div>
-                                <!-- Tags-->
-                                <div class="offset-top-60 offset-lg-top-90">
-                                    <hr class="divider hr-left-0 bg-bermuda">
-                                    <h5 class="offset-top-15">Tags</h5>
-                                </div>
-                                <div class="offset-top-30">
-                                    <div class="group group-sm"><a class="btn btn-tag btn-primary-outline" href="shops.html">Shops</a><a class="btn btn-tag btn-primary-outline" href="entertainment.html">Entertainment</a><a class="btn btn-tag btn-primary-outline" href="blog-classic.html">Blog</a><a class="btn btn-tag btn-primary-outline" href="gift-cards.html">Fashion</a><a class="btn btn-tag btn-primary-outline" href="food.html">Cafe</a><a class="btn btn-tag btn-primary-outline" href="entertainment.html">Services</a><a class="btn btn-tag btn-primary-outline" href="parking.html">Parking</a><a class="btn btn-tag btn-primary-outline" href="blog-masonry.html">Articles</a></div>
                                 </div>
                             </aside>
                         </div>

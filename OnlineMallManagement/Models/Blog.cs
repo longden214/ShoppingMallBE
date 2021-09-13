@@ -27,6 +27,7 @@ namespace OnlineMallManagement.Models
         public string Meta_description { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string Images { get; set; }
     
         public virtual Category_blog Category_blog { get; set; }
     }

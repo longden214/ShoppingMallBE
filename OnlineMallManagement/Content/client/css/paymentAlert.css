@@ -1,0 +1,99 @@
+﻿body {
+    text-align: center;
+    padding: 40px 0;
+    background: #EBF0F5;
+    background-image: url('img_girl.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    position:relative;
+}
+
+h1 {
+    color: #88B04B;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #404F5E;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-size: 20px;
+    margin: 0;
+}
+
+i {
+    color: #9ABC66;
+    font-size: 100px;
+    line-height: 200px;
+    margin-left: -15px;
+}
+
+.card {
+    background: white;
+    padding: 60px;
+    border-radius: 4px;
+    box-shadow: 0 2px 3px #C8D0D8;
+    display: inline-block;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn-back {
+    padding: 20px;
+    display: inline-block;
+    background: #88B04B;
+    color: white;
+    margin-top: 50px;
+    border-radius: 30px;
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+
+* {
+}
+
+.failed div {
+    background: teal;
+    width: 60px;
+    height: 60px;
+    position: relative;
+}
+
+    .failed div:after {
+        content: '';
+        height: 115px;
+        border-left: 10px solid #fff;
+        position: absolute;
+        transform: rotate( 45deg );
+        left: 48%;
+        top: 15%;
+    }
+
+    .failed div:before {
+        content: '';
+        height: 115px;
+        border-left: 10px solid #fff;
+        position: absolute;
+        transform: rotate( -45deg );
+        left: 48%;
+        top: 15%;
+    }
+
+.failed i.checkmark {
+    color: white;
+}
+
+.failed div {
+    background: #ff5b5b !important;
+    height: 150px !important;
+    width: 150px !important;
+}

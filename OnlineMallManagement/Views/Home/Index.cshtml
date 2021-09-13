@@ -2,78 +2,49 @@
     ViewBag.Title = "Home Page";
 }
 
+@section MovieCss{
+    <style>
+        .event-description__home p {
+            width: 100%;
+            white-space: pre-wrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 7;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+        }
+        .blog_description {
+            width: 100%;
+            white-space: pre-wrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+        }
+    </style>
+}
 
 <div class="swiper-container-wrap">
     <div class="swiper-container swiper-slider" data-height="" data-min-height="300px" data-simulate-touch="false" data-autoplay="4200">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" data-slide-bg="/Content/client/images/backgrounds/background-02-1920-1080.jpg">
-                <div class="swiper-slide-caption">
-                    <div class="inset-xl-left-35 inset-xxl-left-125">
-                        <div class="container-wide container-wide-custom">
-                            <div class="row justify-content-sm-center justify-content-xl-start text-xl-left">
-                                <div class="col-md-10 col-xl-7">
-                                    <div class="text-big-84 font-italic font-monospace text-spacing-inverse-20 text-white">Season Sale</div>
-                                    <div class="d-none d-xl-inline-block offset-top-25 offset-sm-top-30">
-                                        <hr class="divider divider-mod divider-58 bg-default">
+            @foreach (var item in ViewBag.Banners)
+            {
+                <div class="swiper-slide" data-slide-bg="@item.Image">
+                    <div class="swiper-slide-caption">
+                        <div class="inset-xl-left-35 inset-xxl-left-125">
+                            <div class="container-wide container-wide-custom">
+                                <div class="row justify-content-sm-center justify-content-xl-start text-xl-left">
+                                    <div class="col-md-10 col-xl-7">
+                                        <div class="text-big-84 font-italic font-monospace text-spacing-inverse-20 text-white">@item.description</div>
                                     </div>
-                                    <div class="d-inline-block text-top offset-top-10 offset-sm-top-15 inset-left-10">
-                                        <h4 class="text-white">UP TO</h4>
-                                    </div>
-                                    <div class="d-inline-block text-top inset-left-10">
-                                        <h1>70% OFF</h1>
-                                    </div>
-                                    <div class="offset-top-20"><a class="btn btn-width-165 btn-bermuda" href="shops.html">shop now</a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="swiper-slide" data-slide-bg="/Content/client/images/backgrounds/background-05-1920-710.jpg">
-                <div class="swiper-slide-caption">
-                    <div class="inset-xl-left-35 inset-xxl-left-125">
-                        <div class="container-wide container-wide-custom">
-                            <div class="row justify-content-sm-center justify-content-xl-start text-xl-left">
-                                <div class="col-md-10 col-xl-7">
-                                    <h4 class="text-uppercase text-white">New Collection</h4>
-                                    <h1 class="text-uppercase text-spacing-100">always</h1>
-                                    <div class="d-none d-xl-inline-block offset-top-45">
-                                        <hr class="divider divider-xl bg-default">
-                                    </div>
-                                    <div class="d-inline-block text-top inset-xl-left-35">
-                                        <div class="text-big-84 font-monospace font-italic text-white text-spacing-inverse-20">in</div>
-                                    </div>
-                                    <div class="d-inline-block text-top inset-left-15">
-                                        <h1 class="text-uppercase text-spacing-100 text-height-1">style</h1>
-                                    </div>
-                                    <div class="offset-top-15 offset-md-top-65"><a class="btn btn-width-165 btn-bermuda" href="shops.html">shop now</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-slide" data-slide-bg="/Content/client/images/backgrounds/background-08-1920-1025.jpg">
-                <div class="swiper-slide-caption">
-                    <div class="inset-xl-left-35 inset-xxl-left-125">
-                        <div class="container-wide container-wide-custom">
-                            <div class="row justify-content-sm-center justify-content-xl-start text-xl-left">
-                                <div class="col-md-10 col-xl-7">
-                                    <div class="text-big-84 font-italic font-monospace text-spacing-inverse-20 text-white">Hats & Accessories</div>
-                                    <h1>30% OFF</h1>
-                                    <div class="d-none d-xl-inline-block offset-top-25">
-                                        <hr class="divider divider-xl bg-default">
-                                    </div>
-                                    <div class="d-inline-block text-top offset-lg-top-10 inset-left-10">
-                                        <h4 class="text-uppercase">EVERYTHING</h4>
-                                    </div>
-                                    <div class="offset-top-15 offset-md-top-65"><a class="btn btn-width-165 btn-bermuda" href="shops.html">shop now</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
+
         </div>
         <div class="container-wide container-wide-custom">
             <div class="inset-xl-left-45 inset-xxl-left-85">
@@ -83,11 +54,11 @@
     </div>
     <div class="swiper-aside-right">
         <ul class="list list-background-minsk list-0 text-center section-top-60 section-md-top-0">
-            <li class="inset-sm-left-85 inset-sm-right-85 inset-md-left-0 inset-md-right-0"><a class="box-sm bg-accent d-block" href="directions.html"><span class="sprite sprite-icon-02-44x44 d-inline-block"></span><span class="font-weight-bold text-white d-block">Directions</span></a></li>
-            <li class="inset-sm-left-85 inset-sm-right-85 inset-md-left-0 inset-md-right-0 offset-top-30 offset-md-top-0"><a class="box-sm bg-accent d-block" href="shops.html"><span class="sprite sprite-icon-06-44x44 d-inline-block"></span><span class="font-weight-bold text-white d-block">Shops</span></a></li>
-            <li class="inset-sm-left-85 inset-sm-right-85 inset-md-left-0 inset-md-right-0 offset-top-30 offset-md-top-0"><a class="box-sm bg-accent d-block" href="food.html"><span class="sprite sprite-icon-05-44x44 d-inline-block"></span><span class="font-weight-bold text-white d-block">Food</span></a></li>
-            <li class="inset-sm-left-85 inset-sm-right-85 inset-md-left-0 inset-md-right-0 offset-top-30 offset-md-top-0"><a class="box-sm bg-accent d-block" href="entertainment.html"><span class="sprite sprite-icon-04-45x44 d-inline-block"></span><span class="font-weight-bold text-white d-block">Entertainment</span></a></li>
-            <li class="inset-sm-left-85 inset-sm-right-85 inset-md-left-0 inset-md-right-0 offset-top-30 offset-md-top-0"><a class="box-sm bg-accent d-block" href="parking.html"><span class="sprite sprite-icon-03-36x44 d-inline-block"></span><span class="font-weight-bold text-white d-block">Parking</span></a></li>
+            <li class="inset-sm-left-85 inset-sm-right-85 inset-md-left-0 inset-md-right-0"><a class="box-sm bg-accent d-block" href="@Url.Action("Directions","Home")"><span class="sprite sprite-icon-02-44x44 d-inline-block"></span><span class="font-weight-bold text-white d-block">Directions</span></a></li>
+            <li class="inset-sm-left-85 inset-sm-right-85 inset-md-left-0 inset-md-right-0 offset-top-30 offset-md-top-0"><a class="box-sm bg-accent d-block" href="@Url.Action("Shops","Service")"><span class="sprite sprite-icon-06-44x44 d-inline-block"></span><span class="font-weight-bold text-white d-block">Shops</span></a></li>
+            <li class="inset-sm-left-85 inset-sm-right-85 inset-md-left-0 inset-md-right-0 offset-top-30 offset-md-top-0"><a class="box-sm bg-accent d-block" href="@Url.Action("Food","Service")"><span class="sprite sprite-icon-05-44x44 d-inline-block"></span><span class="font-weight-bold text-white d-block">Food</span></a></li>
+            <li class="inset-sm-left-85 inset-sm-right-85 inset-md-left-0 inset-md-right-0 offset-top-30 offset-md-top-0"><a class="box-sm bg-accent d-block" href="@Url.Action("Entertainment","Service")"><span class="sprite sprite-icon-04-45x44 d-inline-block"></span><span class="font-weight-bold text-white d-block">Entertainment</span></a></li>
+            <li class="inset-sm-left-85 inset-sm-right-85 inset-md-left-0 inset-md-right-0 offset-top-30 offset-md-top-0"><a class="box-sm bg-accent d-block" href="@Url.Action("Parking","Service")"><span class="sprite sprite-icon-03-36x44 d-inline-block"></span><span class="font-weight-bold text-white d-block">Parking</span></a></li>
         </ul>
     </div>
 </div>
@@ -113,7 +84,6 @@
                             <div class="offset-top-30">
                                 <p>Audrey Mall is a four-story vertical shopping and entertainment center located in the heart of downtown San Diego in the thriving Yerba Buena Neighborhood. Shop at the City Target on the second level and visit a 16-screen AMC Theater with the largest IMAX in North America.</p>
                             </div>
-                            <div class="offset-top-30 text-center text-lg-left"><a class="btn btn-width-175 btn-primary" href="entertainment.html">learn more</a></div>
                         </div>
                     </div>
                     <div class="col-md-10 col-xl-7 col-xxl-8 offset-top-60 offset-xl-top-0">
@@ -208,49 +178,49 @@
                     <h3>Events</h3>
                 </div>
                 <div class="row justify-content-center justify-content-xl-start text-left offset-top-35 offset-md-top-60 row-50">
-                    <div class="col-lg-6">
-                        <div class="row justify-content-sm-center justify-content-xl-start row-30 text-center text-md-left">
-                            <div class="col-md-5 col-lg-10 col-xl-5 d-flex justify-content-center"><img class="img-cover img-responsive" src="~/Content/client/images/blog/post-13-320x442.jpg" width="320" height="442" alt=""></div>
-                            <div class="col-md-6 col-lg-10 col-xl-6">
-                                <ul class="list-inline list-inline-20">
-                                    <li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10">June, 29</span></li>
-                                    <li><span class="icon icon-normal icon-sm mdi mdi-clock text-bermuda text-middle"></span><span class="text-middle inset-left-10">6:00pm</span></li>
-                                </ul>
-                                <div class="offset-top-25">
-                                    <h5><a href="event-single.html">The KidsLand Summer Day</a></h5>
+                    @foreach (var item in ViewBag.Events)
+                    {
+                        <div class="col-lg-6">
+                            <div class="row justify-content-sm-center justify-content-xl-start row-30 text-center text-md-left">
+                                <div class="col-md-5 col-lg-10 col-xl-5 d-flex justify-content-center">
+                                    <img class="img-cover img-responsive" src="@item.Image" width="320" height="442" alt="">
                                 </div>
-                                <div class="offset-top-25">
-                                    <p>The KidsLand SummerDay will begin on Saturday, July 4, with a special celebration and will run until Sunday, September 4. <span class="d-lg-none d-xl-inline">Children can take part in a variety of themed activities and broadcast live events from the KidsLand Radio Station and TV Studio located at Audrey Mall.</span></p>
+                                <div class="col-md-6 col-lg-10 col-xl-6">
+                                    <ul class="list-inline list-inline-20">
+                                        @{
+                                            var startDate = item.StartDate.ToString("MMM, dd");
+                                            var startTime = item.StartDate.ToString("h:mm tt");
+                                        }
+                                        <li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10">@startDate</span></li>
+                                        <li><span class="icon icon-normal icon-sm mdi mdi-clock text-bermuda text-middle"></span><span class="text-middle inset-left-10">@startTime</span></li>
+                                    </ul>
+                                    <div class="offset-top-25">
+                                        <h5><a href="@Url.Action("EventSingle","Event",new { id = item.Event_id })">@item.Title</a></h5>
+                                    </div>
+                                    <div class="offset-top-25 event-description__home">
+                                        <p>@item.Descriptions</p>
+                                    </div>
+                                    <div class="offset-top-20">
+                                        @{
+                                            var price = "";
+                                            if (item.Price > 0)
+                                            {
+                                                price = item.Price.ToString();
+                                            }
+                                            else
+                                            {
+                                                price = "Free Entry";
+                                            }
+                                        }
+                                        <div class="h5-variant-2 font-weight-bold font-italic text-gray">@price</div>
+                                    </div>
+                                    <div class="offset-top-25"><a class="btn btn-width-175 btn-primary-outline" href="@Url.Action("EventSingle","Event",new { id = item.Event_id })">learn more</a></div>
                                 </div>
-                                <div class="offset-top-20">
-                                    <div class="h5-variant-2 font-weight-bold font-italic text-gray">Free Entry</div>
-                                </div>
-                                <div class="offset-top-25"><a class="btn btn-width-175 btn-primary-outline" href="event-single.html">learn more</a></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="row justify-content-sm-center justify-content-xl-start row-30 text-center text-md-left">
-                            <div class="col-md-5 col-lg-10 col-xl-5 d-flex justify-content-center"><img class="img-cover img-responsive" src="~/Content/client/images/blog/post-14-320x442.jpg" width="320" height="442" alt=""></div>
-                            <div class="col-md-6 col-lg-10 col-xl-6">
-                                <ul class="list-inline list-inline-20">
-                                    <li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10">August, 29</span></li>
-                                    <li><span class="icon icon-normal icon-sm mdi mdi-clock text-bermuda text-middle"></span><span class="text-middle inset-left-10">6:00pm</span></li>
-                                </ul>
-                                <div class="offset-top-25">
-                                    <h5><a href="event-single.html">Audrey Cafe Evening</a></h5>
-                                </div>
-                                <div class="offset-top-25">
-                                    <p>Relax and unwind throughout the Summer while sipping on a specially created Audrey 100 Champagne cocktail <span class="d-lg-none d-xl-inline">or a glass of Audrey 100 Punch, designed to help you cool down after a long day of shopping. A traditional English afternoon tea is also offered, alongside a delicious array of macaroons.</span></p>
-                                </div>
-                                <div class="offset-top-20">
-                                    <div class="h5-variant-2 font-weight-bold font-italic text-gray">Free Entry</div>
-                                </div>
-                                <div class="offset-top-25"><a class="btn btn-width-175 btn-primary-outline" href="event-single.html">learn more</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div><a class="btn btn-width-200 btn-bermuda offset-top-35 offset-md-top-65" href="events.html">view all events</a>
+
+                    }
+                </div><a class="btn btn-width-200 btn-bermuda offset-top-35 offset-md-top-65" href="@Url.Action("Events","Event")">view all events</a>
             </div>
         </div>
     </section>
@@ -262,116 +232,35 @@
                     <h3>Latest News</h3>
                 </div>
                 <div class="row justify-content-sm-center text-left offset-top-35 offset-md-top-60">
-                    <div class="col-md-10 col-lg-6 col-xl-4 col-xxl-5">
-                        <div class="post-box shadow-drop post-box-max-width-none d-block">
-                            <div class="post-box-img-wrap"><a class="thumbnail-robben" href="blog-post.html"><span class="thumbnail-robben-img-wrap post-box-top-radius"><img class="img-responsive center-block post-box-top-radius" src="~/Content/client/images/blog/post-15-320x442.jpg" width="320" height="442" alt=""></span></a></div>
-                            <div class="post-box-caption post-box-bottom-radius bg-default">
-                                <a class="label-custom-wrap d-inline-block" href="#"><span class="label-custom label-bermuda">Article</span></a>
-                                <h5 class="offset-top-15"><a href="blog-post.html">Top 3 Reasons to Visit Audrey Mall at Any Season and How You Can Benefit From It</a></h5>
-                                <p class="offset-top-20">Regardless of what season it is now, there are always plenty of reasons to visit our mall. In this article, we decided to show you the list of Top 3 reasons to visit Audrey Mall. To begin with, people usually visit shopping malls to enjoy…</p>
-                                <ul class="list-inline list-inline-20 offset-top-22">
-                                    <li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10 font-italic">2 days ago</span></li>
-                                    <li><span class="icon icon-normal icon-sm mdi mdi-comment-multiple-outline text-bermuda text-middle"></span><span class="text-middle inset-left-10 font-italic p"><a class="text-gray-light" href="#">23 Comments</a></span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-10 col-lg-6 col-xl-4 col-xxl-3 offset-top-30 offset-lg-top-5">
-                        <div class="post-box shadow-drop post-box-max-width-none d-block">
-                            <div class="post-box-caption post-box-top-radius post-box-bottom-radius bg-default">
-                                <a class="label-custom-wrap d-inline-block" href="#"><span class="label-custom label-bermuda">Fashion</span></a>
-                                <h5 class="offset-top-15"><a href="blog-post.html">Perfect Clothes to Wear When It’s Hot</a></h5>
-                                <p class="offset-top-20">In the middle of a heatwave, your corporate uniform — the usual blazers, slacks, and button-downs—is the...</p>
-                                <ul class="list-inline list-inline-20 offset-top-25 offset-md-top-50">
-                                    <li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10 font-italic">2 days ago</span></li>
-                                    <li><span class="icon icon-normal icon-sm mdi mdi-comment-multiple-outline text-bermuda text-middle"></span><span class="text-middle inset-left-10 font-italic p"><a class="text-gray-light" href="#">23 Comments</a></span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="offset-top-30 shadow-drop rd-video-xl-inset-74">
-                            <div class="embed-responsive">
-                                <iframe class="youtubeiframe embed-responsive-item" data-src="https://www.youtube.com/embed/E8trgeZTKJc" src="about:blank" width="560" height="315" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-10 col-lg-12 col-xl-4 col-xxl-3 offset-top-30 offset-lg-top-5">
-                        <div class="row justify-content-sm-center">
-                            <div class="col-lg-6 col-xl-12">
-                                <div class="post-box shadow-drop post-box-max-width-none d-block">
-                                    <div class="post-box-caption post-box-top-radius post-box-bottom-radius bg-default">
-                                        <a class="label-custom-wrap d-inline-block" href="#"><span class="label-custom label-bermuda">Quote</span></a>
-                                        <blockquote class="quote offset-top-15">
-                                            <span class="icon icon-rotate-180 mdi mdi-format-quote text-primary"></span>
-                                            <p class="font-monospace font-italic text-gray-dark inset-left-10">
-                                                <q>An exciting place for the whole family to shop. Whatever you’ve got in mind, we’ve got inside.</q>
-                                            </p>
-                                        </blockquote>
-                                        <ul class="list-inline list-inline-20 offset-top-25 offset-lg-top-50">
-                                            <li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10 font-italic">2 days ago</span></li>
-                                            <li><span class="icon icon-normal icon-sm mdi mdi-comment-multiple-outline text-bermuda text-middle"></span><span class="text-middle inset-left-10 font-italic p"><a class="text-gray-light" href="#">5 Comments</a></span></li>
-                                        </ul>
-                                    </div>
+                    @foreach (var item in ViewBag.Blogs)
+                    {
+
+                        <div class="col-md-10 col-lg-6 col-xl-4 col-xxl-5 offset-lg-top-5">
+                            <div class="post-box shadow-drop post-box-max-width-none d-block">
+                                <div class="post-box-img-wrap">
+                                    <a class="thumbnail-robben" href="@Url.Action("BlogPost","Blog",new { id = item.BlogId })">
+                                        <span class="thumbnail-robben-img-wrap post-box-top-radius">
+                                            <img class="img-responsive center-block post-box-top-radius" src="@item.Images" width="320" height="442" alt="">
+                                        </span>
+                                    </a>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-xl-12 offset-top-35 offset-lg-top-0 offset-xl-top-35">
-                                <div class="post-box post-box-min-height shadow-drop post-box-max-width-none d-block">
-                                    <div class="post-box-caption post-box-top-radius post-box-bottom-radius bg-default">
-                                        <a class="label-custom-wrap d-inline-block" href="#"><span class="label-custom label-bermuda">Article</span></a>
-                                        <h5 class="offset-top-15"><a href="blog-post.html">Planning Your Weekend? Visit Audrey Mall!</a></h5>
-                                        <p class="offset-top-30">Audrey Mall often evokes memories of endless shopping, thrilling rides or concerts. But we...</p>
-                                        <ul class="list-inline list-inline-20 offset-top-35">
-                                            <li><span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span><span class="text-middle inset-left-10 font-italic">2 days ago</span></li>
-                                            <li><span class="icon icon-normal icon-sm mdi mdi-comment-multiple-outline text-bermuda text-middle"></span><span class="text-middle inset-left-10 font-italic p"><a class="text-gray-light" href="#">23 Comments</a></span></li>
-                                        </ul>
-                                    </div>
+                                <div class="post-box-caption post-box-bottom-radius bg-default">
+                                    <h5 class="offset-top-15"><a href="@Url.Action("BlogPost","Blog",new { id = item.BlogId })">@item.Title</a></h5>
+                                    <p class="offset-top-20 blog_description">@item.Description</p>
+                                    <ul class="list-inline list-inline-20 offset-top-22">
+                                        <li>
+                                            <span class="icon icon-normal icon-sm mdi mdi-calendar text-bermuda text-middle"></span>
+                                            <span class="text-middle inset-left-10 font-italic">@item.BlogTime.ToString("dd/MM/yyyy")</span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div><a class="btn btn-width-200 btn-primary offset-top-35 offset-md-top-65" href="blog-classic.html">view all news</a>
+
+                    }
+                </div><a class="btn btn-width-200 btn-primary offset-top-35 offset-md-top-65" href="@Url.Action("BlogClassic","Blog")">view all news</a>
             </div>
         </div>
     </section>
-    <section>
-        <div class="rd-google-map-wrap">
-            <div class="section-60 section-lg-0 inset-left-15 inset-right-15 inset-lg-left-0 inset-lg-right-0">
-                <div class="box-lg box-contacts bg-default text-left center-block shadow-drop">
-                    <hr class="divider hr-left-0 bg-bermuda">
-                    <div class="offset-top-15">
-                        <h5>Contact Information</h5>
-                        <address class="contact-info offset-top-35 p">
-                            <div class="unit flex-row unit-spacing-xs">
-                                <div class="unit-left"><span class="icon icon-normal icon-sm icon-sm-variant-2 mdi mdi-map-marker text-primary"></span></div>
-                                <div class="unit-body"><a class="text-dove-gray" href="contacts.html">2130 Fulton Street, San Diego, CA 94117-1080 USA</a></div>
-                            </div>
-                            <div class="unit flex-row unit-spacing-xs offset-top-20">
-                                <div class="unit-left"><span class="icon icon-normal icon-sm icon-sm-variant-2 mdi mdi-calendar-clock text-primary"></span></div>
-                                <div class="unit-body">
-                                    <p class="text-dove-gray">Opening Hours: 9:00am–9:00pm Supermarket: 7:00am–11:00pm</p>
-                                </div>
-                            </div>
-                            <div class="unit flex-row unit-spacing-xs offset-top-20">
-                                <div class="unit-left">
-                                    <div class="icon icon-normal icon-sm icon-sm-variant-2 mdi mdi-phone text-primary"></div>
-                                </div>
-                                <div class="unit-body"><a class="text-dove-gray" href="tel:#">1-800-3214-987</a></div>
-                            </div>
-                            <div class="unit flex-row unit-spacing-xs offset-top-20">
-                                <div class="unit-left">
-                                    <div class="icon icon-normal icon-sm icon-sm-variant-2 mdi mdi-email-outline text-primary"></div>
-                                </div>
-                                <div class="unit-body"><a class="text-dove-gray" href="mailto:#">mail@demolink.org</a></div>
-                            </div>
-                        </address>
-                    </div>
-                </div>
-            </div>
-            <div class="google-map-container" data-center="9870 St Vincent Place, Glasgow, DC 45 Fr 45." data-styles="[{&quot;featureType&quot;:&quot;landscape.natural&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;color&quot;:&quot;#e0efef&quot;}]},{&quot;featureType&quot;:&quot;poi&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;hue&quot;:&quot;#1900ff&quot;},{&quot;color&quot;:&quot;#c0e8e8&quot;}]},{&quot;featureType&quot;:&quot;road&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;lightness&quot;:100},{&quot;visibility&quot;:&quot;simplified&quot;}]},{&quot;featureType&quot;:&quot;road&quot;,&quot;elementType&quot;:&quot;labels&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;off&quot;}]},{&quot;featureType&quot;:&quot;transit.line&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;lightness&quot;:700}]},{&quot;featureType&quot;:&quot;water&quot;,&quot;elementType&quot;:&quot;all&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#7dcdcd&quot;}]}]">
-                <div class="google-map"></div>
-                <ul class="google-map-markers">
-                    <li data-location="9870 St Vincent Place, Glasgow, DC 45 Fr 45." data-description="9870 St Vincent Place, Glasgow" data-icon="~/Content/client/images/gmap_marker.png" data-icon-active="~/Content/client/images/gmap_marker_active.png"></li>
-                </ul>
-            </div>
-        </div>
-    </section>
+
 </div>

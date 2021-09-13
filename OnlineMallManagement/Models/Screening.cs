@@ -26,6 +26,7 @@ namespace OnlineMallManagement.Models
         public int Movie_Id { get; set; }
         public System.DateTime ScreeningDate { get; set; }
         public System.TimeSpan StartTime { get; set; }
+        public Nullable<bool> Status { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     

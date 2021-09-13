@@ -1,0 +1,155 @@
+﻿
+@{ 
+    var configs = (IEnumerable< OnlineMallManagement.Models.Config>) ViewBag.Configs;
+    var meta_title = configs.Where(x => x.Id == 12).FirstOrDefault().value;
+}
+<header class="page-header">
+    <!-- RD Navbar-->
+    <div class="rd-navbar-wrap">
+        <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-sm-device-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xg-stick-up-offset="46px" data-xxl-stick-up-offset="46px">
+            <div class="rd-navbar-top-panel-wrap">
+                <div class="rd-navbar-top-panel">
+                    <div class="left-side">
+                        <!-- Contact Info-->
+                        <address class="contact-info text-left">
+                            @foreach (var item in ViewBag.Configs)
+                            {
+                                if (item.Id == 8 && item.Status)
+                                {
+                                    <div class="d-inline-block">
+                                        <a class="unit align-items-xl-center flex-row unit-spacing-xxs" href="#">
+                                            <span class="unit-left">
+                                                <span class="icon icon-sm icon-primary icon-circle mdi mdi-map-marker text-bermuda"></span>
+                                            </span>
+                                            <span class="unit-body">
+                                                <span class="text-gray-lighter">@item.value</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                            @foreach (var item in ViewBag.Configs)
+                            {
+                                if (item.Id == 9 && item.Status)
+                                {
+                                    <div class="d-inline-block">
+                                        <div class="unit align-items-center flex-row unit-spacing-xxs">
+                                            <div class="unit-left">
+                                                <div class="icon icon-sm icon-primary icon-circle mdi mdi-calendar-clock text-bermuda"></div>
+                                            </div>
+                                            <div class="unit-body">
+                                                <div class="text-gray-lighter">@item.value</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            @foreach (var item in ViewBag.Configs)
+                            {
+                                if (item.Id == 10 && item.Status)
+                                {
+                                    <div class="d-inline-block">
+                                        <a class="unit align-items-center flex-row unit-spacing-xxs" href="tel:#">
+                                            <span class="unit-left">
+                                                <span class="icon icon-sm icon-primary icon-circle mdi mdi-phone text-bermuda"></span>
+                                            </span>
+                                            <span class="unit-body"><span class="text-gray-lighter">@item.value</span></span>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </address>
+                    </div>
+                </div>
+            </div>
+            <div class="rd-navbar-inner">
+                <!-- RD Navbar Panel-->
+                <div class="rd-navbar-left-side">
+                    <div class="rd-navbar-panel">
+                        <!-- RD Navbar Toggle-->
+                        <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                        <!-- RD Navbar Brand-->
+                        <div class="rd-navbar-brand">
+                            <a class="brand" href="/">
+                                @foreach (var item in ViewBag.Configs)
+                                {
+                                    if (item.Id == 16 && item.Status)
+                                    {
+                                        <img class="brand-logo-dark" src="@item.value" alt="" width="101" height="28" />
+                                    }
+                                }
+                            </a>
+                        </div>
+                        <!-- RD Navbar Toggle-->
+                        <button class="rd-navbar-toggle-search-fixed d-lg-none d-tablet" data-rd-navbar-toggle=".rd-navbar-search-wrap-fixed"></button>
+                        <!-- RD Navbar Toggle-->
+                        <button class="rd-navbar-collapse-toggle d-xl-none d-lg-inline-block" data-rd-navbar-toggle=".rd-navbar-top-panel"><span></span></button>
+                    </div>
+                </div>
+                <div class="rd-navbar-right-side">
+                    <div class="rd-navbar-nav-wrap d-inline-block">
+                        <ul class="rd-navbar-nav">
+                            <li class="rd-nav-item active">
+                                <a class="rd-nav-link" href="/">Home</a>
+                            </li>
+                            <li class="rd-nav-item">
+                                <a class="rd-nav-link" href="@Url.Action("Entertainment","Service")">Services</a>
+                                <ul class="rd-menu rd-navbar-dropdown">
+                                    <li class="rd-dropdown-item">
+                                        <a class="rd-dropdown-link" href="@Url.Action("Shops","Service")">Shops</a>
+                                    </li>
+                                    <li class="rd-dropdown-item">
+                                        <a class="rd-dropdown-link" href="@Url.Action("Food","Service")">Food</a>
+                                    </li>
+                                    <li class="rd-dropdown-item">
+                                        <a class="rd-dropdown-link" href="@Url.Action("Entertainment","Service")">Entertainment</a>
+                                    </li>
+                                    <li class="rd-dropdown-item">
+                                        <a class="rd-dropdown-link" href="@Url.Action("MovieList","Movie")">Cinema</a>
+                                    </li>
+                                    <li class="rd-dropdown-item">
+                                        <a class="rd-dropdown-link" href="@Url.Action("Parking","Service")">Parking</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li class="rd-nav-item">
+                                <a class="rd-nav-link" href="@Url.Action("Events","Event")">Events</a>
+                            </li>
+                            <li class="rd-nav-item">
+                                <a class="rd-nav-link" href="@Url.Action("Sales","Home")">Sales</a>
+                            </li>
+                            <li class="rd-nav-item">
+                                <a class="rd-nav-link" href="@Url.Action("BlogClassic","Blog")">Blog</a>
+                            </li>
+                            <li class="rd-nav-item">
+                                <a class="rd-nav-link" href="@Url.Action("GalleryMasonry","Home")">Gallery</a>
+                            </li>
+                            <li class="rd-nav-item">
+                                <a class="rd-nav-link" href="@Url.Action("Contact","Home")">Contacts</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--RD Navbar Search-->
+                    <div class="rd-navbar-search-wrap-fixed d-inline-block">
+                        <div class="rd-navbar-search-wrap">
+                            <div class="rd-navbar-search">
+                                <a class="rd-navbar-search-toggle" data-rd-navbar-toggle=".rd-navbar-search" href="#"><span></span></a>
+                                <form class="rd-search rd-navbar-search-custom" action="search-results.html" data-search-live="rd-search-results-live" method="GET">
+                                    <div class="form-group">
+                                        <label class="form-label" for="rd-navbar-search-form-input">Search</label>
+                                        <input class="rd-navbar-search-form-input form-control form-control-gray-lightest" id="rd-navbar-search-form-input" type="text" name="s" autocomplete="off">
+                                        <button type="submit"><span class="icon icon-xs fa fa-search"></span></button>
+                                    </div>
+                                    <div class="rd-search-results-live d-none d-xl-block" id="rd-search-results-live"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- RD Navbar Toggle-->
+                    <button class="rd-navbar-toggle-search d-none d-lg-inline-block veil-tablet" data-rd-navbar-toggle=".rd-navbar-search-wrap"></button>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>

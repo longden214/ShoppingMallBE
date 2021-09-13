@@ -4,32 +4,35 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c2d70408bb564a269fe8976ad950fcd8" Name="Diagram1">
-        <EntityTypeShape EntityType="DBOnlineMallModel.Admin" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Area" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Banner" Width="1.5" PointX="9.75" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Blog" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Category_blog" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Category_Movie" Width="1.5" PointX="7.5" PointY="17.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Config" Width="1.5" PointX="11.75" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Customer" Width="1.5" PointX="12" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Event" Width="1.5" PointX="7.5" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Feedback" Width="1.5" PointX="13.75" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Movie" Width="1.5" PointX="9.75" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Order" Width="1.5" PointX="14.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Role" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Room" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Sale" Width="1.5" PointX="7.5" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Screening" Width="1.5" PointX="12" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Screening_seat" Width="1.5" PointX="16.5" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Seat" Width="1.5" PointX="12" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Service" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Shop" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBOnlineMallModel.Shop_Product" Width="1.5" PointX="7.5" PointY="12.5" IsExpanded="true" />
+      <Diagram DiagramId="1075e695b8ae418692713b2f0ae68d0b" Name="Diagram1" ZoomLevel="44">
+        <EntityTypeShape EntityType="DBOnlineMallModel.Admin" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.AdminRole" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Area" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Banner" Width="1.5" PointX="2.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Blog" Width="1.5" PointX="14" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Category_blog" Width="1.5" PointX="11.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Category_Movie" Width="1.5" PointX="9.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Customer" Width="1.5" PointX="15" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Feedback" Width="1.5" PointX="11.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Movie" Width="1.5" PointX="9.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Movie_type" Width="1.5" PointX="12" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Order" Width="1.5" PointX="17.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Role" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Room" Width="1.5" PointX="12.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Sale" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Screening" Width="1.5" PointX="15" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Screening_seat" Width="1.5" PointX="19.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Seat" Width="1.5" PointX="17.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Service" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Shop" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Shop_Product" Width="1.5" PointX="7.5" PointY="12.75" IsExpanded="true" />
+        <AssociationConnector Association="DBOnlineMallModel.AdminRoles_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOnlineMallModel.AdminRoles_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="DBOnlineMallModel.Service_Area" ManuallyRouted="false" />
         <AssociationConnector Association="DBOnlineMallModel.Blog_Category_blog" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOnlineMallModel.FK__Movie_typ__cate___5EBF139D" ManuallyRouted="false" />
         <AssociationConnector Association="DBOnlineMallModel.Order_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="DBOnlineMallModel.Events_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOnlineMallModel.FK__Movie_typ__movie__5FB337D6" ManuallyRouted="false" />
         <AssociationConnector Association="DBOnlineMallModel.Screening_Movie" ManuallyRouted="false" />
         <AssociationConnector Association="DBOnlineMallModel.Order_Screening" ManuallyRouted="false" />
         <AssociationConnector Association="DBOnlineMallModel.Screening_seat_Order" ManuallyRouted="false" />
@@ -37,11 +40,13 @@
         <AssociationConnector Association="DBOnlineMallModel.Seat_Room" ManuallyRouted="false" />
         <AssociationConnector Association="DBOnlineMallModel.Sales_Shop" ManuallyRouted="false" />
         <AssociationConnector Association="DBOnlineMallModel.Screening_seat_Screening" ManuallyRouted="false" />
-        <AssociationConnector Association="DBOnlineMallModel.Screening_seat_Seat" ManuallyRouted="false" />
+        <AssociationConnector Association="DBOnlineMallModel.Screening_seat_seats" ManuallyRouted="false" />
         <AssociationConnector Association="DBOnlineMallModel.Shop_Service" ManuallyRouted="false" />
         <AssociationConnector Association="DBOnlineMallModel.Shop_Product_Shop" ManuallyRouted="false" />
-        <AssociationConnector Association="DBOnlineMallModel.AdminRoles" ManuallyRouted="false" />
-        <AssociationConnector Association="DBOnlineMallModel.Movie_type" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Event" Width="1.5" PointX="7.5" PointY="3.125" />
+        <AssociationConnector Association="DBOnlineMallModel.Events_Shop" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.Config" Width="1.5" PointX="14.375" PointY="13.75" />
+        <EntityTypeShape EntityType="DBOnlineMallModel.gallery" Width="1.5" PointX="0.75" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

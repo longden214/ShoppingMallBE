@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div class="content-header row">
+</div>
+<div class="content-body">
+    <section class="app-user-list">
+        <div class="card">
+            <div class="card-datatable table-responsive pt-0">
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="d-flex justify-content-between align-items-center header-actions mx-1 row mt-75">
+                        <div class="col-lg-12 col-xl-6">
+                            <div class="dataTables_length" id="DataTables_Table_0_length">
+                                <label>
+                                    Show
+                                    <select id="user_select" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="custom-select form-control">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div><div class="col-lg-12 col-xl-6 pl-xl-75 pl-0">
+                            <div class="dt-action-buttons text-xl-right text-lg-left text-md-right text-left d-flex align-items-center justify-content-lg-end align-items-center flex-sm-nowrap flex-wrap mr-1">
+                                <div class="mr-1">
+                                    <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                                        <span>Search</span>
+                                        <label>
+                                            <input type="search" class="form-control" id="user_search" placeholder="Search Invoice" aria-controls="DataTables_Table_0">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="dt-buttons btn-group flex-wrap">
+                                    <button class="btn add-new btn-primary mt-50" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-toggle="modal" data-target="#modals-slide-in"><span>Add New User</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="user-list-table table dataTable no-footer user_table dtr-column" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                        <thead class="thead-light">
+                            <tr role="row">
+                                <th class="control sorting_disabled" rowspan="1" colspan="1" style="width: 43.5375px; display: none;" aria-label=""></th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 124.812px;" aria-label="User: activate to sort column ascending">User</th>
+                                <th class="sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 133.95px;" aria-sort="descending" aria-label="Email: activate to sort column ascending">Email</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 124.787px;" aria-label="Role: activate to sort column ascending">Role</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 123.438px;" aria-label="Plan: activate to sort column ascending">Phone</th>
+                                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 160.613px;" aria-label="Actions">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-between mx-2 row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="dataTables_paginate paging_simple_numbers" id="user_paginate">
+                                <ul class="pagination" style="justify-content: center;">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal to add new user starts-->
+            <div class="modal modal-slide-in new-user-modal fade model-user-form" id="modals-slide-in">
+                <div class="modal-dialog">
+                    <form class="add-new-user modal-content pt-0" novalidate="novalidate">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                        <div class="modal-header mb-1">
+                            <h5 class="modal-title" id="exampleModalLabel">New User</h5>
+                        </div>
+                        <div class="modal-body flex-grow-1">
+                            <div class="form-group">
+                                <label class="form-label" for="basic-icon-default-fullname">User Name</label>
+                                <input type="text" class="form-control dt-full-name" id="user-name" placeholder="Your User Name" name="user-fullname" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2">
+                                <div class="invalid-feedback" style="display:block;"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="basic-icon-default-uname">Display Name</label>
+                                <input type="text" id="user-displayName" class="form-control dt-uname" placeholder="Your Display Name" aria-label="jdoe1" aria-describedby="basic-icon-default-uname2" name="user-name">
+                                <div class="invalid-feedback" style="display:block;"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="basic-icon-default-email">Email</label>
+                                <input type="text" id="user-email" class="form-control dt-email" placeholder="Your Email" aria-label="john.doe@example.com" aria-describedby="basic-icon-default-email2" name="user-email">
+                                <div class="invalid-feedback" style="display:block;"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="basic-icon-default-uname">Phone</label>
+                                <input type="text" id="user-phone" class="form-control dt-uname" placeholder="Your Phone" aria-label="jdoe1" aria-describedby="basic-icon-default-uname2" name="user-name">
+                                <div class="invalid-feedback" style="display:block;"></div>
+                            </div>
+                            <input type="hidden" class="form-control dt-full-name" id="user-password" value="12345678">
+                            <div class="form-group">
+                                <label class="form-label" for="user-role">User Role</label>
+                                <select id="user-role" class="form-control">
+                                    <option value="0">Choose</option>
+                                    @foreach (var item in ViewBag.Roles)
+                                    {
+                                        <option value="@item.Role_id">@item.Role_name</option>
+                                    }
+                                </select>
+                                <div class="invalid-feedback" style="display:block;"></div>
+                            </div>
+
+                            <button type="button" class="btn btn-primary mr-1 data-submit waves-effect waves-float waves-light btn-user-submit">Submit</button>
+                            <button type="reset" class="btn btn-outline-secondary waves-effect" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Modal to add new user Ends-->
+        </div>
+    </section>
+</div>
+
+<script id="user-list" type="x-tmpl-mustache">
+    <tr class="odd" id="user_{{UserId}}">
+        <td class=" control" tabindex="0" style="display: none;"></td>
+        <td class="sorting_1">
+            <div class="d-flex justify-content-left align-items-center">
+                <div class="d-flex flex-column">
+                    <a href="javascript:void(0)" class="user_name text-truncate text-body">
+                        <span class="fw-bolder">{{UserName}}</span>
+                    </a>
+                </div>
+            </div>
+        </td>
+        <td>
+            {{Email}}
+        </td>
+        <td>{{Role}}</td>
+        <td><span class="text-nowrap">{{Phone}}</span></td>
+        <td>
+            <div class="dropdown">
+                <button type="button" class="btn btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                </button>
+                <div class="dropdown-menu" style="">
+                    <a class="dropdown-item btn-delete-user" href="javascript:void(0);" data-id="{{UserId}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        <span>Delete</span>
+                    </a>
+                </div>
+            </div>
+        </td>
+    </tr>
+</script>
+
+@section scripts{
+    <script src="~/Content/admin/assets/js/controllers/UserController.js"></script>
+    <script src="~/Scripts/mustache.min.js"></script>
+}

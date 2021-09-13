@@ -1,0 +1,195 @@
+﻿@model IEnumerable<OnlineMallManagement.Models.Shop>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div class="content-header row">
+    <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h2 class="content-header-title float-left mb-0">Shop Management</h2>
+                <div class="breadcrumb-wrapper">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Shop
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+
+    </div>
+</div>
+
+<div class="content-body">
+    <div class="row" id="basic-table">
+        <div class="col-12">
+            <div class="card">
+                <div class="row d-flex justify-content-between align-items-center m-1">
+                    <div class="col-lg-6 d-flex align-items-center">
+                        <div class="dt-action-buttons text-xl-right text-lg-left text-lg-right text-left ">
+                            @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                            {
+                                <div class="dt-buttons">
+                                    <a href="@Url.Action("Create", "Shop")" class="dt-button btn btn-primary btn-add-record waves-effect waves-float waves-light" tabindex="0" aria-controls="DataTables_Table_0" type="button"><span>Add Record</span></a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-flex align-items-center justify-content-lg-end flex-lg-nowrap flex-wrap pr-lg-1 p-0">
+                        @using (Html.BeginForm("Index", "Shop", FormMethod.Get))
+                        {
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="SearchString" placeholder="Search..." aria-describedby="button-addon2">
+                                <div class="input-group-append" id="button-addon2">
+                                    <button class="btn btn-outline-primary waves-effect" type="submit"><i data-feather="search"></i></button>
+                                </div>
+
+                            </div>
+                        }
+                        <div class="invoice_status ml-sm-2"></div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Logo</th>
+                                <th>Shop Name</th>
+                                <th>Service</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.ShoId)</td>
+                                    <td>
+                                        <img width="60" src="@Url.Content(item.Logo)" />
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.ShopName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Service.ServiceName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                                    <td>
+                                        @if (item.Status == true)
+                                        {
+                                            <span class="badge text-capitalize badge-light-success badge-pill" id="true">Show</span>
+                                        }@if (item.Status == false)
+                                        {
+                                            <span class="badge text-capitalize badge-light-warning badge-pill" id="true">Hide</span>
+                                        }
+                                    </td>
+
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                                                {
+                                                    <a class="dropdown-item" href="@Url.Action("Edit", "Shop", new { id = item.ShoId })">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 mr-50"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                                        <span>Edit</span>
+                                                    </a>
+                                                    <a class="dropdown-item" href="@Url.Action("Delete", "Shop", new { id = item.ShoId })">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                                        <span>Delete</span>
+                                                    </a>
+                                                }
+                                                @if (item.Service.Service_area != 2 && item.Service.Service_area != 3)
+                                                {
+                                                    <a class="dropdown-item" href="@Url.Action("Index", "Shop_Product", new { Shopid = item.ShoId })">
+                                                        <i data-feather='eye'>Detail</i>
+                                                        <span>Product</span>
+                                                    </a>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-between mx-2 row mb-1">
+                        <div class="col-sm-12 col-md-12">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination mt-3 justify-content-center">
+                                    @{
+                                        int numberPage = ViewBag.numberPage;
+                                        int pageCurrent = ViewBag.pageCurrent;
+                                        if (pageCurrent > 1)
+                                        {
+                                            int pagePage = pageCurrent - 1;
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page=@pagePage" aria-label="Previous">
+                                                    <span aria-hidden="true">«</span>
+                                                </a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+                                                    <span aria-hidden="true">«</span>
+                                                </a>
+                                            </li>
+                                        }
+
+                                        int i;
+                                        for (i = 1; i <= numberPage; i++)
+                                        {
+                                            if (i == pageCurrent)
+                                            {
+                                                <li class="page-item active"><a class="page-link" href="?page=@i">@i</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li class="page-item "><a class="page-link" href="?page=@i">@i</a></li>
+                                            }
+                                        }
+
+                                        if (pageCurrent >= 1 && pageCurrent < numberPage)
+                                        {
+                                            int nextPage = pageCurrent + 1;
+
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page=@nextPage" aria-label="Next">
+                                                    <span aria-hidden="true">»</span>
+                                                </a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="javascript:void(0)" aria-label="Next">
+                                                    <span aria-hidden="true">»</span>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

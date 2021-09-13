@@ -1,0 +1,272 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MaillClass = "email-application";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@section Styles{
+    <link href="~/Content/admin/app-assets/vendors/css/editors/quill/katex.min.css" rel="stylesheet" />
+    <link href="~/Content/admin/app-assets/vendors/css/editors/quill/monokai-sublime.min.css" rel="stylesheet" />
+    <link href="~/Content/admin/app-assets/vendors/css/editors/quill/quill.snow.css" rel="stylesheet" />
+    <link href="~/Content/admin/assets/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/admin/app-assets/css-rtl/plugins/forms/form-quill-editor.css" rel="stylesheet" />
+    <link href="~/Content/admin/app-assets/css-rtl/pages/app-email.css" rel="stylesheet" />
+    <style>
+        .mail-read .check-read{
+            display:none;
+        }
+    </style>
+}
+
+@section scripts{
+    <script src="~/Content/admin/app-assets/vendors/js/editors/quill/katex.min.js"></script>
+    <script src="~/Content/admin/app-assets/vendors/js/editors/quill/highlight.min.js"></script>
+    <script src="~/Content/admin/app-assets/vendors/js/editors/quill/quill.js"></script>
+    <script src="~/Content/admin/assets/js/select2.min.js"></script>
+    <script src="~/Content/admin/app-assets/js/scripts/pages/app-email.js"></script>
+    <script>
+        $('.mail-delete').on('click', function () {
+            var _arr = new Array();
+
+            $(".email-media-list .media").each(function () {
+                if ($(this).find('.feedback-checkbox').is(':checked')) {
+                    var id = $(this).find('.feedback-checkbox').val();
+                    _arr.push(id);
+                }
+            });
+
+            if (_arr.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("DeleteFeedback","Contact")",
+                    data: JSON.stringify({ arr: _arr }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data.status);
+                    },
+                    error: function (data) {
+                        console.log(data.status);
+                    }
+                });
+            }
+        });
+
+        // Email Right sidebar toggle
+        if ($('.email-user-list').find('li').length) {
+            $('.email-user-list').find('li').on('click', function (e) {
+                $('.email-app-details').toggleClass('show');
+                var _id = parseInt($(this).attr("id"));
+
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("FindFeedback", "Contact")",
+                    data: {id: _id},
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+
+                        $('.email-app-details').find('.user-details .mail-items h5').html(data.model.FirstName + " " + data.model.LastName);
+                        $('.email-app-details').find('.user-details .mail-items .email-info-dropup span').html(data.model.Email);
+                        $('.email-app-details').find('.user-details .mail-items .dropdown-menu table tr:first td:eq(1)').html(data.model.Email);
+                        $('.email-app-details').find('.user-details .mail-items .dropdown-menu table tr:last td:eq(1)').html(data.model.FBDate);
+                        $('.email-app-details').find('.mail-date-time').html(data.model.FBDate);
+                        $('.email-app-details').find('.mail-message-wrapper .mail-message').html(data.model.Content);
+
+                        $('.email-media-list').find('li#' + data.model.Id).addClass('mail-read');
+                    }
+                });
+            });
+        }
+
+        // Email detail view back button click
+        if ($('.go-back').length) {
+            $('.go-back').on('click', function (e) {
+                e.stopPropagation();
+                $('.email-app-details').removeClass('show');
+            });
+        }
+
+    </script>
+}
+
+<div class="content-area-wrapper">
+
+    <div class="content-right" style="width: 100%;">
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <div class="body-content-overlay"></div>
+                <!-- Email list Area -->
+                <div class="email-app-list">
+                    <!-- Email search starts -->
+                    <div class="app-fixed-search d-flex align-items-center">
+                        <div class="sidebar-toggle d-block d-lg-none ml-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu font-medium-5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                        </div>
+                        <div class="d-flex align-content-center justify-content-between w-100">
+                            <div class="input-group input-group-merge">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search text-muted"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+                                </div>
+                                <input type="text" class="form-control" id="email-search" placeholder="Search email" aria-label="Search..." aria-describedby="email-search">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Email search ends -->
+                    <!-- Email actions starts -->
+                    <div class="app-action">
+                        <div class="action-left">
+                            <div class="custom-control custom-checkbox selectAll">
+                                <input type="checkbox" class="custom-control-input" id="selectAllCheck">
+                                <label class="custom-control-label font-weight-bolder pl-25" for="selectAllCheck">Select All</label>
+                            </div>
+                        </div>
+                        <div class="action-right">
+                            <ul class="list-inline m-0">
+                                @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                                {
+                                    <li class="list-inline-item mail-delete">
+                                        <span class="action-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 font-medium-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                        </span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Email actions ends -->
+                    <!-- Email list starts -->
+                    <div class="email-user-list ps ps--active-y">
+                        <ul class="email-media-list">
+                            @foreach (var item in ViewBag.Feedbacks)
+                            {
+                                var read = item.Status ? "" : "mail-read";
+                                <li class="media @read" id="@item.Id">
+                                    <div class="media-left pr-50">
+                                        <div class="avatar">
+                                            <img src="~/Content/admin/app-assets/images/portrait/small/avatar-s-3.jpg" alt="Generic placeholder image">
+                                        </div>
+                                        <div class="user-action">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" value="@item.Id" class="custom-control-input feedback-checkbox" id="customCheck_@item.Id">
+                                                <label class="custom-control-label" for="customCheck_@item.Id"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="mail-details">
+                                            <div class="mail-items">
+                                                <h5 class="mb-25">@item.FirstName @item.LastName</h5>
+                                                <span class="text-truncate">@item.Email</span>
+                                            </div>
+                                            <div class="mail-meta-item">
+                                                <i data-feather="paperclip"></i>
+                                                <span class="mx-50 bullet bullet-primary bullet-sm check-read"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mail-message">
+                                            <p class="mb-0 text-truncate">
+                                                @item.Content
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                        <div class="no-results">
+                            <h5>No Items Found</h5>
+                        </div>
+                        <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 470px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 178px;"></div></div>
+                    </div>
+                    <!-- Email list ends -->
+                </div>
+                <!--/ Email list Area -->
+                <!-- Detailed Email View -->
+                <div class="email-app-details" style="width:100%;">
+                    <!-- Detailed Email Header starts -->
+                    <div class="email-detail-header">
+                        <div class="email-header-left d-flex align-items-center">
+                            <span class="go-back mr-1"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left font-medium-4"><polyline points="15 18 9 12 15 6"></polyline></svg></span>
+                            <h4 class="email-subject mb-0">Customer feedback content 😃</h4>
+                        </div>
+                        <div class="email-header-right ml-2 pl-1">
+                            <ul class="list-inline m-0">
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Detailed Email Header ends -->
+                    <!-- Detailed Email Content starts -->
+                    <div class="email-scroll-area ps ps--active-y">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="email-label">
+                                    <span class="mail-label badge badge-pill badge-light-primary">Content</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header email-detail-head">
+                                        <div class="user-details d-flex justify-content-between align-items-center flex-wrap">
+                                            <div class="avatar mr-75">
+                                                <img src="~/Content/admin/app-assets/images/portrait/small/avatar-s-9.jpg" alt="avatar img holder" width="48" height="48">
+                                            </div>
+                                            <div class="mail-items">
+                                                <h5 class="mb-0">Carlos Williamson</h5>
+                                                <div class="email-info-dropup dropdown">
+                                                    <span role="button" class="dropdown-toggle font-small-3 text-muted" id="card_top01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        carlos@gmail.com
+                                                    </span>
+                                                    <div class="dropdown-menu" aria-labelledby="card_top01">
+                                                        <table class="table table-sm table-borderless">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="text-right">From:</td>
+                                                                    <td>carlos@gmail.com</td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="text-right">Date:</td>
+                                                                    <td>14:58, 29 Aug 2020</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mail-meta-item d-flex align-items-center">
+                                            <small class="mail-date-time text-muted">29 Aug, 2020, 14:58</small>
+                                        </div>
+                                    </div>
+                                    <div class="card-body mail-message-wrapper pt-2">
+                                        <div class="mail-message">
+                                            <p class="card-text">Hey John,</p>
+                                            <p class="card-text">
+                                                bah kivu decrete epanorthotic unnotched Argyroneta nonius veratrine preimaginary saunders demidolmen
+                                                Chaldaic allusiveness lorriker unworshipping ribaldish tableman hendiadys outwrest unendeavored
+                                                fulfillment scientifical Pianokoto Chelonia
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                        </div>
+                        <div class="ps__rail-y" style="top: 0px; height: 495px; right: 0px;">
+                            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 299px;"></div>
+                        </div>
+                    </div>
+                    <!-- Detailed Email Content ends -->
+                </div>
+                <!--/ Detailed Email View -->
+            </div>
+        </div>
+    </div>
+</div>

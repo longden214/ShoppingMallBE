@@ -5,12 +5,12 @@
 }
 
 <!-- Breadcrumbs-->
-<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="/Content/client/images/backgrounds/background-01-1920-900.jpg">
+<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="@ViewBag.Banner.Image">
     <div class="parallax-content">
         <div class="bg-overlay-darker">
             <div class="container-wide section-34 section-md-60 section-lg-top-130 section-lg-bottom-155">
                 <div class="d-none d-lg-block">
-                    <div class="h1 breadcrumbs-custom-title">Entertainment</div>
+                    <div class="h1 breadcrumbs-custom-title">@ViewBag.Banner.description</div>
                 </div>
             </div>
         </div>
@@ -19,8 +19,8 @@
 <section class="section-34 bg-selago">
     <div class="container">
         <ul class="list-inline list-inline-12 list-inline-icon breadcrumbs-list">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="entertainment.html">Services</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="#0">Services</a></li>
             <li class="active">Entertainment</li>
         </ul>
     </div>
@@ -29,98 +29,39 @@
     <!-- Entertaiment-->
     <section class="section-80 section-md-0">
         <div class="container-wide">
-            <div class="row justify-content-sm-center justify-content-md-start">
-                <div class="col-sm-10 col-md-6 section-image-aside section-image-aside-right text-left">
-                    <div class="section-image-aside-img d-none d-md-block" style="background-image: url(/Content/client/images/pages/careers-01-960x580.jpg); background-position: center center;"></div>
-                    <div class="section-image-aside-body section-60 section-lg-120 inset-md-left-10 inset-md-right-10 inset-xl-left-45 inset-xl-right-75 inset-xxl-left-85 inset-xxl-right-140">
-                        <hr class="divider bg-bermuda hr-left-0">
-                        <div class="offset-top-20">
-                            <h3>Cinema</h3>
-                        </div>
-                        <div class="offset-top-20 offset-lg-top-35">
-                            <!-- List Inline-->
-                            <ul class="list-inline list-inline-20">
-                                <li><span class="icon icon-sm mdi mdi-map-marker text-bermuda text-middle"></span><span class="text-middle">Third Floor</span></li>
-                                <li><span class="icon icon-sm mdi mdi-clock text-bermuda text-middle"></span><span class="text-middle">9:00am–2:00am</span></li>
-                                <li class="p"><a class="text-gray-light" href="tel:#"><span class="icon icon-sm mdi mdi-phone text-bermuda text-middle"></span><span class="text-middle">1-800-6547-958</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="offset-top-15">
-                            <p>Audrey Cinema opened at San Diego in March 2013 to provide movie-goers with a luxury cinema experience in the heart of our city. We can boast seven VIP screens, large VIP seats, state-of-the-art projection and surround sound systems, and a new gourmet menu. What more could any cinema lover wish for?</p>
-                            <div class="group offset-top-20 offset-lg-top-35"><a class="btn btn-width-200 btn-primary" href="events.html">view schedule</a><a class="btn btn-width-200 btn-primary-outline" href="gift-cards.html">learn more</a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-sm-center justify-content-md-end offset-top-0">
-                <div class="col-sm-10 col-md-6 section-image-aside section-image-aside-left text-left">
-                    <div class="section-image-aside-img d-none d-md-block" style="background-image: url(/Content/client/images/pages/careers-02-960x580.jpg); background-position: center center;"></div>
-                    <div class="section-image-aside-body offset-md-top-0 inset-md-left-10 inset-md-right-10 section-60 section-lg-120 inset-xl-right-45 inset-xl-left-75 inset-xxl-right-85 inset-xxl-left-140 offset-md-top-60">
-                        <hr class="divider bg-bermuda hr-left-0">
-                        <div class="offset-top-20">
-                            <h3>Bowling Club</h3>
-                        </div>
-                        <div class="offset-top-20 offset-lg-top-35">
-                            <!-- List Inline-->
-                            <ul class="list-inline list-inline-20">
-                                <li><span class="icon icon-sm mdi mdi-map-marker text-bermuda text-middle"></span><span class="text-middle">Third Floor</span></li>
-                                <li><span class="icon icon-sm mdi mdi-clock text-bermuda text-middle"></span><span class="text-middle">10:00am–11:00pm</span></li>
-                                <li class="p"><a class="text-gray-light" href="tel:#"><span class="icon icon-sm mdi mdi-phone text-bermuda text-middle"></span><span class="text-middle">1-800-6547-958</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="offset-top-15">
-                            <p>Audrey Bowling Club has six regulation size bowling lanes, outfitted with automatic scoring and ball speed technology. We base our pricing on 6 people per lane and charge by hour. We are a 21+ facility, with the exception of our Family Bowl hours.</p>
-                            <div class="group offset-top-20 offset-lg-top-35"></div>
+            @{ var i = 1;}
+            @foreach (var item in ViewBag.Entertainment)
+            {
+                var type = i % 2 == 0 ? "justify-content-md-end" : "justify-content-md-start";
+                var aside = i % 2 == 0 ? "section-image-aside-left" : "section-image-aside-right";
+
+                <div class="row justify-content-sm-center @type offset-top-0">
+                    <div class="col-sm-10 col-md-6 section-image-aside @aside text-left">
+                        <div class="section-image-aside-img d-none d-md-block" style="background-image: url(@item.Photo); background-position: center center;"></div>
+                        <div class="section-image-aside-body section-60 section-lg-120 inset-md-left-10 inset-md-right-10 inset-xl-left-45 inset-xl-right-75 inset-xxl-left-85 inset-xxl-right-140">
+                            <hr class="divider bg-bermuda hr-left-0">
+                            <div class="offset-top-20">
+                                <h3>@item.ShopName</h3>
+                            </div>
+                            <div class="offset-top-20 offset-lg-top-35">
+                                <!-- List Inline-->
+                                <ul class="list-inline list-inline-20">
+                                    <li><span class="icon icon-sm mdi mdi-map-marker text-bermuda text-middle"></span><span class="text-middle">@item.Address</span></li>
+                                    <li class="p"><a class="text-gray-light" href="tel:#"><span class="icon icon-sm mdi mdi-phone text-bermuda text-middle"></span><span class="text-middle">@item.Phone</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="offset-top-15">
+                                <p>@item.Description</p>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row justify-content-sm-center justify-content-md-start offset-top-0">
-                <div class="col-sm-10 col-md-6 section-image-aside section-image-aside-right text-left">
-                    <div class="section-image-aside-img d-none d-md-block" style="background-image: url(/Content/client/images/pages/careers-03-960x580.jpg); background-position: center center;"></div>
-                    <div class="section-image-aside-body offset-md-top-0 inset-md-left-10 inset-md-right-10 section-60 section-lg-120 inset-xl-left-45 inset-xl-right-75 inset-xxl-left-85 inset-xxl-right-140 offset-md-top-60">
-                        <hr class="divider bg-bermuda hr-left-0">
-                        <div class="offset-top-20">
-                            <h3>Playground for Kids</h3>
-                        </div>
-                        <div class="offset-top-20 offset-lg-top-35">
-                            <!-- List Inline-->
-                            <ul class="list-inline list-inline-20">
-                                <li><span class="icon icon-sm mdi mdi-map-marker text-bermuda text-middle"></span><span class="text-middle">Third Floor</span></li>
-                                <li><span class="icon icon-sm mdi mdi-clock text-bermuda text-middle"></span><span class="text-middle">9:00am–9:00am</span></li>
-                                <li class="p"><a class="text-gray-light" href="tel:#"><span class="icon icon-sm mdi mdi-phone text-bermuda text-middle"></span><span class="text-middle">1-800-6547-958</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="offset-top-15">
-                            <p>The Playground For Kids was created by local parents with active children. As parents, we were always trying to find local places to take our children to play where we weren’t handing out quarters the whole time, we were running out of options, so we created The Audrey Playground For Kids”</p>
-                            <div class="group offset-top-20 offset-lg-top-35"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-sm-center justify-content-md-end offset-top-0">
-                <div class="col-sm-10 col-md-6 section-image-aside section-image-aside-left text-left">
-                    <div class="section-image-aside-img d-none d-md-block" style="background-image: url(/Content/client/images/pages/careers-04-960x580.jpg); background-position: center center;"></div>
-                    <div class="section-image-aside-body offset-md-top-0 inset-md-left-10 inset-md-right-10 section-60 section-lg-120 inset-xl-right-45 inset-xl-left-75 inset-xxl-right-85 inset-xxl-left-140 offset-md-top-60">
-                        <hr class="divider bg-bermuda hr-left-0">
-                        <div class="offset-top-20">
-                            <h3>Roller Skating</h3>
-                        </div>
-                        <div class="offset-top-20 offset-lg-top-35">
-                            <!-- List Inline-->
-                            <ul class="list-inline list-inline-20">
-                                <li><span class="icon icon-sm mdi mdi-map-marker text-bermuda text-middle"></span><span class="text-middle">Second Floor</span></li>
-                                <li><span class="icon icon-sm mdi mdi-clock text-bermuda text-middle"></span><span class="text-middle">9:00am–11:00pm</span></li>
-                                <li class="p"><a class="text-gray-light" href="tel:#"><span class="icon icon-sm mdi mdi-phone text-bermuda text-middle"></span><span class="text-middle">1-800-6547-958</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="offset-top-15">
-                            <p>Roller skating is old time fun that never goes out of fashion! One of the largest roller skating rinks in America, Audrey Roller Skating Rink offers the best skating experience you'll find anywhere. Whether you're lacing up your skates for the first time or you are one of our regular roller enthusiasts, we offer a wide range of sessions, classes, and programs for every skater!</p>
-                            <div class="group offset-top-20 offset-lg-top-35"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+                i++;
+            }
+
+
         </div>
     </section>
 </div>

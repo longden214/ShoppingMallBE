@@ -1,0 +1,88 @@
+* {
+}
+
+.avatar-content-row {
+    width: 80px;
+    padding: 40px;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/*begin css upload-image-item*/
+.upload-image-item .image-bg {
+    position: absolute;
+    background: rgba(0,0,0,0);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.upload-image-item:first-child span.icon-delete-img {
+    display: none;
+}
+
+.upload-image-item .show-image {
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-repeat: no-repeat;
+}
+
+.upload-image-list {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.upload-image-item:hover {
+    box-shadow: 0px 0px 7px 0px #b1b0b0;
+}
+
+.upload-image-item span.icon-delete-img:hover {
+    color: #f71616;
+}
+
+.upload-image-item span.icon-delete-img {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.upload-image-item .icon-adds i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.upload-image-item .icon-adds {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border: 1px dashed gray;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.upload-image-item {
+    width: 200px;
+    height: 110px;
+    border: 1px dashed gray;
+    position: relative;
+    cursor: pointer;
+    margin: 10px;
+}
+/*end css upload-image-item*/

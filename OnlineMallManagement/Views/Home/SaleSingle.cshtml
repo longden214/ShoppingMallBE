@@ -5,12 +5,12 @@
 }
 
 <!-- Breadcrumbs-->
-<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="/Content/client/images/backgrounds/background-01-1920-900.jpg">
+<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="@ViewBag.Banner.Image">
     <div class="parallax-content">
         <div class="bg-overlay-darker">
             <div class="container-wide section-34 section-md-60 section-lg-top-130 section-lg-bottom-155">
                 <div class="d-none d-lg-block">
-                    <div class="h1 breadcrumbs-custom-title">Sale Page</div>
+                    <div class="h1 breadcrumbs-custom-title">@ViewBag.Banner.description</div>
                 </div>
             </div>
         </div>
@@ -19,8 +19,8 @@
 <section class="section-34 bg-selago">
     <div class="container">
         <ul class="list-inline list-inline-12 list-inline-icon breadcrumbs-list">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">Pages</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="#0">Pages</a></li>
             <li class="active">Sale Page</li>
         </ul>
     </div>
@@ -30,20 +30,19 @@
     <section class="section-90 text-left">
         <div class="container-wide container-wide-custom">
             <div class="row justify-content-sm-center justify-content-xl-between">
-                <div class="col-md-8 col-lg-3 col-xxl-3"><a href="#"><img class="img-responsive img-semi-transparent-inverse center-block" src="~/Content/client/images/products/product-logo-15-239x204.png" width="239" height="204" alt=""></a></div>
+                <div class="col-md-8 col-lg-3 col-xxl-3"><a href="#"><img class="img-responsive img-semi-transparent-inverse center-block" src="@ViewBag.Sales.Shop.Logo" width="239" height="204" alt=""></a></div>
                 <div class="col-md-8 col-lg-6 col-xxl-5 offset-top-40 offset-lg-top-0">
                     <div class="inset-xxl-right-70">
-                        <p>Blossom offers everything you need to live the laid-back California lifestyle in a Golden State of Mind. With roots in action sports, fashion, art and music, this shop serves up the latest styles for men and women from top brands including Bullhead, Volcom, Billabong, Hurley, Roxy, Diamond Supply Co., Nike SB, RVCA, Vans, Modern Amusement, Neff, Young & Reckless, Riot Society, Quiksilver, Crooks and Castles, Rook, and more!</p>
+                        <p>@ViewBag.Sales.Shop.Description</p>
                     </div>
-                    <div class="offset-top-25"><a class="btn btn-width-175 btn-primary" href="entertainment.html">learn more</a></div>
                 </div>
                 <div class="col-md-8 col-lg-3 col-xxl-3 offset-top-40 offset-lg-top-0">
                     <!-- List-->
                     <ul class="list list-15 text-left p">
-                        <li><span class="icon icon-sm mdi mdi-map-marker text-bermuda text-middle"></span><span class="text-middle inset-left-5">Third Floor</span></li>
-                        <li><a class="text-gray-light" href="tel:#"><span class="icon icon-sm mdi mdi-phone text-bermuda text-middle"></span><span class="text-middle inset-left-5">1-800-1234-567</span></a></li>
-                        <li><a class="text-gray-light" href="mailto:#"><span class="icon icon-sm mdi mdi-email-outline text-bermuda text-middle"></span><span class="text-middle inset-left-5">mail@demolink.org</span></a></li>
-                        <li><a class="text-gray-light" href="#"><span class="icon icon-sm mdi mdi-web text-bermuda text-middle"></span><span class="text-middle inset-left-5">demolink.org</span></a></li>
+                        <li><span class="icon icon-sm mdi mdi-map-marker text-bermuda text-middle"></span><span class="text-middle inset-left-5">@ViewBag.Sales.Shop.Address</span></li>
+                        <li><a class="text-gray-light" href="tel:#"><span class="icon icon-sm mdi mdi-phone text-bermuda text-middle"></span><span class="text-middle inset-left-5">@ViewBag.Sales.Shop.Phone</span></a></li>
+                        <li><a class="text-gray-light" href="mailto:#"><span class="icon icon-sm mdi mdi-email-outline text-bermuda text-middle"></span><span class="text-middle inset-left-5">@ViewBag.Sales.Shop.Email</span></a></li>
+                        <li><a class="text-gray-light" href="#"><span class="icon icon-sm mdi mdi-web text-bermuda text-middle"></span><span class="text-middle inset-left-5">@ViewBag.Sales.Shop.Url_web</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -54,83 +53,33 @@
         <div class="container-wide">
             <div class="row justify-content-sm-center justify-content-lg-end offset-top-0">
                 <div class="col-sm-10 col-lg-8 col-xl-6 section-image-aside section-image-aside-left text-left">
-                    <div class="section-image-aside-img d-none d-lg-block" style="background-image: url(/Content/client/images/pages/sale-single-01-960x772.jpg); background-position: center center;"></div>
+                    <div class="section-image-aside-img d-none d-lg-block" style="background-image: url(@ViewBag.Sales.Shop.Photo); background-position: center center;"></div>
                     <div class="section-image-aside-body inset-lg-left-35 inset-lg-right-35 section-md-60 section-lg-120 inset-xl-right-45 inset-xl-left-75 inset-xxl-right-85 inset-xxl-left-140">
                         <div class="divider bg-bermuda hr-left-0"></div>
                         <div class="offset-top-20">
-                            <h3>Save 25% <br class="d-none d-xl-inline-block"> at Men’s Clothes at Blossom</h3>
+                            <h3>Save @ViewBag.Sales.Sale1 % <br class="d-none d-xl-inline-block"> at @ViewBag.Sales.Shop.ShopName</h3>
                         </div>
-                        <div class="offset-top-35 offset-lg-top-60 text-center text-md-left">
-                            <!-- Owl Carousel-->
-                            <div class="owl-carousel owl-dots-offset-top-55 owl-dots-sm-left" data-items="1" data-md-items="2" data-lg-items="2" data-stage-padding="0" data-loop="false" data-margin="30" data-mouse-drag="false" data-dots="true">
-                                <div class="owl-item">
-                                    <!-- Thumbnail Rayen--><a href="shop-single.html">
-                                        <figure class="thumbnail-rayen thumbnail-rayen-primary thumbnail-rayen-product">
-                                            <img width="280" height="280" src="~/Content/client/images/products/product-15-280x280.jpg" alt="">
-                                            <figcaption>
-                                                <p class="font-weight-bold text-white">Men's Baseball Camp Jacket</p>
-                                                <h5 class="text-white offset-top-20">$98.00</h5>
-                                            </figcaption>
-                                        </figure>
-                                    </a>
-                                </div>
-                                <div class="owl-item">
-                                    <!-- Thumbnail Rayen--><a href="shop-single.html">
-                                        <figure class="thumbnail-rayen thumbnail-rayen-primary thumbnail-rayen-product">
-                                            <img width="280" height="280" src="~/Content/client/images/products/product-16-280x280.jpg" alt="">
-                                            <figcaption>
-                                                <p class="font-weight-bold text-white">Crosby suit jacket in Italian chino</p>
-                                                <h5 class="text-white offset-top-20">$38.00</h5>
-                                            </figcaption>
-                                        </figure>
-                                    </a>
-                                </div>
-                                <div class="owl-item">
-                                    <!-- Thumbnail Rayen--><a href="shop-single.html">
-                                        <figure class="thumbnail-rayen thumbnail-rayen-primary thumbnail-rayen-product">
-                                            <img width="280" height="280" src="~/Content/client/images/products/product-17-280x280.jpg" alt="">
-                                            <figcaption>
-                                                <p class="font-weight-bold text-white">Ludlow shawl-collar tuxedo jacket</p>
-                                                <h5 class="text-white offset-top-20">$48.00</h5>
-                                            </figcaption>
-                                        </figure>
-                                    </a>
-                                </div>
-                                <div class="owl-item">
-                                    <!-- Thumbnail Rayen--><a href="shop-single.html">
-                                        <figure class="thumbnail-rayen thumbnail-rayen-primary thumbnail-rayen-product">
-                                            <img width="280" height="280" src="~/Content/client/images/products/product-18-280x280.jpg" alt="">
-                                            <figcaption>
-                                                <p class="font-weight-bold text-white">Ludlow suit jacket in Italian cashmere</p>
-                                                <h5 class="text-white offset-top-20">$68.00</h5>
-                                            </figcaption>
-                                        </figure>
-                                    </a>
-                                </div>
-                                <div class="owl-item">
-                                    <!-- Thumbnail Rayen--><a href="shop-single.html">
-                                        <figure class="thumbnail-rayen thumbnail-rayen-primary thumbnail-rayen-product">
-                                            <img width="280" height="280" src="~/Content/client/images/products/product-19-280x280.jpg" alt="">
-                                            <figcaption>
-                                                <p class="font-weight-bold text-white">Ludlow tuxedo jacket in Italian wool</p>
-                                                <h5 class="text-white offset-top-20">$78.00</h5>
-                                            </figcaption>
-                                        </figure>
-                                    </a>
-                                </div>
-                                <div class="owl-item">
-                                    <!-- Thumbnail Rayen--><a href="shop-single.html">
-                                        <figure class="thumbnail-rayen thumbnail-rayen-primary thumbnail-rayen-product">
-                                            <img width="280" height="280" src="~/Content/client/images/products/product-15-280x280.jpg" alt="">
-                                            <figcaption>
-                                                <p class="font-weight-bold text-white">Men's Baseball Camp Jacket</p>
-                                                <h5 class="text-white offset-top-20">$28.00</h5>
-                                            </figcaption>
-                                        </figure>
-                                    </a>
+                        @if (ViewBag.Shop.Service.Service_area == 9)
+                        {
+                            <div class="offset-top-35 offset-lg-top-60 text-center text-md-left">
+                                <!-- Owl Carousel-->
+                                <div class="owl-carousel owl-dots-offset-top-55 owl-dots-sm-left" data-items="1" data-md-items="2" data-lg-items="2" data-stage-padding="0" data-loop="false" data-margin="30" data-mouse-drag="false" data-dots="true">
+                                    @foreach (var item in ViewBag.Product)
+                                    {
+                                        <div class="owl-item">
+                                            <!-- Thumbnail Rayen--><a href="shop-single.html">
+                                                <figure class="thumbnail-rayen thumbnail-rayen-primary thumbnail-rayen-product">
+                                                    <img width="280" height="280" src="@item.Images" alt="">
+                                                    <figcaption>
+                                                        <p class="font-weight-bold text-white">@item.Pro_name</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </a>
+                                        </div>
+                                    }
                                 </div>
                             </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>

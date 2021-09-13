@@ -1,0 +1,89 @@
+﻿@model OnlineMallManagement.Models.Sale
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Sale_id)
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Delete Sale</h4>
+            </div>
+            <div class="card-body">
+                <form class="form">
+                    <div class="row">
+
+                        <div class="col-md-6 col-12">
+                            <div class="mb-1">
+                                <label class="form-label" for="country-floating">Title</label>
+                                <input type="text" id="country-floating" class="form-control" name="Slug" placeholder="Country" value="@Html.DisplayFor(model=>model.slug)" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="mb-1">
+                                <label class="form-label" for="first-name-column">Shop</label>
+                                <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Shop.ShopName)" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="mb-1">
+                                <label class="form-label" for="city-column">Sale (%)</label>
+                                <input type="text" id="city-column" class="form-control" placeholder="City" name="Sale" value="@Html.DisplayFor(model=>model.Sale1)" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="mb-1">
+                                <label class="form-label" for="last-name-column">Start Date</label>
+                                <input type="text" id="fp-start-time" class="form-control flatpickr-date-time flatpickr-input" name="StartDate" placeholder="YYYY-MM-DD HH:MM" readonly value="@Html.DisplayFor(model=>model.StartDate)">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="mb-1">
+                                <label class="form-label" for="city-column">End Date</label>
+                                <input type="text" id="fp-end-time" class="form-control flatpickr-date-time flatpickr-input" name="EndDate" placeholder="YYYY-MM-DD HH:MM" readonly value="@Html.DisplayFor(model=>model.EndDate)">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="mb-1">
+                                <label class="form-label" for="company-column">Meta title</label>
+                                <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Meta_title)" readonly />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="mb-1">
+                                <label class="form-label" for="blocks">Meta keyword</label>
+                                <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Meta_keyword)" readonly />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="mb-1">
+                                <label class="form-label" for="blocks">Meta description</label>
+                                <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Meta_description)" readonly />
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-6 col-sm-12 mb-2">
+                            <label class="form-label" for="custom-delimiters"><b>Status</b></label>
+                            @Html.RadioButtonFor(x => x.Status, "true") <span>Show</span>
+                            @Html.RadioButtonFor(x => x.Status, "false") <span>Hide</span>
+                        </div>
+                        <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+                            <button type="submit" class="btn btn-primary mb-1 mb-sm-0 me-0 me-sm-1 waves-effect waves-float waves-light">Delete</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="@Url.Action("Index","Sales")" class="dt-button btn btn-outline-primary waves-effect" tabindex="0" aria-controls="DataTables_Table_0" type="button"><span>Back To List</span></a>
+</div>

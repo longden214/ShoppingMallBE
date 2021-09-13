@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div class="content-header row">
+</div>
+
+<div class="content-body">
+    <section class="invoice-add-wrapper">
+        <div class="row invoice-add">
+            <!-- Invoice Add Left starts -->
+            <div class="col-xl-9 col-md-8 col-12">
+                <div class="card">
+                    <div class="card-header">Add new movie</div>
+                    <div class="card-body">
+                        <form class="form form-vertical">
+                            <div class="row">
+                                <input type="hidden" id="screening_id" value="@ViewBag.Screening.Id" />
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="contact-info-vertical">Movie</label>
+                                        <div>
+                                            <select id="form-select-movie">
+                                                @foreach (var item in ViewBag.Movies)
+                                                {
+                                                    <option value="@item.IdMovie" @(ViewBag.Screening.Movie_Id==item.IdMovie?"selected":"")>@item.MoviveName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="basicSelect">Cinema Hall</label>
+                                        <div>
+                                            <select id="form-select-room">
+                                                @foreach (var item in ViewBag.Rooms)
+                                                {
+                                                    <option value="@item.IdRoom" @(ViewBag.Screening.Room_IdRoom==item.IdRoom?"selected":"")>@item.RoomName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="contact-info-vertical">Day</label>
+                                        @{ 
+                                            var cv = @ViewBag.Screening.ScreeningDate.ToString("yyyy-MM-dd");
+                                        }
+                                        <input type="text" id="screening_day" class="form-control" placeholder="@cv">
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="contact-info-vertical">Time</label>
+                                        <input type="text" id="screening_time" class="form-control" placeholder="hh:ii">
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Invoice Add Left ends -->
+            <!-- Invoice Add Right starts -->
+            <div class="col-xl-3 col-md-4 col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <button class="btn btn-success btn-block mb-75 waves-effect waves-float waves-light btn-edit-screening" type="button">
+                            Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Styles{
+    <link href="~/Content/admin/assets/css/select2.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Content/admin/assets/js/controllers/ScreeningController.js"></script>
+    <script src="~/Content/admin/assets/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#screening_day').flatpickr({
+                dateFormat: "Y-m-d",
+                defaultDate: '@cv',
+            });
+            $('#screening_time').flatpickr({
+                enableTime: true,
+                noCalendar: true,
+                defaultDate: '@ViewBag.Screening.StartTime',
+                dateFormat: "H:i"
+            });
+
+            $('#form-select-movie').select2({
+                placeholder: "Select a Movie",
+                allowClear: true
+            });
+            $('#form-select-room').select2({
+                placeholder: "Select a Cinema Hall",
+                allowClear: true
+            });
+        });
+    </script>
+}
+

@@ -1,6 +1,7 @@
 ﻿@model OnlineMallManagement.Areas.Admin.Data.LoginViewModel
 @{
     ViewBag.Title = "Login";
+
     Layout = "~/Areas/Admin/Views/Shared/_login.cshtml";
 }
 
@@ -13,7 +14,7 @@
             <div class="card mb-0">
                 <div class="card-body">
                     <a href="javascript:void(0);" class="brand-logo">
-                        <img src="~/Content/client/images/logo-202x56.png" class="rounded mr-50" alt="profile image" width="100">
+                        <img src="@ViewBag.Logo" class="rounded mr-50" alt="profile image" width="100">
                     </a>
 
                     <h4 class="card-title mb-1">Welcome to AudreyMall! 👋</h4>

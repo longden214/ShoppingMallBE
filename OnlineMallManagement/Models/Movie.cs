@@ -17,8 +17,8 @@ namespace OnlineMallManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Movie()
         {
+            this.Movie_type = new HashSet<Movie_type>();
             this.Screenings = new HashSet<Screening>();
-            this.Category_Movie = new HashSet<Category_Movie>();
         }
     
         public int IdMovie { get; set; }
@@ -38,10 +38,12 @@ namespace OnlineMallManagement.Models
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<bool> Status { get; set; }
+        public string banner { get; set; }
+        public string photos { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Screening> Screenings { get; set; }
+        public virtual ICollection<Movie_type> Movie_type { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category_Movie> Category_Movie { get; set; }
+        public virtual ICollection<Screening> Screenings { get; set; }
     }
 }

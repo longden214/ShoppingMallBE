@@ -1,0 +1,134 @@
+﻿@model OnlineMallManagement.Models.Sale
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Sale_id)
+        <div class="content-body">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Update Sales</h4>
+                </div>
+                <div class="card-body">
+                    <form class="form">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <label class="form-label" for="company-column">Title</label>
+                                    @Html.EditorFor(model => model.slug, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.slug, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <label class="form-label" for="first-name-column">Shop</label>
+                                    @Html.DropDownList("Shop_ShoId", (IEnumerable<SelectListItem>)ViewBag.Shop_Id, "-- Select --", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Shop_ShoId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <label class="form-label" for="country-floating">Sale (%)</label>
+                                    @Html.EditorFor(model => model.Sale1, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Sale1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <label class="form-label" for="last-name-column">Start Date</label>
+                                    @{ 
+                                        var StartDate = Model.StartDate.ToString("yyyy-MM-dd HH:mm");
+                                    }
+                                    @Html.EditorFor(model => StartDate, new { htmlAttributes = new { @class = "form-control", @id = "fp-start-time", @placeholder = "YYYY-MM-DD HH:MM" } })
+                                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <label class="form-label" for="city-column">End Date</label>
+                                    @{
+                                        var EndDate = Model.EndDate.ToString("yyyy-MM-dd HH:mm");
+                                    }
+                                    @Html.EditorFor(model => EndDate, new { htmlAttributes = new { @class = "form-control", @id = "fp-end-time", @placeholder = "YYYY-MM-DD HH:MM" } })
+                                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <label for="Meta_title">Meta title</label>
+                                    @Html.EditorFor(model => model.Meta_title, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Meta_title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <label for="Meta_keyword">Meta keyword</label>
+                                    @Html.EditorFor(model => model.Meta_keyword, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Meta_keyword, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <label for="Meta_description">Meta description</label>
+                                    @Html.EditorFor(model => model.Meta_description, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Meta_description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <div class="demo-inline-spacing">
+                                        <label for="Status"><b>Status</b></label>
+                                        @Html.RadioButtonFor(x => x.Status, "true") <span>Show</span>
+                                        @Html.RadioButtonFor(x => x.Status, "false") <span>Hide</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary me-1 waves-effect waves-float waves-light">Update</button>
+                                <button type="reset" class="btn btn-outline-secondary waves-effect">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="@Url.Action("Index","Sales")" class="dt-button btn btn-outline-primary waves-effect" tabindex="0" aria-controls="DataTables_Table_0" type="button"><span>Back To List</span></a>
+</div>
+
+@section Styles {
+    <link href="~/Content/admin/assets/css/flatpickr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Content/admin/app-assets/css/plugins/forms/pickers/form-flat-pickr.css">
+}
+
+@section Scripts {
+
+    <script src="~/Content/admin/assets/js/flatpickr.js"></script>
+    <script src="~/Content/admin/assets/js/scripts.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+            $('#fp-start-time').flatpickr({
+                enableTime: true,
+                minDate: "today",
+                dateFormat: "Y-m-d H:i",
+
+            });
+            $('#fp-end-time').flatpickr({
+                enableTime: true,
+                minDate: "today",
+                dateFormat: "Y-m-d H:i",
+            });
+
+    </script>
+}

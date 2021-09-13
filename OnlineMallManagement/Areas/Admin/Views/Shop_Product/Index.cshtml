@@ -1,0 +1,124 @@
+﻿@model IEnumerable<OnlineMallManagement.Models.Shop_Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div class="content-header row">
+    <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h2 class="content-header-title float-left mb-0">Product Management</h2>
+                <div class="breadcrumb-wrapper">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Shop</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Product
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+    </div>
+</div>
+
+<div class="content-body">
+    <div class="row" id="basic-table">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Product List</h4>
+                    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                    {
+                        <a href="@Url.Action("Create", "Shop_Product", new { shopid = ViewBag.ShopId })" class="dt-button btn btn-primary btn-add-record waves-effect waves-float waves-light" tabindex="0" aria-controls="DataTables_Table_0" type="button"><span>Add Record</span></a>
+                    }
+                </div>
+                <div class="card-body">
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    Images
+                                </th>
+                                <th>
+                                    Product
+                                </th>
+                                <th>
+                                    Shop
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                                {
+                                    <th>Action</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Pro_Id)
+                                    </td>
+                                    <td>
+                                        <img width="60" src="@item.Images" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Pro_name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Shop.ShopName)
+                                    </td>
+                                    <td>
+                                        @if (item.Status == true)
+                                        {
+                                            <span class="badge text-capitalize badge-light-success badge-pill" id="true">Show</span>
+                                        }@if (item.Status == false)
+                                        {
+                                            <span class="badge text-capitalize badge-light-warning badge-pill" id="true">Hide</span>
+                                        }
+                                    </td>
+                                    @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                                    {
+                                        <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="@Url.Action("Edit", "Shop_Product", new { id = item.Pro_Id })">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 mr-50"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                                        <span>Edit</span>
+                                                    </a>
+                                                    <a class="dropdown-item" href="@Url.Action("Delete", "Shop_Product", new { id = item.Pro_Id })">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                                        <span>Delete</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,221 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@section scripts{
+    <script src="~/Content/admin/assets/js/Config.js"></script>
+}
+
+
+<div class="content-header row">
+    <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h2 class="content-header-title float-left mb-0">Config Management</h2>
+                <div class="breadcrumb-wrapper">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Config
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+
+    </div>
+</div>
+
+<div class="content-body">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" hidden>
+                        <label for="Location">ID</label>
+                        <input type="text" class="form-control" id="IDlocation" placeholder="Value" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Location">Location</label>
+                        <input type="text" class="form-control" id="location" placeholder="Value" />
+                        <small id="vlocation" class="text-danger"></small>
+                    </div>
+                    <div class="custom-control custom-control-inline custom-switch">
+                        <input id="statusLocation" type="checkbox" name="check-button" class="custom-control-input" value="true">
+                        <label for="statusLocation" class="custom-control-label">
+                            <h5><span>Status</span></h5>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" hidden>
+                        <label for="Location">ID</label>
+                        <input type="text" class="form-control" id="IDIP" placeholder="Value" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Location">GPS Longitude and Latitude Coordinates</label>
+                        <span>(<a href="https://youtu.be/2yOX7soSPeQ">How to Find GPS in Google Map</a>)</span>
+                        <input type="text" class="form-control" id="ip" placeholder="Value" />
+                        <small id="vip" class="text-danger"></small>
+                    </div>
+                    <div class="custom-control custom-control-inline custom-switch">
+                        <input id="statusIp" type="checkbox" name="check-button" class="custom-control-input" value="true">
+                        <label for="statusIp" class="custom-control-label">
+                            <h5><span>Status</span></h5>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" hidden>
+                        <label for="Time">ID</label>
+                        <input type="text" class="form-control" id="IDTime" placeholder="Value" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Time">Opening hours</label>
+                        <input type="text" class="form-control" id="Time" placeholder="Location" />
+                        <small id="vtime" class="text-danger"></small>
+                    </div>
+                    <div class="custom-control custom-control-inline custom-switch">
+                        <input id="StatusTime" type="checkbox" name="check-button" class="custom-control-input" value="true">
+                        <label for="StatusTime" class="custom-control-label">
+                            <h5><span>Status</span></h5>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" hidden>
+                        <label for="Phone">ID</label>
+                        <input type="text" class="form-control" id="IDPhone" placeholder="Value" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Phone">Phone</label>
+                        <input type="text" class="form-control" id="Phone" placeholder="XXX-XXX-XXXX" />
+                        <small id="vphone" class="text-danger"></small>
+                    </div>
+                    <div class="custom-control custom-control-inline custom-switch">
+                        <input id="StatusPhone" type="checkbox" name="check-button" class="custom-control-input" value="true">
+                        <label for="StatusPhone" class="custom-control-label">
+                            <h5><span>Status</span></h5>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" hidden>
+                        <label for="Mail">ID</label>
+                        <input type="text" class="form-control" id="IDMail" placeholder="Value" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Mail">Mail</label>
+                        <input type="text" class="form-control" id="Mail" placeholder="mysite@ourearth.com" />
+                        <small id="vmail" class="text-danger"></small>
+                    </div>
+                    <div class="custom-control custom-switch ">
+                        <input id="StatusMail" type="checkbox" name="check-button" class="custom-control-input" value="true" checked="">
+                        <label for="StatusMail" class="custom-control-label">
+                            <h5><span>Status</span></h5>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" hidden>
+                        <label for="Meta_Title">ID</label>
+                        <input type="text" class="form-control" id="IDMeta_Title" placeholder="Value" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Meta_Title">Meta Title</label>
+                        <input type="text" class="form-control" id="Meta_Title" placeholder="Value" />
+                        <small id="vmetatitle" class="text-danger"></small>
+                    </div>
+                    <div class="custom-control custom-switch ">
+                        <input id="StatusMeta_Title" hidden type="checkbox" name="check-button" class="custom-control-input" value="true" checked="">
+                       
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" hidden>
+                        <label for="Meta_Keyword">ID</label>
+                        <input type="text" class="form-control" id="IDMeta_Keyword" placeholder="Value" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Meta_Keyword">Meta Keyword</label>
+                        <input type="text" class="form-control" id="Meta_Keyword" placeholder="Value" />
+                        <small id="vmetakeyword" class="text-danger"></small>
+                    </div>
+                    <div class="custom-control custom-switch ">
+                        <input id="StatusMeta_Keyword" hidden type="checkbox" name="check-button" class="custom-control-input" value="true" checked="">
+                        
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" hidden>
+                        <label for="Meta_description">ID</label>
+                        <input type="text" class="form-control" id="IDMeta_description" placeholder="Value" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Meta_description">Meta description</label>
+                        <input type="text" class="form-control" id="Meta_description" placeholder="Value" />
+                        <small id="vmetadescription" class="text-danger"></small>
+                    </div>
+                    <div class="custom-control custom-switch ">
+                        <input id="StatusMeta_description" hidden type="checkbox" name="check-button" class="custom-control-input" value="true" checked="">
+                      
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="image">Favicon Website</label>
+                    <input hidden type="text" class="form-control" id="IDIcon1" placeholder="Value" />
+
+                    <div class="media">
+                        <div class="media-aside align-self-start">
+                            <img id="imgicon1" src="" width="30" class="rounded">
+                        </div>
+                        <div class="media-body mt-75 ml-75">
+
+                            <button type="button" class="btn mb-75 mr-75 btn-primary btn-sm" id="btn-image-icon1"> Upload </button>
+                            <p hidden class="card-text" id="icon1value">Allowed JPG, GIF or PNG. Max size of 800kB</p>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="custom-control custom-switch ">
+                        <br />
+                        <input id="StatusMetaIcon1" hidden type="checkbox" name="check-button" class="custom-control-input" value="true" checked="">
+
+                    </div>
+                    <br />
+                </div>
+                <div class="col-md-6">
+                    <label for="image">Logo Website</label>
+                    <input hidden type="text" class="form-control" id="IDIcon" placeholder="Value" />
+                    <div class="media">
+                        <div class="media-aside align-self-start">
+                            <img id="imgicon" src="" width="120" class="rounded">
+                        </div>
+                        <div class="media-body mt-75 ml-75">
+                            <button type="button" class="btn mb-75 mr-75 btn-primary btn-sm" id="btn-image-icon"> Upload </button>
+                            <p hidden class="card-text" id="iconvalue">Allowed JPG, GIF or PNG. Max size of 800kB</p>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="custom-control custom-switch ">
+                        <br />
+                        <input id="StatusIcon" type="checkbox" hidden name="check-button" class="custom-control-input" value="true" checked="">
+                    </div>
+                    <br />
+                </div>
+            </div>
+            @if (User.IsInRole("Admin") || User.IsInRole("User"))
+            {
+                <div style=" margin-top: 40px; text-align: right; ">
+                    <button class="btn  btn-primary " id="update" onclick="return Update();"> Update </button>
+                    <button class="btn btn-outline-secondary" id="reset" onclick="return loadData();">Reset</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

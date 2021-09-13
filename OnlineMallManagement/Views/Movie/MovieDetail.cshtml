@@ -1,4 +1,4 @@
-﻿
+﻿@model OnlineMallManagement.Areas.Admin.Data.MovieViewModel
 @{
     ViewBag.Title = "MovieDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -35,32 +35,40 @@
 
 <div class="page-content">
 
-    <section class="details-banner bg_img" data-background="/Content/client/assets/images/banner/banner03.jpg"
-             style="background-image: url(/Content/client/assets/images/banner/banner03.jpg&quot;);">
+    <section class="details-banner bg_img" style="background-image: url(@Model._Banner);">
         <div class="container">
             <div class="details-banner-wrapper">
                 <div class="details-banner-thumb">
-                    <img src="~/Content/client/assets/images/movie/venus.jpg" alt="movie">
-                    <a href="https://www.youtube.com/embed/KGeBMAgc46E" class="video-popup">
-                        <img src="~/Content/client/assets/images/movie/video-button.png" alt="movie">
-                    </a>
+                    <img src="@Model._Image" alt="movie">
                 </div>
                 <div class="details-banner-content offset-lg-3" style="text-align: left;">
-                    <h3 class="title" style="color:#fff;">Venus</h3>
+                    <h3 class="title" style="color:#fff;">@Model._MoviveName</h3>
                     <div class="tags">
-                        <a href="#0">English</a>
-                        <a href="#0">Hindi</a>
-                        <a href="#0">Telegu</a>
-                        <a href="#0">Tamil</a>
+                        <a href="#0">@Model._Language</a>
                     </div>
-                    <a href="#0" class="button">horror</a>
+                    @foreach (var item in ViewBag.genreList)
+                    {
+                        <a href="#0" class="button">@item</a>
+                    }
+                  
                     <div class="social-and-duration">
                         <div class="duration-area">
                             <div class="item">
-                                <i class="fas fa-calendar-alt"></i><span>06 Dec, 2020</span>
+                                <i class="fas fa-calendar-alt"></i><span>@Model._ReleaseDate</span>
                             </div>
                             <div class="item">
-                                <i class="far fa-clock"></i><span>2 hrs 50 mins</span>
+                                <i class="far fa-clock"></i><span>@Model._Duration</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-and-duration">
+                        <div class="duration-area">
+                            <div class="item">
+                                <span>Age : @Model._AgeRestriction</span>
+                            </div>
+                            <div class="item">
+                                <i class="fa fa-globe" aria-hidden="true"></i><span>@Model._Country</span>
                             </div>
                         </div>
 
@@ -70,33 +78,17 @@
 
         </div>
     </section>
-    <section class="book-section bg-one" style="
-">
+    <section class="book-section bg-one" style="">
         <div class="container">
             <div class="book-wrapper offset-lg-3">
-
-                <a href="#0" class="custom-button">book tickets</a>
+                <a href="@Url.Action("MovieTicket", "Movie",new { id = Model._IdMovie})" class="custom-button">book tickets</a>
             </div>
         </div>
     </section>
-    <section class="movie-details-section padding-top padding-bottom" style="
-background-color: #001232;">
+    <section class="movie-details-section padding-top padding-bottom" style="background-color: #001232;">
         <div class="container">
             <div class="row justify-content-center flex-wrap-reverse mb--50">
                 <div class="col-lg-3 col-sm-10 col-md-6 mb-50">
-                    <div class="widget-1 widget-tags">
-                        <ul>
-                            <li>
-                                <a href="#0">2D</a>
-                            </li>
-                            <li>
-                                <a href="#0">imax 2D</a>
-                            </li>
-                            <li>
-                                <a href="#0">4DX</a>
-                            </li>
-                        </ul>
-                    </div>
                     <div class="widget-1 widget-offer">
                         <h3 class="title" style="color:#fff;">Applicable offer</h3>
                         <div class="offer-body">
@@ -148,56 +140,21 @@ background-color: #001232;">
                         <h3 class="title" style="color:#fff;text-align:left;">photos</h3>
                         <div class="details-photos owl-carousel owl-loaded owl-drag">
                             <div class="owl-stage-outer">
-                                <div class="owl-stage"
-                                     style="transform: translate3d(-877px, 0px, 0px); transition: all 0s ease 0s; width: 1755px;">
-                                    <div class="owl-item" style="width: 262.5px; margin-right: 30px;">
-                                        <div class="thumb">
-                                            <a href="~/Content/client/assets/images/movie/movie-details01.jpg" class="img-pop">
-                                                <img src="~/Content/client/assets/images/movie/movie-details01.jpg"
-                                                     alt="movie">
-                                            </a>
+                                <div class="owl-stage" style="transform: translate3d(-877px, 0px, 0px); transition: all 0s ease 0s; width: 1755px;">
+                                    @{ var photo = Model._Photos;
+                                       string[] p = photo.Split(',');
+                                    }
+
+                                    @foreach (string item in @p)
+                                    {
+                                        <div class="owl-item" style="width: 262.5px; margin-right: 30px;">
+                                            <div class="thumb">
+                                                <a href="@item" class="img-pop">
+                                                    <img src="@item" alt="movie">
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="owl-item" style="width: 262.5px; margin-right: 30px;">
-                                        <div class="thumb">
-                                            <a href="~/Content/client/assets/images/movie/movie-details02.jpg" class="img-pop">
-                                                <img src="~/Content/client/assets/images/movie/movie-details02.jpg"
-                                                     alt="movie">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="owl-item" style="width: 262.5px; margin-right: 30px;">
-                                        <div class="thumb">
-                                            <a href="~/Content/client/assets/images/movie/movie-details03.jpg" class="img-pop">
-                                                <img src="~/Content/client/assets/images/movie/movie-details03.jpg"
-                                                     alt="movie">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="owl-item active" style="width: 262.5px; margin-right: 30px;">
-                                        <div class="thumb">
-                                            <a href="~/Content/client/assets/images/movie/movie-details01.jpg" class="img-pop">
-                                                <img src="~/Content/client/assets/images/movie/movie-details01.jpg"
-                                                     alt="movie">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="owl-item active" style="width: 262.5px; margin-right: 30px;">
-                                        <div class="thumb">
-                                            <a href="~/Content/client/assets/images/movie/movie-details02.jpg" class="img-pop">
-                                                <img src="~/Content/client/assets/images/movie/movie-details02.jpg"
-                                                     alt="movie">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="owl-item active" style="width: 262.5px; margin-right: 30px;">
-                                        <div class="thumb">
-                                            <a href="~/Content/client/assets/images/movie/movie-details03.jpg" class="img-pop">
-                                                <img src="~/Content/client/assets/images/movie/movie-details03.jpg"
-                                                     alt="movie">
-                                            </a>
-                                        </div>
-                                    </div>
+                                    }
                                 </div>
                             </div>
                             <div class="owl-nav disabled">
@@ -222,297 +179,17 @@ background-color: #001232;">
                                     <div class="item" style="text-align: left;">
                                         <h5 class="sub-title" style="color: white">Synopsis</h5>
                                         <p style="color: #dbe2fb">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                                            vehicula eros sit amet est tincidunt aliquet. Fusce laoreet ligula
-                                            ac ultrices eleifend. Donec hendrerit fringilla odio, ut feugiat mi
-                                            convallis nec. Fusce elit ex, blandit vitae mattis sit amet, iaculis
-                                            ac elit. Ut diam mauris, viverra sit amet dictum vel, aliquam ac
-                                            quam. Ut mi nisl, fringilla sit amet erat et, convallis porttitor
-                                            ligula. Sed auctor, orci id luctus venenatis, dui dolor euismod
-                                            risus, et pharetra orci lectus quis sapien. Duis blandit ipsum ac
-                                            consectetur scelerisque.
+                                            @Model._Description
                                         </p>
                                     </div>
                                     <div class="item">
                                         <div class="header">
                                             <h5 class="sub-title" style="color: white">cast</h5>
-                                            <div class="navigation">
-                                                <div class="cast-prev">
-                                                    <i class="flaticon-double-right-arrows-angles"></i>
-                                                </div>
-                                                <div class="cast-next">
-                                                    <i class="flaticon-double-right-arrows-angles"></i>
-                                                </div>
-                                            </div>
                                         </div>
-                                        <div class="casting-slider owl-carousel owl-loaded owl-drag">
-
-                                            <div class="owl-stage-outer">
-                                                <div class="owl-stage"
-                                                     style="transform: translate3d(-1658px, 0px, 0px); transition: all 0.25s ease 0s; width: 2843px;">
-                                                    <div class="owl-item cloned"
-                                                         style="width: 136.875px; margin-right: 100px;">
-                                                        <div class="cast-item">
-                                                            <div class="cast-thumb">
-                                                                <a href="#0">
-                                                                    <img src="~/Content/client/assets/images/cast/cast01.jpg"
-                                                                         alt="cast">
-                                                                </a>
-                                                            </div>
-                                                            <div class="cast-content">
-                                                                <h6 class="cast-title">
-                                                                    <a href="#0">
-                                                                        Bill
-                                                                        Hader
-                                                                    </a>
-                                                                </h6>
-                                                                <span class="cate">actor</span>
-                                                                <p>As Richie Tozier</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="owl-item cloned"
-                                                         style="width: 136.875px; margin-right: 100px;">
-                                                        <div class="cast-item">
-                                                            <div class="cast-thumb">
-                                                                <a href="#0">
-                                                                    <img src="~/Content/client/assets/images/cast/cast02.jpg"
-                                                                         alt="cast">
-                                                                </a>
-                                                            </div>
-                                                            <div class="cast-content">
-                                                                <h6 class="cast-title">
-                                                                    <a href="#0">
-                                                                        nora
-                                                                        hardy
-                                                                    </a>
-                                                                </h6>
-                                                                <span class="cate">actor</span>
-                                                                <p>As raven</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="owl-item cloned"
-                                                         style="width: 136.875px; margin-right: 100px;">
-                                                        <div class="cast-item">
-                                                            <div class="cast-thumb">
-                                                                <a href="#0">
-                                                                    <img src="~/Content/client/assets/images/cast/cast03.jpg"
-                                                                         alt="cast">
-                                                                </a>
-                                                            </div>
-                                                            <div class="cast-content">
-                                                                <h6 class="cast-title">
-                                                                    <a href="#0">
-                                                                        alvin
-                                                                        peters
-                                                                    </a>
-                                                                </h6>
-                                                                <span class="cate">actor</span>
-                                                                <p>As magneto</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="owl-item cloned"
-                                                         style="width: 136.875px; margin-right: 100px;">
-                                                        <div class="cast-item">
-                                                            <div class="cast-thumb">
-                                                                <a href="#0">
-                                                                    <img src="~/Content/client/assets/images/cast/cast04.jpg"
-                                                                         alt="cast">
-                                                                </a>
-                                                            </div>
-                                                            <div class="cast-content">
-                                                                <h6 class="cast-title">
-                                                                    <a href="#0">
-                                                                        josh
-                                                                        potter
-                                                                    </a>
-                                                                </h6>
-                                                                <span class="cate">actor</span>
-                                                                <p>As quicksilver</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="owl-item"
-                                                         style="width: 136.875px; margin-right: 100px;">
-                                                        <div class="cast-item">
-                                                            <div class="cast-thumb">
-                                                                <a href="#0">
-                                                                    <img src="~/Content/client/assets/images/cast/cast01.jpg"
-                                                                         alt="cast">
-                                                                </a>
-                                                            </div>
-                                                            <div class="cast-content">
-                                                                <h6 class="cast-title">
-                                                                    <a href="#0">
-                                                                        Bill
-                                                                        Hader
-                                                                    </a>
-                                                                </h6>
-                                                                <span class="cate">actor</span>
-                                                                <p>As Richie Tozier</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="owl-item"
-                                                         style="width: 136.875px; margin-right: 100px;">
-                                                        <div class="cast-item">
-                                                            <div class="cast-thumb">
-                                                                <a href="#0">
-                                                                    <img src="~/Content/client/assets/images/cast/cast02.jpg"
-                                                                         alt="cast">
-                                                                </a>
-                                                            </div>
-                                                            <div class="cast-content">
-                                                                <h6 class="cast-title">
-                                                                    <a href="#0">
-                                                                        nora
-                                                                        hardy
-                                                                    </a>
-                                                                </h6>
-                                                                <span class="cate">actor</span>
-                                                                <p>As raven</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="owl-item"
-                                                         style="width: 136.875px; margin-right: 100px;">
-                                                        <div class="cast-item">
-                                                            <div class="cast-thumb">
-                                                                <a href="#0">
-                                                                    <img src="~/Content/client/assets/images/cast/cast03.jpg"
-                                                                         alt="cast">
-                                                                </a>
-                                                            </div>
-                                                            <div class="cast-content">
-                                                                <h6 class="cast-title">
-                                                                    <a href="#0">
-                                                                        alvin
-                                                                        peters
-                                                                    </a>
-                                                                </h6>
-                                                                <span class="cate">actor</span>
-                                                                <p>As magneto</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="owl-item active"
-                                                         style="width: 136.875px; margin-right: 100px;">
-                                                        <div class="cast-item">
-                                                            <div class="cast-thumb">
-                                                                <a href="#0">
-                                                                    <img src="~/Content/client/assets/images/cast/cast04.jpg"
-                                                                         alt="cast">
-                                                                </a>
-                                                            </div>
-                                                            <div class="cast-content">
-                                                                <h6 class="cast-title">
-                                                                    <a href="#0">
-                                                                        josh
-                                                                        potter
-                                                                    </a>
-                                                                </h6>
-                                                                <span class="cate">actor</span>
-                                                                <p>As quicksilver</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="owl-item cloned active"
-                                                         style="width: 136.875px; margin-right: 100px;">
-                                                        <div class="cast-item">
-                                                            <div class="cast-thumb">
-                                                                <a href="#0">
-                                                                    <img src="~/Content/client/assets/images/cast/cast01.jpg"
-                                                                         alt="cast">
-                                                                </a>
-                                                            </div>
-                                                            <div class="cast-content">
-                                                                <h6 class="cast-title">
-                                                                    <a href="#0">
-                                                                        Bill
-                                                                        Hader
-                                                                    </a>
-                                                                </h6>
-                                                                <span class="cate">actor</span>
-                                                                <p>As Richie Tozier</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="owl-item cloned active"
-                                                         style="width: 136.875px; margin-right: 100px;">
-                                                        <div class="cast-item">
-                                                            <div class="cast-thumb">
-                                                                <a href="#0">
-                                                                    <img src="~/Content/client/assets/images/cast/cast02.jpg"
-                                                                         alt="cast">
-                                                                </a>
-                                                            </div>
-                                                            <div class="cast-content">
-                                                                <h6 class="cast-title">
-                                                                    <a href="#0">
-                                                                        nora
-                                                                        hardy
-                                                                    </a>
-                                                                </h6>
-                                                                <span class="cate">actor</span>
-                                                                <p>As raven</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="owl-item cloned active"
-                                                         style="width: 136.875px; margin-right: 100px;">
-                                                        <div class="cast-item">
-                                                            <div class="cast-thumb">
-                                                                <a href="#0">
-                                                                    <img src="~/Content/client/assets/images/cast/cast03.jpg"
-                                                                         alt="cast">
-                                                                </a>
-                                                            </div>
-                                                            <div class="cast-content">
-                                                                <h6 class="cast-title">
-                                                                    <a href="#0">
-                                                                        alvin
-                                                                        peters
-                                                                    </a>
-                                                                </h6>
-                                                                <span class="cate">actor</span>
-                                                                <p>As magneto</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="owl-item cloned"
-                                                         style="width: 136.875px; margin-right: 100px;">
-                                                        <div class="cast-item">
-                                                            <div class="cast-thumb">
-                                                                <a href="#0">
-                                                                    <img src="~/Content/client/assets/images/cast/cast04.jpg"
-                                                                         alt="cast">
-                                                                </a>
-                                                            </div>
-                                                            <div class="cast-content">
-                                                                <h6 class="cast-title">
-                                                                    <a href="#0">
-                                                                        josh
-                                                                        potter
-                                                                    </a>
-                                                                </h6>
-                                                                <span class="cate">actor</span>
-                                                                <p>As quicksilver</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="owl-nav disabled">
-                                                <button type="button"
-                                                        role="presentation" class="owl-prev">
-                                                    <span aria-label="Previous">‹</span>
-                                                </button><button type="button" role="presentation" class="owl-next">
-                                                    <span aria-label="Next">›</span>
-                                                </button>
-                                            </div>
-                                            <div class="owl-dots disabled"></div>
+                                        <div>
+                                            <p style="color: #dbe2fb;text-align:left;">
+                                                @Model._Actors
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

@@ -30,17 +30,31 @@
     <script src="~/Content/client/assets/js/odometer.min.js"></script>
     <script src="~/Content/client/assets/js/viewport.jquery.js"></script>
     <script src="~/Content/client/assets/js/nice-select.js"></script>
+    <script src="~/Scripts/mustache.min.js"></script>
+    <script src="~/Content/client/js/MovieController.js"></script>
     <script src="~/Content/client/assets/js/main.js"></script>
+
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#movie-filter-date').flatpickr({
+                minDate: "today",
+                dateFormat: "Y-m-d"
+            });
+        });
+    </script>
 }
 
 
 <!-- Breadcrumbs-->
-<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="/Content/client/images/backgrounds/background-01-1920-900.jpg">
+<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="@ViewBag.Banner.Image">
     <div class="parallax-content">
         <div class="bg-overlay-darker">
             <div class="container-wide section-34 section-md-60 section-lg-top-130 section-lg-bottom-155">
                 <div class="d-none d-lg-block">
-                    <div class="h1 breadcrumbs-custom-title">Movies</div>
+                    <div class="h1 breadcrumbs-custom-title">@ViewBag.Banner.description</div>
                 </div>
             </div>
         </div>
@@ -59,13 +73,13 @@
     <!-- ==========Ticket-Search========== -->
     <section class="search-ticket-section padding-top pt-lg-0" style="background-color: #001232;">
         <div class="container">
-            <div class="search-tab bg_img" data-background="/Content/client/assets/images/ticket/ticket-bg01.jpg">
+            <div class="search-tab bg_img"  style="background-image: url('/Content/client/assets/images/ticket/ticket-bg01.jpg');">
                 <div class="tab-area" style="margin-top:0;">
                     <div class="tab-item active">
                         <form class="ticket-search-form">
                             <div class="form-group large">
-                                <input type="text" placeholder="Search fo Movies">
-                                <button type="submit"><i class="fas fa-search"></i></button>
+                                <input type="text" id="movie-search-client" placeholder="Search for Movies">
+                                <button type="button" class="btn-search-movie"><i class="fas fa-search"></i></button>
                             </div>
 
                             <div class="form-group">
@@ -73,12 +87,7 @@
                                     <img src="~/Content/client/assets/images/ticket/date.png" alt="ticket">
                                 </div>
                                 <span class="type">date</span>
-                                <select class="select-bar">
-                                    <option value="26-12-19">23/10/2020</option>
-                                    <option value="26-12-19">24/10/2020</option>
-                                    <option value="26-12-19">25/10/2020</option>
-                                    <option value="26-12-19">26/10/2020</option>
-                                </select>
+                                <input type="text" value="" placeholder="Choose" id="movie-filter-date" style="width: 130px; padding-left: 10px; padding-right: 0;" />
                             </div>
 
                         </form>
@@ -100,7 +109,7 @@
                                 <div class="left">
                                     <div class="item">
                                         <span class="show">Show :</span>
-                                        <select class="select-bar">
+                                        <select class="select-bar" id="select-movie-bar">
                                             <option value="12">12</option>
                                             <option value="15">15</option>
                                             <option value="18">18</option>
@@ -110,80 +119,18 @@
                                             <option value="30">30</option>
                                         </select>
                                     </div>
-                                    <div class="item">
-                                        <span class="show">Sort By :</span>
-                                        <select class="select-bar">
-                                            <option value="showing">now showing</option>
-                                            <option value="exclusive">exclusive</option>
-                                            <option value="trending">trending</option>
-                                            <option value="most-view">most view</option>
-                                        </select>
-                                    </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="tab-area">
                             <div class="tab-item active">
-                                <div class="movie-area mb-10">
-                                    <div class="movie-list">
-                                        <div class="movie-thumb c-thumb">
-                                            <a href="movie-details.html" class="w-100 bg_img h-100" data-background="/Content/client/assets/images/movie/movie01.jpg">
-                                                <img class="d-sm-none" src="~/Content/client/assets/images/movie/movie01.jpg" alt="movie">
-                                            </a>
-                                        </div>
-                                        <div class="movie-content bg-one">
-                                            <h5 class="title" style="text-align: left;">
-                                                <a href="movie-details.html">alone</a>
-                                            </h5>
-                                            <div class="release" style="text-align: left;">
-                                                <span>Duration : </span>
-                                                <p class="duration" style="text-align: left;margin-bottom: 10px; display:inline-block;">250 min</p>
-                                            </div>
-                                            <div class="movie-tags" style="margin-bottom: 10px;">
-                                                <a href="#0">action</a>
-                                                <a href="#0">adventure</a>
-                                                <a href="#0">fantasy</a>
-                                            </div>
-                                            <div class="release" style="text-align: left; margin-bottom: 20px">
-                                                <span>Release Date : </span> <a href="#0"> November 8 , 2020</a>
-                                            </div>
-                                            <div class="release" style="text-align: left; margin-bottom: 20px">
-                                                <span>Actors : </span>
-                                                <p class="duration" style="text-align: left; display:inline-block;">Robert De Niro, Michael Douglas, Morgan Freeman, Kevin Kline, Mary Steenburgen, Jerry Ferrara, Romany Malco ...</p>
-                                            </div>
-                                            <div class="release" style="text-align: left; margin-bottom: 20px">
-                                                <span>Age restriction : </span>
-                                                <p class="duration" style="text-align: left; display:inline-block;">13</p>
-                                            </div>
-                                            <div class="book-area">
-                                                <div class="book-ticket">
-                                                
-                                                    <div class="react-item mr-auto">
-                                                        <a href="#0">
-                                                            <div class="thumb">
-                                                                <img src="~/Content/client/assets/images/icons/book.png" alt="icons">
-                                                            </div>
-                                                            <span>book ticket</span>
-                                                        </a>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="movie-area movie__list-full mb-10">
 
                                 </div>
                             </div>
                         </div>
-                        <div class="pagination-area text-center">
-                            <a href="#0"><i class="fas fa-angle-double-left"></i><span>Prev</span></a>
-                            <a href="#0">1</a>
-                            <a href="#0">2</a>
-                            <a href="#0" class="active">3</a>
-                            <a href="#0">4</a>
-                            <a href="#0">5</a>
-                            <a href="#0"><span>Next</span><i class="fas fa-angle-double-right"></i></a>
+                        <div class="pagination-area movie-client-pagination text-center">
+
                         </div>
                     </div>
                 </div>
@@ -194,3 +141,47 @@
 
 </div>
 
+<script id="movies-list-client" type="x-tmpl-mustache">
+    <div class="movie-list">
+        <div class="movie-thumb c-thumb">
+            <a href="@Url.Action("MovieDetail", "Movie")?id={{MovieId}}" class="w-100 bg_img h-100" style="background-image: url({{Image}});" >
+                <img class="d-sm-none" src="{{Image}}" alt="movie">
+            </a>
+        </div>
+        <div class="movie-content bg-one">
+            <h5 class="title" style="text-align: left;">
+                <a href="@Url.Action("MovieDetail", "Movie")?id={{MovieId}}">{{Name}}</a>
+            </h5>
+            <div class="release" style="text-align: left;">
+                <span>Duration : </span>
+                <p class="duration" style="text-align: left;margin-bottom: 10px; display:inline-block;">{{Duration}} min</p>
+            </div>
+            <div class="movie-tags" style="margin-bottom: 10px;color:#ffffff;">
+               <span style="margin-right: 5px">Genres : </span> <span> {{Genres}} </span>
+            </div>
+            <div class="release" style="text-align: left; margin-bottom: 20px">
+                <span>Release Date : </span> <a href="javascript:void(0"> {{ReleaseDate}}</a>
+            </div>
+            <div class="release" style="text-align: left; margin-bottom: 20px">
+                <span>Actors : </span>
+                <p class="duration" style="text-align: left; display:inline-block;">{{Actors}}</p>
+            </div>
+            <div class="release" style="text-align: left; margin-bottom: 20px">
+                <span>Age restriction : </span>
+                <p class="duration" style="text-align: left; display:inline-block;">{{Age}}</p>
+            </div>
+            <div class="book-area">
+                <div class="book-ticket">
+                    <div class="react-item mr-auto">
+                        <a href="@Url.Action("MovieTicket", "Movie")?id={{MovieId}}">
+                            <div class="thumb">
+                                <img src="/Content/client/assets/images/icons/book.png" alt="icons">
+                            </div>
+                            <span>book ticket</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

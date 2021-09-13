@@ -5,12 +5,12 @@
 }
 
 <!-- Breadcrumbs-->
-<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="/Content/client/images/backgrounds/background-01-1920-900.jpg">
+<section class="section-height-800 breadcrumb-modern parallax-container context-dark bg-gray-darkest d-none d-lg-block" data-parallax-img="@ViewBag.Banner.Image">
     <div class="parallax-content">
         <div class="bg-overlay-darker">
             <div class="container-wide section-34 section-md-60 section-lg-top-130 section-lg-bottom-155">
                 <div class="d-none d-lg-block">
-                    <div class="h1 breadcrumbs-custom-title">Food</div>
+                    <div class="h1 breadcrumbs-custom-title">@ViewBag.Banner.description</div>
                 </div>
             </div>
         </div>
@@ -19,8 +19,8 @@
 <section class="section-34 bg-selago">
     <div class="container">
         <ul class="list-inline list-inline-12 list-inline-icon breadcrumbs-list">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="entertainment.html">Services</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="#0">Services</a></li>
             <li class="active">Food</li>
         </ul>
     </div>
@@ -46,9 +46,10 @@
                                                 <button class="isotope-filters-toggle btn btn-primary-outline" data-custom-toggle="isotope-1" data-custom-toggle-disable-on-blur="true">Filter<span class="caret"></span></button>
                                                 <ul class="list-sm-inline isotope-filters-list d-lg-block" id="isotope-1">
                                                     <li><a class="active" data-isotope-filter="*" data-isotope-group="gallery" href="#">All Restaurants <span class="d-none d-lg-inline-block">and Cafes</span></a></li>
-                                                    <li><a data-isotope-filter="Asian Cuisine" data-isotope-group="gallery" href="#">Asian Cuisine</a></li>
-                                                    <li><a data-isotope-filter="Italian Food" data-isotope-group="gallery" href="#">Italian Food</a></li>
-                                                    <li><a data-isotope-filter="Mexican Food" data-isotope-group="gallery" href="#">Mexican Food</a></li>
+                                                    @foreach (var item in ViewBag.FoodFilter)
+                                                    {
+                                                        <li><a data-isotope-filter="@item.ServiceName" data-isotope-group="gallery" href="#">@item.ServiceName</a></li>
+                                                    }
                                                 </ul>
                                             </li>
                                         </ul>
@@ -59,96 +60,26 @@
                             <div class="col-xl-9 col-xxl-10 offset-top-90 offset-xl-top-65">
                                 <div class="isotope" data-isotope-layout="fitRows" data-isotope-group="gallery">
                                     <div class="row" data-lightgallery="group" data-lg-thumbnail="false">
-                                        <div class="col-12 col-md-6 isotope-item" data-filter="*">
-                                            <!-- Product-->
-                                            <div class="product product-horizontal thumbnail-robben">
-                                                <a class="thumbnail-rayen" data-lightgallery="item" href="~/Content/client/images/gallery/portfolio-16-1170x778_original.jpg">
-                                                    <figure>
-                                                        <img src="~/Content/client/images/products/product-09-295x260.jpg" width="295" height="260" alt="">
-                                                        <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
-                                                    </figure>
-                                                </a>
-                                                <div class="product-body bg-selago">
-                                                    <a href="restaurant-single.html"><img class="img-responsive center-block img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-09-160x109.png" width="160" height="109" alt=""></a>
-                                                    <div class="product-btn-wrap offset-top-20"><a class="btn btn-xs btn-bermuda" href="restaurant-single.html">learn more</a></div>
+                                        @foreach (var item in ViewBag.Foods)
+                                        {
+                                            <div class="col-12 col-md-6 isotope-item" data-filter="@item.Service.ServiceName">
+                                                <!-- Product-->
+                                                <div class="product product-horizontal thumbnail-robben">
+                                                    <a class="thumbnail-rayen" data-lightgallery="item" href="@item.Photo">
+                                                        <figure>
+                                                            <img src="@item.Photo" width="295" height="260" alt="foodPhoto">
+                                                            <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
+                                                        </figure>
+                                                    </a>
+                                                    <div class="product-body bg-selago">
+                                                        <a href="@Url.Action("RestaurantSingle","Service",new { id = item.ShoId })">
+                                                            <img class="img-responsive center-block img-semi-transparent-inverse" src="@item.Logo" alt="foodlogo">
+                                                        </a>
+                                                        <div class="product-btn-wrap offset-top-20"><a class="btn btn-xs btn-bermuda" href="@Url.Action("RestaurantSingle","Service",new { id = item.ShoId })">learn more</a></div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 isotope-item" data-filter="Mexican Food">
-                                            <!-- Product-->
-                                            <div class="product product-horizontal thumbnail-robben">
-                                                <a class="thumbnail-rayen" data-lightgallery="item" href="~/Content/client/images/gallery/portfolio-01-1170x842_original.jpg">
-                                                    <figure>
-                                                        <img class="img-responsive center-block" src="~/Content/client/images/products/product-10-295x260.jpg" width="295" height="260" alt="">
-                                                        <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
-                                                    </figure>
-                                                </a>
-                                                <div class="product-body bg-selago">
-                                                    <a href="restaurant-single.html"><img class="img-responsive center-block img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-10-81x109.png" width="81" height="109" alt=""></a>
-                                                    <div class="product-btn-wrap offset-top-20"><a class="btn btn-xs btn-bermuda" href="restaurant-single.html">learn more</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 isotope-item" data-filter="Italian Food">
-                                            <!-- Product-->
-                                            <div class="product product-horizontal thumbnail-robben">
-                                                <a class="thumbnail-rayen" data-lightgallery="item" href="~/Content/client/images/gallery/portfolio-05-1170x781_original.jpg">
-                                                    <figure>
-                                                        <img class="img-responsive center-block" src="~/Content/client/images/products/product-11-295x260.jpg" width="295" height="260" alt="">
-                                                        <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
-                                                    </figure>
-                                                </a>
-                                                <div class="product-body bg-selago">
-                                                    <a href="restaurant-single.html"><img class="img-responsive center-block img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-11-160x104.png" width="160" height="104" alt=""></a>
-                                                    <div class="product-btn-wrap offset-top-20"><a class="btn btn-xs btn-bermuda" href="restaurant-single.html">learn more</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 isotope-item" data-filter="Asian Cuisine">
-                                            <!-- Product-->
-                                            <div class="product product-horizontal thumbnail-robben">
-                                                <a class="thumbnail-rayen" data-lightgallery="item" href="~/Content/client/images/gallery/portfolio-13-1170x783_original.jpg">
-                                                    <figure>
-                                                        <img class="img-responsive center-block" src="~/Content/client/images/products/product-12-295x260.jpg" width="295" height="260" alt="">
-                                                        <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
-                                                    </figure>
-                                                </a>
-                                                <div class="product-body bg-selago">
-                                                    <a href="restaurant-single.html"><img class="img-responsive center-block img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-12-144x110.png" width="144" height="110" alt=""></a>
-                                                    <div class="product-btn-wrap offset-top-20"><a class="btn btn-xs btn-bermuda" href="restaurant-single.html">learn more</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 isotope-item" data-filter="Asian Cuisine">
-                                            <!-- Product-->
-                                            <div class="product product-horizontal thumbnail-robben">
-                                                <a class="thumbnail-rayen" data-lightgallery="item" href="~/Content/client/images/gallery/portfolio-15-1170x780_original.jpg">
-                                                    <figure>
-                                                        <img class="img-responsive center-block" src="~/Content/client/images/products/product-13-295x260.jpg" width="295" height="260" alt="">
-                                                        <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
-                                                    </figure>
-                                                </a>
-                                                <div class="product-body bg-selago">
-                                                    <a href="restaurant-single.html"><img class="img-responsive center-block img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-13-103x119.png" width="103" height="119" alt=""></a>
-                                                    <div class="product-btn-wrap offset-top-20"><a class="btn btn-xs btn-bermuda" href="restaurant-single.html">learn more</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 isotope-item" data-filter="Asian Cuisine">
-                                            <!-- Product-->
-                                            <div class="product product-horizontal thumbnail-robben">
-                                                <a class="thumbnail-rayen" data-lightgallery="item" href="~/Content/client/images/gallery/portfolio-14-884x800_original.jpg">
-                                                    <figure>
-                                                        <img class="img-responsive center-block" src="~/Content/client/images/products/product-14-295x260.jpg" width="295" height="260" alt="">
-                                                        <figcaption><span class="icon icon-normal icon-lg mdi mdi-plus"></span></figcaption>
-                                                    </figure>
-                                                </a>
-                                                <div class="product-body bg-selago">
-                                                    <a href="restaurant-single.html"><img class="img-responsive center-block img-semi-transparent-inverse" src="~/Content/client/images/products/product-logo-14-110x111.png" width="110" height="111" alt=""></a>
-                                                    <div class="product-btn-wrap offset-top-20"><a class="btn btn-xs btn-bermuda" href="restaurant-single.html">learn more</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        }
                                     </div>
                                 </div>
                             </div>

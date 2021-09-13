@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@section scripts{
+    <script src="~/Content/admin/assets/js/controllers/ScreeningController.js"></script>
+    <script src="~/Scripts/mustache.min.js"></script>
+}
+
+<div class="content-header row">
+    <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h2 class="content-header-title float-left mb-0">Movies Management</h2>
+                <div class="breadcrumb-wrapper">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Screening
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+    </div>
+</div>
+<div class="content-body">
+    <div class="product-show-list">
+        <section class="invoice-list-wrapper">
+            <div class="card">
+                <div class="card-datatable table-responsive">
+                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                        <div class="row d-flex justify-content-between align-items-center m-1">
+                            <div class="col-lg-6 d-flex align-items-center">
+                                <div class="dataTables_length" id="DataTables_Table_0_length">
+                                    <label>
+                                        Show
+                                        <select id="DataTables_screening_length" aria-controls="DataTables_Table_0" class="custom-select form-control">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                @if (User.IsInRole("User") || User.IsInRole("Admin"))
+                                {
+
+                                    <div class="dt-action-buttons text-xl-right text-lg-left text-lg-right text-left ">
+                                        <div class="dt-buttons">
+                                            <a href="@Url.Action("Create", "Screening")" class="dt-button btn btn-primary btn-add-record ml-2" tabindex="0" aria-controls="DataTables_Table_0" type="button"><span>Add Record</span></a>
+                                        </div>
+                                    </div>
+                                }
+                            </div><div class="col-lg-6 d-flex align-items-center justify-content-lg-end flex-lg-nowrap flex-wrap pr-lg-1 p-0">
+                                <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                                    <span>Search</span>
+                                    <label>
+                                        <input type="search" class="form-control" id="screening_search" placeholder="Search Invoice" aria-controls="DataTables_Table_0">
+                                    </label>
+                                </div>
+                                <div class="invoice_status ml-sm-2"></div>
+                            </div>
+                        </div>
+                        <table class="invoice-list-table table dataTable no-footer dtr-column screening-table" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="control sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="display: none;"></th>
+                                    <th class="sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 46px;" aria-sort="descending" aria-label="#: activate to sort column ascending">#</th>
+                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 270px;" aria-label="Client: activate to sort column ascending">Movie Name</th>
+                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 73px;" aria-label="Client: activate to sort column ascending">Cinema Hall</th>
+                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 73px;" aria-label="Client: activate to sort column ascending">Date</th>
+                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 73px;" aria-label="Total: activate to sort column ascending">Time</th>
+                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 98px;" aria-label="Balance: activate to sort column ascending">Status</th>
+                                    @if (User.IsInRole("User") || User.IsInRole("Admin"))
+                                    {
+                                        <th class="cell-fit sorting_disabled" rowspan="1" colspan="1" style="width: 80px;" aria-label="Actions">Actions</th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div class="d-flex justify-content-between mx-2 row">
+                            <div class="col-sm-12 col-md-12">
+                                <div class="dataTables_paginate paging_simple_numbers" id="screening_paginate">
+                                    <ul class="pagination" style="justify-content: center;">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script id="screening-list" type="x-tmpl-mustache">
+    <tr role="row" class="odd">
+        <td class=" control" tabindex="0" style="display: none;"></td>
+        <td class="sorting_1"><a class="font-weight-bold" href="javascript:void(0);"> {{ScreeningId}}</a></td>
+        <td>
+            <div class="d-flex justify-content-left align-items-center">
+                <div class="avatar-wrapper">
+                    <div class="avatar-content-row" style="background-image: url('{{MovieImage}}');"> </div>
+                </div>
+                <div class="d-flex flex-column">
+                    <h6 class="user-name mb-0">{{MovieName}}</h6>
+                </div>
+            </div>
+        </td>
+        <td>
+            {{RoomName}}
+        </td>
+        <td>
+            {{Date}}
+        </td>
+        <td>
+            {{Time}}
+        </td>
+        <td>
+            {{{Status}}}
+        </td>
+    @if (User.IsInRole("User") || User.IsInRole("Admin"))
+    {
+        <td>
+            <div class="dropdown">
+                <button type="button" class="btn btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                </button>
+                <div class="dropdown-menu" style="">
+                    <a class="dropdown-item" href="@Url.Action("Edit", "Screening")?ScreeningId={{ScreeningId}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 mr-50"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                        <span>Edit</span>
+                    </a>
+                    <a class="dropdown-item btn-delete-screening" href="javascript:void(0);" data-id="{{ScreeningId}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        <span>Delete</span>
+                    </a>
+                </div>
+            </div>
+        </td>
+    }
+    </tr>
+</script>

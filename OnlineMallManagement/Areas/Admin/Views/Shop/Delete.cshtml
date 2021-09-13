@@ -1,0 +1,128 @@
+﻿@model OnlineMallManagement.Models.Shop
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div class="content-body">
+    <section id="multiple-column-form">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Delete Shop</h4>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm("Delete", "Shop", FormMethod.Post, new { @class = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.ShoId)
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="ShopName">Shop Name</label>
+                                        <input type="text" class="form-control" id="shop_name" readonly value="@Html.DisplayFor(model => model.ShopName)" name="ShopName" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="ServiceId">Service</label>
+                                        <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Service.ServiceName)" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Address">Address</label>
+                                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Phone">Phone</label>
+                                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Email">Email</label>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Url_web">Url_web</label>
+                                        @Html.EditorFor(model => model.Url_web, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="slug">Slug</label>
+                                        <input type="text" class="form-control" readonly id="shop_slug" value="@Html.DisplayFor(model => model.slug)" name="slug" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="first-name-vertical">Photo</label>
+                                        <input type="text" class="form-control" id="edit-img-photoShop" readonly value="@Html.DisplayFor(model => model.Photo)" placeholder="Button on right" aria-describedby="button-addon2" name="Photo">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="first-name-vertical">Logo</label>
+                                        <input type="text" class="form-control" readonly id="edit-img-logoShop" value="@Html.DisplayFor(model => model.Logo)" placeholder="Button on right" aria-describedby="button-addon2" name="Logo">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Meta_title">Meta_title</label>
+                                        @Html.EditorFor(model => model.Meta_title, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Meta_keyword">Meta_keyword</label>
+                                        @Html.EditorFor(model => model.Meta_keyword, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <div class="mb-1 ">
+                                            <label for="Meta_description">Meta_description</label>
+                                            @Html.EditorFor(model => model.Meta_description, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="Description">Description</label>
+                                        <textarea class="form-control" name="Description" rows="3" placeholder="Description..." readonly>@Html.DisplayFor(model => model.Description)</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <div class="demo-inline-spacing">
+                                            <label for="Status"><b>Status</b></label>
+                                            @Html.RadioButtonFor(x => x.Status, "true") <span>Show</span>
+                                            @Html.RadioButtonFor(x => x.Status, "false") <span>Hide</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary mr-1 waves-effect waves-float waves-light">Submit</button>
+                                    <button type="reset" class="btn btn-outline-secondary waves-effect">Reset</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div>
+        <a href="@Url.Action("Index","Shop")" class="dt-button btn btn-outline-primary waves-effect" tabindex="0" aria-controls="DataTables_Table_0" type="button"><span>Back To List</span></a>
+    </div>
+</div>

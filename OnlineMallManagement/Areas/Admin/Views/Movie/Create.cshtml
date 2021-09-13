@@ -1,0 +1,255 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div class="content-header row">
+</div>
+
+<div class="content-body">
+    <section class="invoice-add-wrapper">
+        <div class="row invoice-add">
+            <!-- Invoice Add Left starts -->
+            <div class="col-xl-9 col-md-8 col-12">
+                <div class="card">
+                    <div class="card-header">Add new movie</div>
+                    <div class="card-body">
+                        <form class="form form-vertical">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="first-name-vertical">Movie</label>
+                                        <input type="text" id="movie__name" class="form-control" placeholder="Movie Name">
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="email-id-vertical">Duration (min)</label>
+                                        <input type="text" id="movie__duration" class="form-control" placeholder="Duration">
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="contact-info-vertical">Actors </label>
+                                        <small><br />( Actors are separated by " , " )</small>
+                                        <input type="text" id="movie__actors" class="form-control" placeholder="Actors">
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="contact-info-vertical">Age Restriction</label>
+                                        <div style="display: inline-block;">
+                                            <div class="input-group">
+                                                <input type="text" id="movie__age-restriction" value="13" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="contact-info-vertical">Language</label>
+                                        <input type="text" id="movie__language" class="form-control" placeholder="Language">
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="contact-info-vertical">Country</label>
+                                        <input type="text" id="movie__country" class="form-control" placeholder="Country">
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="contact-info-vertical">Release Date</label>
+                                        <input type="text" id="movie__release-date" class="form-control" placeholder="YYYY-MM-DD">
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="contact-info-vertical">Genres Movie</label>
+                                        <div>
+                                            <select class="movie__genres" name="genres[]" multiple="multiple">
+                                                @foreach (var item in ViewBag.Genres)
+                                                {
+                                                    <option value="@item.Cate_id">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <div class="form-group">
+                                            <label class="d-block" for="validationBioBootstrap">Description</label>
+                                            <textarea class="form-control" id="movie__description" rows="3"></textarea>
+                                            <div class="invalid-feedback" style="display:block;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Images</div>
+                    <div class="card-body">
+                        <form class="form form-vertical">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="first-name-vertical">Banner</label>
+                                        <fieldset>
+                                            <div class="input-group">
+                                                <button class="btn btn-outline-primary waves-effect btn-banner__movie" type="button" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">
+                                                    Choose
+                                                </button>
+                                                <input type="text" class="form-control" id="movie__banner" placeholder="Banner...">
+                                            </div>
+                                        </fieldset>
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="first-name-vertical">Image</label>
+                                        <fieldset>
+                                            <div class="input-group">
+                                                <button class="btn btn-outline-primary waves-effect btn-image__movie" type="button" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">
+                                                    Choose
+                                                </button>
+                                                <input type="text" class="form-control" id="movie__image" placeholder="Image...">
+                                            </div>
+                                        </fieldset>
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="d-block" for="validationBioBootstrap">Photos Movie</label>
+                                        <div class="upload-images mb-3">
+                                            <div class="upload-image-list" id="card-drag-area" data-repeater-list="invoice">
+                                                <div class="upload-image-item" data-repeater-item>
+                                                    <div class="icon-adds">
+                                                        <i class="fas fa-plus"></i>
+                                                    </div>
+                                                    <div class="image-bg"></div>
+                                                    <div class="show-image" data-url="" style=""></div>
+                                                    <span class="icon-delete-img" data-repeater-delete><i class="fas fa-times-circle"></i></span>
+                                                </div>
+
+                                            </div>
+                                            <div class="upload-image__btn-add">
+                                                <button type="button" class="btn btn-gradient-primary" data-repeater-create>Add photos</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">SEO</div>
+                    <div class="card-body">
+                        <form class="form form-vertical">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="first-name-vertical">Slug</label>
+                                        <input type="text" id="movie__slug" class="form-control" placeholder="Slug">
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="email-id-vertical">Meta Title</label>
+                                        <input type="text" id="movie__meta-title" class="form-control" placeholder="Meta Title">
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="contact-info-vertical">Meta Keyword</label>
+                                        <input type="text" id="movie__meta-keyword" class="form-control" placeholder="Meta Keyword">
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-1">
+                                        <label class="form-label" for="password-vertical">Meta Description</label>
+                                        <input type="text" id="movie__meta-description" class="form-control" placeholder="Meta Description">
+                                        <div class="invalid-feedback" style="display:block;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Invoice Add Left ends -->
+            <!-- Invoice Add Right starts -->
+            <div class="col-xl-3 col-md-4 col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="d-block">Status</label>
+                            <div class="custom-control custom-radio my-50">
+                                <input type="radio" id="validationRadio3" checked name="validationRadioBootstrap" value="1" class="custom-control-input movie__status">
+                                <label class="custom-control-label" for="validationRadio3">Show</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="validationRadio4" name="validationRadioBootstrap" value="0" class="custom-control-input movie__status">
+                                <label class="custom-control-label" for="validationRadio4">Hidden</label>
+                            </div>
+                        </div>
+                        <button class="btn btn-success btn-block mb-75 waves-effect waves-float waves-light btn-save-movie" type="button">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Styles{
+    <link href="~/Content/admin/assets/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/admin/assets/css/dragula.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/admin/app-assets/css/plugins/extensions/ext-component-drag-drop.min.css">
+    <link href="~/Content/admin/assets/css/jquery.bootstrap-touchspin.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Content/admin/assets/js/controllers/MovieController.js"></script>
+    <script src="~/Content/admin/app-assets/js/scripts/jquery.repeater.min.js"></script>
+    <script src="~/Content/admin/assets/js/dragula.min.js"></script>
+    <script src="~/Content/admin/app-assets/js/scripts/extensions/ext-component-drag-drop.min.js"></script>
+    <script src="~/Content/admin/assets/js/jquery.bootstrap-touchspin.js"></script>
+    <script src="~/Content/admin/assets/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#movie__release-date').flatpickr();
+            $('.movie__genres').select2();
+            $('.upload-images').repeater();
+            dragula([$('#card-drag-area')]);
+
+            $('#movie__age-restriction').TouchSpin({
+                min: 0,
+                max: 100,
+                step: 1,
+                buttondown_class: 'btn btn-primary',
+                buttonup_class: 'btn btn-primary',
+                buttondown_txt: feather.icons['minus'].toSvg(),
+                buttonup_txt: feather.icons['plus'].toSvg()
+            });
+        });
+    </script>
+}

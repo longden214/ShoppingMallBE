@@ -9,11 +9,11 @@
   // Preloader Js
   $(window).on('load', function () {
       $('.preloader').fadeOut(1000);
-      var img = $('.bg_img');
-      img.css('background-image', function () {
-        var bg = ('url(' + $(this).data('background') + ')');
-        return bg;
-      });
+      //var img = $('.bg_img');
+      //img.css('background-image', function () {
+      //  var bg = ('url(' + $(this).data('background') + ')');
+      //  return bg;
+      //});
       // filter functions
       var $grid = $(".grid-area");
       var filterFns = {};
@@ -142,9 +142,7 @@
     $('.window-warning .lay').on('click', function() {
       $('.window-warning').addClass('inActive');
     })
-    $('.seat-plan-wrapper li .movie-schedule .item').on('click', function() {
-      $('.window-warning').removeClass('inActive');
-    })
+
     //Tab Section
     $('.tab ul.tab-menu li').on('click', function (g) {
       var tab = $(this).closest('.tab'),
@@ -323,7 +321,7 @@
         owlTT.trigger('prev.owl.carousel', [300]);
     })
     $('.details-photos').owlCarousel({
-      // loop:true,
+      loop:false,
       dots: false,
       autoplay: true,
       autoplayTimeout: 5000,
@@ -350,11 +348,13 @@
     });
     var book = 0;
     $(".seat-free img").on('click', function(e) {
-      if(book == 0) {
-        $(this).attr("src","/Content/client/assets/images/movie/seat01-free.png");
+        if (book == 0) {
+            $(this).parent().removeClass("seat__booked");
+            $(this).attr("src","/Content/client/assets/images/movie/seat01-free.png");
         book = 1;
       }
-      else if(book == 1) {
+      else if (book == 1) {
+          $(this).parent().addClass("seat__booked");
           $(this).attr("src","/Content/client/assets/images/movie/seat01-booked.png");
         book = 0;
       }

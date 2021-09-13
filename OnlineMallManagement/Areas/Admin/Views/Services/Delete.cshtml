@@ -1,0 +1,80 @@
+﻿@model OnlineMallManagement.Models.Service
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ServiceId)
+        <div class="content-body">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Delete Area</h4>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <form class="form-validate" novalidate="novalidate">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-1">
+                                        <div class="col-sm-3">
+                                            <label class="form-label" for="credit-card">ServiceName</label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.ServiceName)" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-1">
+                                        <div class="col-sm-3">
+                                            <label class="form-label" for="credit-card">CreatedDate</label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.CreatedDate)" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-1">
+                                        <div class="col-sm-3">
+                                            <label class="form-label" for="credit-card">CreatedDate</label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.CreatedDate)" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-1">
+                                        <div class="col-sm-3">
+                                            <label class="form-label" for="credit-card">AreaName</label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Area.AreaName)" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+                                    <button type="submit" class="btn btn-primary mb-1 mb-sm-0 me-0 me-sm-1 waves-effect waves-float waves-light">Delete</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+}
+
+<div>
+    <a href="@Url.Action("Index","Services")" class="dt-button btn btn-outline-primary waves-effect" tabindex="0" aria-controls="DataTables_Table_0" type="button"><span>Back To List</span></a>
+</div>
