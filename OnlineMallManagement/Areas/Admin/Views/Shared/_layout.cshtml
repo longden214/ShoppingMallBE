@@ -78,8 +78,8 @@
                                 <span class="user-status">Customer</span>
                             }
                         </div>
-                        <span class="avatar">
-                            <img class="round" src="~/Content/admin/app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40">
+                        <span class="avatar bg-primary">
+                            <span class="avatar-content">@AppState["displayName"].ToString().Remove(1).ToUpper()</span>
                             <span class="avatar-status-online"></span>
                         </span>
                     </a>
@@ -153,6 +153,11 @@
                             <li>
                                 <a class="d-flex align-items-center" href="@Url.Action("Index", "Seat")">
                                     <i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Layout Boxed">Seat</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="d-flex align-items-center" href="@Url.Action("Index", "OrderDetails")">
+                                    <i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Layout Boxed">Order</span>
                                 </a>
                             </li>
                         </ul>
@@ -297,6 +302,14 @@
                 });
             }
         })
+
+
+        $(document).ready(function () {
+            $('#main-menu-navigation li a').filter(function () { return this.href == location.href }).parent().addClass('active').siblings().removeClass('active')
+            $('#main-menu-navigation li a').click(function () {
+                $(this).parent().addClass('active').siblings().removeClass('active')
+            })
+        });
     </script>
 
     @RenderSection("scripts", required: false)

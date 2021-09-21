@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBOnlineMallModelStoreContainer" CdmEntityContainer="DBOnlineMallEntities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminRoles">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.AdminRole">
+        <MappingFragment StoreEntitySet="AdminRoles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+          <ScalarProperty Name="Admin_id" ColumnName="Admin_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Areas">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Area">
+        <MappingFragment StoreEntitySet="Area">
+          <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+          <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Banners">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Banner">
+        <MappingFragment StoreEntitySet="Banner">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+          <ScalarProperty Name="Sratus" ColumnName="Sratus" />
+          <ScalarProperty Name="page" ColumnName="page" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Blogs">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Blog">
+        <MappingFragment StoreEntitySet="Blog">
+          <ScalarProperty Name="Images" ColumnName="Images" />
+          <ScalarProperty Name="BlogId" ColumnName="BlogId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="BlogTime" ColumnName="BlogTime" />
+          <ScalarProperty Name="Category_blog_id" ColumnName="Category_blog_id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="slug" ColumnName="slug" />
+          <ScalarProperty Name="Meta_title" ColumnName="Meta_title" />
+          <ScalarProperty Name="Meta_keyword" ColumnName="Meta_keyword" />
+          <ScalarProperty Name="Meta_description" ColumnName="Meta_description" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Category_blog">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Category_blog">
+        <MappingFragment StoreEntitySet="Category_blog">
+          <ScalarProperty Name="Cate_blog_id" ColumnName="Cate_blog_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="slug" ColumnName="slug" />
+          <ScalarProperty Name="Meta_title" ColumnName="Meta_title" />
+          <ScalarProperty Name="Meta_keyword" ColumnName="Meta_keyword" />
+          <ScalarProperty Name="Meta_description" ColumnName="Meta_description" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Category_Movie">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Category_Movie">
+        <MappingFragment StoreEntitySet="Category_Movie">
+          <ScalarProperty Name="Cate_id" ColumnName="Cate_id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="slug" ColumnName="slug" />
+          <ScalarProperty Name="Meta_title" ColumnName="Meta_title" />
+          <ScalarProperty Name="Meta_keyword" ColumnName="Meta_keyword" />
+          <ScalarProperty Name="Meta_description" ColumnName="Meta_description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Feedbacks">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Feedback">
+        <MappingFragment StoreEntitySet="Feedback">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="FBDate" ColumnName="FBDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movies">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Movie">
+        <MappingFragment StoreEntitySet="Movie">
+          <ScalarProperty Name="IdMovie" ColumnName="IdMovie" />
+          <ScalarProperty Name="MoviveName" ColumnName="MoviveName" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Actors" ColumnName="Actors" />
+          <ScalarProperty Name="AgeRestriction" ColumnName="AgeRestriction" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="slug" ColumnName="slug" />
+          <ScalarProperty Name="Meta_title" ColumnName="Meta_title" />
+          <ScalarProperty Name="Meta_keyword" ColumnName="Meta_keyword" />
+          <ScalarProperty Name="Meta_description" ColumnName="Meta_description" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="banner" ColumnName="banner" />
+          <ScalarProperty Name="photos" ColumnName="photos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movie_type">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Movie_type">
+        <MappingFragment StoreEntitySet="Movie_type">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="cate_movie_id" ColumnName="cate_movie_id" />
+          <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Screening_Id" ColumnName="Screening_Id" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="NumberOfSeats" ColumnName="NumberOfSeats" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+          <ScalarProperty Name="Role_name" ColumnName="Role_name" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rooms">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Room">
+        <MappingFragment StoreEntitySet="Room">
+          <ScalarProperty Name="IdRoom" ColumnName="IdRoom" />
+          <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+          <ScalarProperty Name="TotalSeat" ColumnName="TotalSeat" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sales">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Sale">
+        <MappingFragment StoreEntitySet="Sales">
+          <ScalarProperty Name="Sale_id" ColumnName="Sale_id" />
+          <ScalarProperty Name="Shop_ShoId" ColumnName="Shop_ShoId" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Sale1" ColumnName="Sale" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="slug" ColumnName="slug" />
+          <ScalarProperty Name="Meta_title" ColumnName="Meta_title" />
+          <ScalarProperty Name="Meta_keyword" ColumnName="Meta_keyword" />
+          <ScalarProperty Name="Meta_description" ColumnName="Meta_description" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Screenings">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Screening">
+        <MappingFragment StoreEntitySet="Screening">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Room_IdRoom" ColumnName="Room_IdRoom" />
+          <ScalarProperty Name="Movie_Id" ColumnName="Movie_Id" />
+          <ScalarProperty Name="ScreeningDate" ColumnName="ScreeningDate" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Screening_seat">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Screening_seat">
+        <MappingFragment StoreEntitySet="Screening_seat">
+          <ScalarProperty Name="ShowSeat_id" ColumnName="ShowSeat_id" />
+          <ScalarProperty Name="Seat_IdSeat" ColumnName="Seat_IdSeat" />
+          <ScalarProperty Name="Screening_Id" ColumnName="Screening_Id" />
+          <ScalarProperty Name="Order_OrderId" ColumnName="Order_OrderId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seats">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Seat">
+        <MappingFragment StoreEntitySet="Seat">
+          <ScalarProperty Name="IdSeat" ColumnName="IdSeat" />
+          <ScalarProperty Name="SeatName" ColumnName="SeatName" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="IdRoom" ColumnName="IdRoom" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Service">
+        <MappingFragment StoreEntitySet="Service">
+          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+          <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+          <ScalarProperty Name="Service_area" ColumnName="Service_area" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Shops">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Shop">
+        <MappingFragment StoreEntitySet="Shop">
+          <ScalarProperty Name="ShoId" ColumnName="ShoId" />
+          <ScalarProperty Name="ShopName" ColumnName="ShopName" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Url_web" ColumnName="Url_web" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="slug" ColumnName="slug" />
+          <ScalarProperty Name="Meta_title" ColumnName="Meta_title" />
+          <ScalarProperty Name="Meta_keyword" ColumnName="Meta_keyword" />
+          <ScalarProperty Name="Meta_description" ColumnName="Meta_description" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Shop_Product">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Shop_Product">
+        <MappingFragment StoreEntitySet="Shop_Product">
+          <ScalarProperty Name="Pro_Id" ColumnName="Pro_Id" />
+          <ScalarProperty Name="Pro_name" ColumnName="Pro_name" />
+          <ScalarProperty Name="Images" ColumnName="Images" />
+          <ScalarProperty Name="Shop_ShoId" ColumnName="Shop_ShoId" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Event">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Meta_description" ColumnName="Meta_description" />
+          <ScalarProperty Name="Meta_keyword" ColumnName="Meta_keyword" />
+          <ScalarProperty Name="Meta_title" ColumnName="Meta_title" />
+          <ScalarProperty Name="slug" ColumnName="slug" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Shop_ShoId" ColumnName="Shop_ShoId" />
+          <ScalarProperty Name="Event_id" ColumnName="Event_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configs">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.Config">
+        <MappingFragment StoreEntitySet="Config">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="galleries">
+      <EntityTypeMapping TypeName="DBOnlineMallModel.gallery">
+        <MappingFragment StoreEntitySet="gallery">
+          <ScalarProperty Name="Modifidate" ColumnName="Modifidate" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

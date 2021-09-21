@@ -1,0 +1,632 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBOnlineMallModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DisplayName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="varchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="AdminRoles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role_id" Type="int" Nullable="false" />
+    <Property Name="Admin_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="AreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AreaName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Banner">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="link" Type="varchar(max)" />
+    <Property Name="description" Type="varchar(max)" />
+    <Property Name="OrderBy" Type="int" Nullable="false" />
+    <Property Name="Sratus" Type="bit" />
+    <Property Name="page" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Blog">
+    <Key>
+      <PropertyRef Name="BlogId" />
+    </Key>
+    <Property Name="BlogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" Nullable="false" />
+    <Property Name="BlogTime" Type="date" />
+    <Property Name="Category_blog_id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Content" Type="text" Nullable="false" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="slug" Type="varchar" MaxLength="100" />
+    <Property Name="Meta_title" Type="varchar(max)" />
+    <Property Name="Meta_keyword" Type="varchar(max)" />
+    <Property Name="Meta_description" Type="varchar(max)" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="Images" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Category_blog">
+    <Key>
+      <PropertyRef Name="Cate_blog_id" />
+    </Key>
+    <Property Name="Cate_blog_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="slug" Type="varchar" MaxLength="100" />
+    <Property Name="Meta_title" Type="varchar(max)" />
+    <Property Name="Meta_keyword" Type="varchar(max)" />
+    <Property Name="Meta_description" Type="varchar(max)" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Category_Movie">
+    <Key>
+      <PropertyRef Name="Cate_id" />
+    </Key>
+    <Property Name="Cate_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="slug" Type="varchar" MaxLength="100" />
+    <Property Name="Meta_title" Type="varchar(max)" />
+    <Property Name="Meta_keyword" Type="varchar(max)" />
+    <Property Name="Meta_description" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Config">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="100" />
+    <Property Name="value" Type="varchar(max)" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="Event_id" />
+    </Key>
+    <Property Name="Event_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Shop_ShoId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Title" Type="varchar(max)" Nullable="false" />
+    <Property Name="Descriptions" Type="text" Nullable="false" />
+    <Property Name="Image" Type="varchar(max)" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+    <Property Name="slug" Type="varchar" MaxLength="100" />
+    <Property Name="Meta_title" Type="varchar(max)" />
+    <Property Name="Meta_keyword" Type="varchar(max)" />
+    <Property Name="Meta_description" Type="varchar(max)" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="StartDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Content" Type="varchar(max)" />
+    <Property Name="FBDate" Type="datetime" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="gallery">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="image" Type="varchar(max)" />
+    <Property Name="status" Type="bit" />
+    <Property Name="createdDate" Type="datetime" />
+    <Property Name="Modifidate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="IdMovie" />
+    </Key>
+    <Property Name="IdMovie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MoviveName" Type="varchar(max)" Nullable="false" />
+    <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="Actors" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AgeRestriction" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" Nullable="false" />
+    <Property Name="Language" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ReleaseDate" Type="date" Nullable="false" />
+    <Property Name="Country" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="slug" Type="varchar" MaxLength="100" />
+    <Property Name="Meta_title" Type="varchar(max)" />
+    <Property Name="Meta_keyword" Type="varchar(max)" />
+    <Property Name="Meta_description" Type="varchar(max)" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="banner" Type="varchar(max)" />
+    <Property Name="photos" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Movie_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cate_movie_id" Type="int" />
+    <Property Name="movie_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="Discount" Type="int" Nullable="false" />
+    <Property Name="Total" Type="float" Nullable="false" />
+    <Property Name="Screening_Id" Type="int" Nullable="false" />
+    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="NumberOfSeats" Type="int" Nullable="false" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Role_id" />
+    </Key>
+    <Property Name="Role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="IdRoom" />
+    </Key>
+    <Property Name="IdRoom" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoomName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="TotalSeat" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Sales">
+    <Key>
+      <PropertyRef Name="Sale_id" />
+    </Key>
+    <Property Name="Sale_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Shop_ShoId" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Sale" Type="int" Nullable="false" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="slug" Type="varchar" MaxLength="100" />
+    <Property Name="Meta_title" Type="varchar(max)" />
+    <Property Name="Meta_keyword" Type="varchar(max)" />
+    <Property Name="Meta_description" Type="varchar(max)" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Screening">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Room_IdRoom" Type="int" Nullable="false" />
+    <Property Name="Movie_Id" Type="int" Nullable="false" />
+    <Property Name="ScreeningDate" Type="date" Nullable="false" />
+    <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Screening_seat">
+    <Key>
+      <PropertyRef Name="ShowSeat_id" />
+    </Key>
+    <Property Name="ShowSeat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Seat_IdSeat" Type="int" />
+    <Property Name="Screening_Id" Type="int" Nullable="false" />
+    <Property Name="Order_OrderId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Seat">
+    <Key>
+      <PropertyRef Name="IdSeat" />
+    </Key>
+    <Property Name="IdSeat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SeatName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="price" Type="float" />
+    <Property Name="IdRoom" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ServiceId" />
+    </Key>
+    <Property Name="ServiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ServiceName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Service_area" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Shop">
+    <Key>
+      <PropertyRef Name="ShoId" />
+    </Key>
+    <Property Name="ShoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShopName" Type="varchar" MaxLength="225" Nullable="false" />
+    <Property Name="Photo" Type="varchar" MaxLength="200" />
+    <Property Name="ServiceId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Email" Type="varchar" MaxLength="200" />
+    <Property Name="Url_web" Type="varchar" MaxLength="100" />
+    <Property Name="Logo" Type="varchar" MaxLength="200" />
+    <Property Name="slug" Type="varchar" MaxLength="100" />
+    <Property Name="Meta_title" Type="varchar(max)" />
+    <Property Name="Meta_keyword" Type="varchar(max)" />
+    <Property Name="Meta_description" Type="varchar(max)" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Shop_Product">
+    <Key>
+      <PropertyRef Name="Pro_Id" />
+    </Key>
+    <Property Name="Pro_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pro_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Images" Type="text" Nullable="false" />
+    <Property Name="Shop_ShoId" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <Association Name="AdminRoles_Admin">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+    <End Role="AdminRoles" Type="Self.AdminRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdminRoles">
+        <PropertyRef Name="Admin_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdminRoles_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="AdminRoles" Type="Self.AdminRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Role_id" />
+      </Principal>
+      <Dependent Role="AdminRoles">
+        <PropertyRef Name="Role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Blog_Category_blog">
+    <End Role="Category_blog" Type="Self.Category_blog" Multiplicity="1" />
+    <End Role="Blog" Type="Self.Blog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category_blog">
+        <PropertyRef Name="Cate_blog_id" />
+      </Principal>
+      <Dependent Role="Blog">
+        <PropertyRef Name="Category_blog_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Events_Shop">
+    <End Role="Shop" Type="Self.Shop" Multiplicity="1" />
+    <End Role="Events" Type="Self.Events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shop">
+        <PropertyRef Name="ShoId" />
+      </Principal>
+      <Dependent Role="Events">
+        <PropertyRef Name="Shop_ShoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Movie_typ__cate___5EBF139D">
+    <End Role="Category_Movie" Type="Self.Category_Movie" Multiplicity="0..1" />
+    <End Role="Movie_type" Type="Self.Movie_type" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category_Movie">
+        <PropertyRef Name="Cate_id" />
+      </Principal>
+      <Dependent Role="Movie_type">
+        <PropertyRef Name="cate_movie_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Movie_typ__movie__5FB337D6">
+    <End Role="Movie" Type="Self.Movie" Multiplicity="0..1" />
+    <End Role="Movie_type" Type="Self.Movie_type" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="IdMovie" />
+      </Principal>
+      <Dependent Role="Movie_type">
+        <PropertyRef Name="movie_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Order_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Order_Screening">
+    <End Role="Screening" Type="Self.Screening" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Screening">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Screening_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Sales_Shop">
+    <End Role="Shop" Type="Self.Shop" Multiplicity="1" />
+    <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shop">
+        <PropertyRef Name="ShoId" />
+      </Principal>
+      <Dependent Role="Sales">
+        <PropertyRef Name="Shop_ShoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Screening_Movie">
+    <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+    <End Role="Screening" Type="Self.Screening" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="IdMovie" />
+      </Principal>
+      <Dependent Role="Screening">
+        <PropertyRef Name="Movie_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Screening_Room">
+    <End Role="Room" Type="Self.Room" Multiplicity="1" />
+    <End Role="Screening" Type="Self.Screening" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="IdRoom" />
+      </Principal>
+      <Dependent Role="Screening">
+        <PropertyRef Name="Room_IdRoom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Screening_seat_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="Screening_seat" Type="Self.Screening_seat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="Screening_seat">
+        <PropertyRef Name="Order_OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Screening_seat_Screening">
+    <End Role="Screening" Type="Self.Screening" Multiplicity="1" />
+    <End Role="Screening_seat" Type="Self.Screening_seat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Screening">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Screening_seat">
+        <PropertyRef Name="Screening_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Screening_seat_seats">
+    <End Role="Seat" Type="Self.Seat" Multiplicity="0..1" />
+    <End Role="Screening_seat" Type="Self.Screening_seat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seat">
+        <PropertyRef Name="IdSeat" />
+      </Principal>
+      <Dependent Role="Screening_seat">
+        <PropertyRef Name="Seat_IdSeat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Seat_Room">
+    <End Role="Room" Type="Self.Room" Multiplicity="1" />
+    <End Role="Seat" Type="Self.Seat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="IdRoom" />
+      </Principal>
+      <Dependent Role="Seat">
+        <PropertyRef Name="IdRoom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Service_Area">
+    <End Role="Area" Type="Self.Area" Multiplicity="1" />
+    <End Role="Service" Type="Self.Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="Service">
+        <PropertyRef Name="Service_area" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Shop_Product_Shop">
+    <End Role="Shop" Type="Self.Shop" Multiplicity="1" />
+    <End Role="Shop_Product" Type="Self.Shop_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shop">
+        <PropertyRef Name="ShoId" />
+      </Principal>
+      <Dependent Role="Shop_Product">
+        <PropertyRef Name="Shop_ShoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Shop_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="Shop" Type="Self.Shop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="ServiceId" />
+      </Principal>
+      <Dependent Role="Shop">
+        <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBOnlineMallModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AdminRoles" EntityType="Self.AdminRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Blog" EntityType="Self.Blog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category_blog" EntityType="Self.Category_blog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category_Movie" EntityType="Self.Category_Movie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Config" EntityType="Self.Config" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gallery" EntityType="Self.gallery" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movie_type" EntityType="Self.Movie_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Screening" EntityType="Self.Screening" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Screening_seat" EntityType="Self.Screening_seat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Seat" EntityType="Self.Seat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shop" EntityType="Self.Shop" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shop_Product" EntityType="Self.Shop_Product" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="AdminRoles_Admin" Association="Self.AdminRoles_Admin">
+      <End Role="Admin" EntitySet="Admin" />
+      <End Role="AdminRoles" EntitySet="AdminRoles" />
+    </AssociationSet>
+    <AssociationSet Name="AdminRoles_Roles" Association="Self.AdminRoles_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="AdminRoles" EntitySet="AdminRoles" />
+    </AssociationSet>
+    <AssociationSet Name="Blog_Category_blog" Association="Self.Blog_Category_blog">
+      <End Role="Category_blog" EntitySet="Category_blog" />
+      <End Role="Blog" EntitySet="Blog" />
+    </AssociationSet>
+    <AssociationSet Name="Events_Shop" Association="Self.Events_Shop">
+      <End Role="Shop" EntitySet="Shop" />
+      <End Role="Events" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Movie_typ__cate___5EBF139D" Association="Self.FK__Movie_typ__cate___5EBF139D">
+      <End Role="Category_Movie" EntitySet="Category_Movie" />
+      <End Role="Movie_type" EntitySet="Movie_type" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Movie_typ__movie__5FB337D6" Association="Self.FK__Movie_typ__movie__5FB337D6">
+      <End Role="Movie" EntitySet="Movie" />
+      <End Role="Movie_type" EntitySet="Movie_type" />
+    </AssociationSet>
+    <AssociationSet Name="Order_Customer" Association="Self.Order_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="Order_Screening" Association="Self.Order_Screening">
+      <End Role="Screening" EntitySet="Screening" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="Sales_Shop" Association="Self.Sales_Shop">
+      <End Role="Shop" EntitySet="Shop" />
+      <End Role="Sales" EntitySet="Sales" />
+    </AssociationSet>
+    <AssociationSet Name="Screening_Movie" Association="Self.Screening_Movie">
+      <End Role="Movie" EntitySet="Movie" />
+      <End Role="Screening" EntitySet="Screening" />
+    </AssociationSet>
+    <AssociationSet Name="Screening_Room" Association="Self.Screening_Room">
+      <End Role="Room" EntitySet="Room" />
+      <End Role="Screening" EntitySet="Screening" />
+    </AssociationSet>
+    <AssociationSet Name="Screening_seat_Order" Association="Self.Screening_seat_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Screening_seat" EntitySet="Screening_seat" />
+    </AssociationSet>
+    <AssociationSet Name="Screening_seat_Screening" Association="Self.Screening_seat_Screening">
+      <End Role="Screening" EntitySet="Screening" />
+      <End Role="Screening_seat" EntitySet="Screening_seat" />
+    </AssociationSet>
+    <AssociationSet Name="Screening_seat_seats" Association="Self.Screening_seat_seats">
+      <End Role="Seat" EntitySet="Seat" />
+      <End Role="Screening_seat" EntitySet="Screening_seat" />
+    </AssociationSet>
+    <AssociationSet Name="Seat_Room" Association="Self.Seat_Room">
+      <End Role="Room" EntitySet="Room" />
+      <End Role="Seat" EntitySet="Seat" />
+    </AssociationSet>
+    <AssociationSet Name="Service_Area" Association="Self.Service_Area">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="Service" EntitySet="Service" />
+    </AssociationSet>
+    <AssociationSet Name="Shop_Product_Shop" Association="Self.Shop_Product_Shop">
+      <End Role="Shop" EntitySet="Shop" />
+      <End Role="Shop_Product" EntitySet="Shop_Product" />
+    </AssociationSet>
+    <AssociationSet Name="Shop_Service" Association="Self.Shop_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="Shop" EntitySet="Shop" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

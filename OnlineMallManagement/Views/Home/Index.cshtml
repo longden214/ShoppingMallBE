@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home";
 }
 
 @section MovieCss{
@@ -232,10 +232,12 @@
                     <h3>Latest News</h3>
                 </div>
                 <div class="row justify-content-sm-center text-left offset-top-35 offset-md-top-60">
+                @{ var i = 1;}
                     @foreach (var item in ViewBag.Blogs)
                     {
-
-                        <div class="col-md-10 col-lg-6 col-xl-4 col-xxl-5 offset-lg-top-5">
+                        var col = i == 1 ? "col-md-10 col-lg-6 col-xl-4 col-xxl-5" : i == 2 ? "col-md-10 col-lg-6 col-xl-4 col-xxl-3 offset-top-30 offset-lg-top-5" : i == 3 ? "col-md-10 col-lg-12 col-xl-4 col-xxl-3 offset-top-30 offset-lg-top-5" : "";
+             
+                        <div class="@col">
                             <div class="post-box shadow-drop post-box-max-width-none d-block">
                                 <div class="post-box-img-wrap">
                                     <a class="thumbnail-robben" href="@Url.Action("BlogPost","Blog",new { id = item.BlogId })">
@@ -257,6 +259,7 @@
                             </div>
                         </div>
 
+                        i++;
                     }
                 </div><a class="btn btn-width-200 btn-primary offset-top-35 offset-md-top-65" href="@Url.Action("BlogClassic","Blog")">view all news</a>
             </div>

@@ -22,14 +22,8 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
                 ressult = dbContext.Shops.Where(s => s.ShopName.Contains(SearchString));
             }
 
-            if (page > 0)
-            {
-                page = page;
-            }
-            else
-            {
-                page = 1;
-            }
+            page = page ?? 1;
+
             int limit = 8;
             int start = (int)(page - 1) * limit;
             int totalShop = ressult.Count();
@@ -42,7 +36,7 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
             ViewBag.numberPage = (int)Math.Ceiling(numberPage);
 
             var dataShop = ressult.OrderByDescending(s => s.ShoId).Skip(start).Take(limit);
-            
+
             return View(dataShop.ToList());
         }
 

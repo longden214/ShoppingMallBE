@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="~/Content/client/css/style.css">
 </head>
 <body>
-   
+
     <div class="preloader">
         <div class="preloader-body">
             <div id="circular3dG">
@@ -56,7 +56,24 @@
     <script src="~/Content/client/js/core.min.js"></script>
     <script src="~/Content/client/js/script.js"></script>
     <script src="~/Content/admin/assets/js/flatpickr.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('#menu-top-header ul.rd-navbar-nav li a').filter(function () { return this.href == location.href }).parent().addClass('active').siblings().removeClass('active')
+            $('#menu-top-header ul.rd-navbar-nav li a').click(function () {
+                $(this).parent().addClass('active').siblings().removeClass('active')
+            })
+
+            if ($("#menu-top-header ul.rd-navbar-nav > li.rd-navbar--has-dropdown .rd-dropdown-item.active").length > 0) {
+                $('#menu-top-header ul.rd-navbar-nav > li').removeClass('active');
+                $("#menu-top-header ul.rd-navbar-nav > li.rd-navbar--has-dropdown .rd-dropdown-item.active").closest('.rd-navbar--has-dropdown').addClass('active');
+                $("#menu-top-header ul.rd-navbar-nav > li.rd-navbar--has-dropdown .rd-dropdown-item").removeClass('active');
+            }
+        });
+    </script>
+
     @RenderSection("Mapjs", required: false)
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

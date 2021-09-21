@@ -8,7 +8,7 @@ $(document).ready(function () {
         var page = $(this).attr('data-page');
 
         //load event pagination
-        var txtSearch = $(".txtSearch").val();
+        var txtSearch = $("#txtSearch").val();
        
             loadData(txtSearch, page)
         

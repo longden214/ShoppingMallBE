@@ -180,6 +180,8 @@ namespace OnlineMallManagement.Controllers
 
         public ActionResult Failure()
         {
+            ViewBag.favicon = dbContext.Configs.Find(15).value;
+
             return View();
         }
 
@@ -230,6 +232,8 @@ namespace OnlineMallManagement.Controllers
 
             Session[CartSession] = null;
             Session["Customer"] = null;
+
+            ViewBag.favicon = dbContext.Configs.Find(15).value;
             return View();
         }
 

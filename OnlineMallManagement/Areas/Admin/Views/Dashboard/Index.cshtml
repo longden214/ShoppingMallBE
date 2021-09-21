@@ -4,6 +4,170 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
+@section Styles{
+    <link href="~/Content/admin/app-assets/vendors/css/charts/apexcharts.css" rel="stylesheet" />
+    <link href="~/Content/admin/app-assets/css/plugins/charts/chart-apex.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/Content/admin/app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script>
+        var $salesLineChart = document.querySelector('#sales-line-chart');
+        var $strokeColor = '#ebe9f1';
+        var $salesStrokeColor2 = '#df87f2';
+        var $textMutedColor = '#b9b9c3';
+
+        salesLineChartOptions = {
+            chart: {
+                height: 240,
+                toolbar: { show: false },
+                zoom: { enabled: false },
+                type: 'line',
+                dropShadow: {
+                    enabled: true,
+                    top: 18,
+                    left: 2,
+                    blur: 5,
+                    opacity: 0.2
+                },
+                offsetX: -10
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 4
+            },
+            grid: {
+                borderColor: $strokeColor,
+                padding: {
+                    top: -20,
+                    bottom: 5,
+                    left: 20
+                }
+            },
+            legend: {
+                show: false
+            },
+            colors: [$salesStrokeColor2],
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: 'dark',
+                    inverseColors: false,
+                    gradientToColors: [window.colors.solid.primary],
+                    shadeIntensity: 1,
+                    type: 'horizontal',
+                    opacityFrom: 1,
+                    opacityTo: 1,
+                    stops: [0, 100, 100, 100]
+                }
+            },
+            markers: {
+                size: 0,
+                hover: {
+                    size: 5
+                }
+            },
+            xaxis: {
+                labels: {
+                    offsetY: 5,
+                    style: {
+                        colors: $textMutedColor,
+                        fontSize: '0.857rem'
+                    }
+                },
+                axisTicks: {
+                    show: false
+                },
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                axisBorder: {
+                    show: false
+                },
+                tickPlacement: 'on'
+            },
+            yaxis: {
+                tickAmount: 5,
+                labels: {
+                    style: {
+                        colors: $textMutedColor,
+                        fontSize: '0.857rem'
+                    },
+                    formatter: function (val) {
+                        return val > 999 ? (val / 1000).toFixed(1) + 'k' : val;
+                    }
+                }
+            },
+            tooltip: {
+                x: { show: false }
+            },
+            series: [
+                {
+                    name: 'Sales',
+                    data: [140, 180, 150, 205, 160, 295, 125, 255, 205, 305, 240, 295]
+                }
+            ]
+        };
+        salesLineChart = new ApexCharts($salesLineChart, salesLineChartOptions);
+        salesLineChart.render();
+
+
+        var barChartEl = document.querySelector('#bar-chart'),
+            barChartConfig = {
+                chart: {
+                    height: 400,
+                    type: 'bar',
+                    parentHeightOffset: 0,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        barHeight: '30%',
+                        endingShape: 'rounded'
+                    }
+                },
+                grid: {
+                    xaxis: {
+                        lines: {
+                            show: false
+                        }
+                    },
+                    padding: {
+                        top: -15,
+                        bottom: -10
+                    }
+                },
+                colors: window.colors.solid.info,
+                dataLabels: {
+                    enabled: false
+                },
+                series: [
+                    {
+                        data: [700, 350, 480, 600, 210, 550, 150]
+                    }
+                ],
+                xaxis: {
+                    categories: ['MON, 11', 'THU, 14', 'FRI, 15', 'MON, 18', 'WED, 20', 'FRI, 21', 'MON, 23']
+                }
+                //,
+                //yaxis: {
+                //    opposite: isRtl
+                //}
+            };
+        if (typeof barChartEl !== undefined && barChartEl !== null) {
+            var barChart = new ApexCharts(barChartEl, barChartConfig);
+            barChart.render();
+        }
+
+        $('#ticket-filter').flatpickr({
+            mode: "range",
+            dateFormat: "Y-m-d",
+            defaultDate: ["2021-08-11", "2021-08-23"]
+        });
+    </script>
+}
+
 <div class="content-header row">
     <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
@@ -22,39 +186,167 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 <div class="content-body">
-    <!-- Kick start -->
-    <div class="card">
-        <div class="card-header">
-            <h4 class="card-title">Kick start your next project 🚀</h4>
-        </div>
-        <div class="card-body">
-            <div class="card-text">
-                <p>
-                    Getting start with your project custom requirements using a ready template which is
-                    quite difficult and time
-                    taking process, Vuexy Admin provides useful features to kick start your project
-                    development with no efforts !
-                </p>
-                <ul>
-                    <li>
-                        Vuexy Admin provides you getting start pages with different layouts, use the layout
-                        as per your custom
-                        requirements and just change the branding, menu &amp; content.
-                    </li>
-                    <li>
-                        Every components in Vuexy Admin are decoupled, it means use use only components you
-                        actually need! Remove
-                        unnecessary and extra code easily just by excluding the path to specific SCSS, JS
-                        file.
-                    </li>
-                </ul>
+    <div class="content-body">
+        <!-- Dashboard Analytics Start -->
+        <section id="dashboard-analytics">
+            <div class="row match-height">
+                <!-- Greetings Card starts -->
+
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-header flex-column align-items-start pb-0">
+                            <div class="avatar bg-light-primary p-50 m-0">
+                                <div class="avatar-content">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users font-medium-5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                </div>
+                            </div>
+                            <h2 class="fw-bolder mt-1">@ViewBag.User</h2>
+                            <p class="card-text">Total accounts</p>
+                        </div>
+                        <div id="line-area-chart-1" style="min-height: 100px;"><div id="apexchartsd491t8kij" class="apexcharts-canvas apexchartsd491t8kij apexcharts-theme-light" style="width: 280px; height: 100px;"><svg id="SvgjsSvg1525" width="280" height="100" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" class="apexcharts-svg" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent;"><g id="SvgjsG1527" class="apexcharts-inner apexcharts-graphical" transform="translate(0, 0)"><defs id="SvgjsDefs1526"><clipPath id="gridRectMaskd491t8kij"><rect id="SvgjsRect1532" width="286.5" height="102.5" x="-3.25" y="-1.25" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="gridRectMarkerMaskd491t8kij"><rect id="SvgjsRect1533" width="284" height="104" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><linearGradient id="SvgjsLinearGradient1538" x1="0" y1="0" x2="0" y2="1"><stop id="SvgjsStop1539" stop-opacity="0.7" stop-color="rgba(115,103,240,0.7)" offset="0"></stop><stop id="SvgjsStop1540" stop-opacity="0.5" stop-color="rgba(241,240,254,0.5)" offset="0.8"></stop><stop id="SvgjsStop1541" stop-opacity="0.5" stop-color="rgba(241,240,254,0.5)" offset="1"></stop></linearGradient></defs><line id="SvgjsLine1531" x1="0" y1="0" x2="0" y2="100" stroke="#b6b6b6" stroke-dasharray="3" class="apexcharts-xcrosshairs" x="0" y="0" width="1" height="100" fill="#b1b9c4" filter="none" fill-opacity="0.9" stroke-width="1"></line><g id="SvgjsG1544" class="apexcharts-xaxis" transform="translate(0, 0)"><g id="SvgjsG1545" class="apexcharts-xaxis-texts-g" transform="translate(0, -4)"></g></g><g id="SvgjsG1547" class="apexcharts-grid"><g id="SvgjsG1548" class="apexcharts-gridlines-horizontal" style="display: none;"><line id="SvgjsLine1550" x1="0" y1="0" x2="280" y2="0" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1551" x1="0" y1="20" x2="280" y2="20" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1552" x1="0" y1="40" x2="280" y2="40" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1553" x1="0" y1="60" x2="280" y2="60" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1554" x1="0" y1="80" x2="280" y2="80" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1555" x1="0" y1="100" x2="280" y2="100" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line></g><g id="SvgjsG1549" class="apexcharts-gridlines-vertical" style="display: none;"></g><line id="SvgjsLine1557" x1="0" y1="100" x2="280" y2="100" stroke="transparent" stroke-dasharray="0"></line><line id="SvgjsLine1556" x1="0" y1="1" x2="0" y2="100" stroke="transparent" stroke-dasharray="0"></line></g><g id="SvgjsG1534" class="apexcharts-area-series apexcharts-plot-series"><g id="SvgjsG1535" class="apexcharts-series" seriesName="Subscribers" data:longestSeries="true" rel="1" data:realIndex="0"><path id="SvgjsPath1542" d="M 0 100L 0 77.77777777777777C 16.333333333333332 77.77777777777777 30.333333333333332 51.111111111111114 46.666666666666664 51.111111111111114C 63 51.111111111111114 77 60 93.33333333333333 60C 109.66666666666666 60 123.66666666666666 24.444444444444443 140 24.444444444444443C 156.33333333333331 24.444444444444443 170.33333333333331 55.55555555555556 186.66666666666666 55.55555555555556C 203 55.55555555555556 217 6.666666666666657 233.33333333333334 6.666666666666657C 249.66666666666669 6.666666666666657 263.6666666666667 17.777777777777786 280 17.777777777777786C 280 17.777777777777786 280 17.777777777777786 280 100M 280 17.777777777777786z" fill="url(#SvgjsLinearGradient1538)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMaskd491t8kij)" pathTo="M 0 100L 0 77.77777777777777C 16.333333333333332 77.77777777777777 30.333333333333332 51.111111111111114 46.666666666666664 51.111111111111114C 63 51.111111111111114 77 60 93.33333333333333 60C 109.66666666666666 60 123.66666666666666 24.444444444444443 140 24.444444444444443C 156.33333333333331 24.444444444444443 170.33333333333331 55.55555555555556 186.66666666666666 55.55555555555556C 203 55.55555555555556 217 6.666666666666657 233.33333333333334 6.666666666666657C 249.66666666666669 6.666666666666657 263.6666666666667 17.777777777777786 280 17.777777777777786C 280 17.777777777777786 280 17.777777777777786 280 100M 280 17.777777777777786z" pathFrom="M -1 140L -1 140L 46.666666666666664 140L 93.33333333333333 140L 140 140L 186.66666666666666 140L 233.33333333333334 140L 280 140"></path><path id="SvgjsPath1543" d="M 0 77.77777777777777C 16.333333333333332 77.77777777777777 30.333333333333332 51.111111111111114 46.666666666666664 51.111111111111114C 63 51.111111111111114 77 60 93.33333333333333 60C 109.66666666666666 60 123.66666666666666 24.444444444444443 140 24.444444444444443C 156.33333333333331 24.444444444444443 170.33333333333331 55.55555555555556 186.66666666666666 55.55555555555556C 203 55.55555555555556 217 6.666666666666657 233.33333333333334 6.666666666666657C 249.66666666666669 6.666666666666657 263.6666666666667 17.777777777777786 280 17.777777777777786" fill="none" fill-opacity="1" stroke="#7367f0" stroke-opacity="1" stroke-linecap="butt" stroke-width="2.5" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMaskd491t8kij)" pathTo="M 0 77.77777777777777C 16.333333333333332 77.77777777777777 30.333333333333332 51.111111111111114 46.666666666666664 51.111111111111114C 63 51.111111111111114 77 60 93.33333333333333 60C 109.66666666666666 60 123.66666666666666 24.444444444444443 140 24.444444444444443C 156.33333333333331 24.444444444444443 170.33333333333331 55.55555555555556 186.66666666666666 55.55555555555556C 203 55.55555555555556 217 6.666666666666657 233.33333333333334 6.666666666666657C 249.66666666666669 6.666666666666657 263.6666666666667 17.777777777777786 280 17.777777777777786" pathFrom="M -1 140L -1 140L 46.666666666666664 140L 93.33333333333333 140L 140 140L 186.66666666666666 140L 233.33333333333334 140L 280 140"></path><g id="SvgjsG1536" class="apexcharts-series-markers-wrap" data:realIndex="0"><g class="apexcharts-series-markers"><circle id="SvgjsCircle1563" r="0" cx="0" cy="0" class="apexcharts-marker whb1rkxxb no-pointer-events" stroke="#ffffff" fill="#7367f0" fill-opacity="1" stroke-width="2" stroke-opacity="0.9" default-marker-size="0"></circle></g></g></g><g id="SvgjsG1537" class="apexcharts-datalabels" data:realIndex="0"></g></g><line id="SvgjsLine1558" x1="0" y1="0" x2="280" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1559" x1="0" y1="0" x2="280" y2="0" stroke-dasharray="0" stroke-width="0" class="apexcharts-ycrosshairs-hidden"></line><g id="SvgjsG1560" class="apexcharts-yaxis-annotations"></g><g id="SvgjsG1561" class="apexcharts-xaxis-annotations"></g><g id="SvgjsG1562" class="apexcharts-point-annotations"></g></g><rect id="SvgjsRect1530" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe"></rect><g id="SvgjsG1546" class="apexcharts-yaxis" rel="0" transform="translate(-18, 0)"></g><g id="SvgjsG1528" class="apexcharts-annotations"></g></svg><div class="apexcharts-legend" style="max-height: 50px;"></div><div class="apexcharts-tooltip apexcharts-theme-light"><div class="apexcharts-tooltip-series-group" style="order: 1;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(115, 103, 240);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-label"></span><span class="apexcharts-tooltip-text-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div><div class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light"><div class="apexcharts-yaxistooltip-text"></div></div></div></div>
+                        <div class="resize-triggers"><div class="expand-trigger"><div style="width: 281px; height: 239px;"></div></div><div class="contract-trigger"></div></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-header flex-column align-items-start pb-0">
+                            <div class="avatar bg-light-success p-50 m-0">
+                                <div class="avatar-content">
+                                    <i data-feather="film"></i>
+                                </div>
+                            </div>
+                            <h2 class="fw-bolder mt-1">@ViewBag.Movie</h2>
+                            <p class="card-text">Movies</p>
+                        </div>
+                        <div id="line-area-chart-2" style="min-height: 100px;"><div id="apexchartscnkuciuo" class="apexcharts-canvas apexchartscnkuciuo apexcharts-theme-light" style="width: 280px; height: 100px;"><svg id="SvgjsSvg1565" width="280" height="100" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" class="apexcharts-svg" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent;"><g id="SvgjsG1567" class="apexcharts-inner apexcharts-graphical" transform="translate(0, 0)"><defs id="SvgjsDefs1566"><clipPath id="gridRectMaskcnkuciuo"><rect id="SvgjsRect1572" width="286.5" height="102.5" x="-3.25" y="-1.25" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="gridRectMarkerMaskcnkuciuo"><rect id="SvgjsRect1573" width="284" height="104" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><linearGradient id="SvgjsLinearGradient1578" x1="0" y1="0" x2="0" y2="1"><stop id="SvgjsStop1579" stop-opacity="0.7" stop-color="rgba(40,199,111,0.7)" offset="0"></stop><stop id="SvgjsStop1580" stop-opacity="0.5" stop-color="rgba(234,249,241,0.5)" offset="0.8"></stop><stop id="SvgjsStop1581" stop-opacity="0.5" stop-color="rgba(234,249,241,0.5)" offset="1"></stop></linearGradient></defs><line id="SvgjsLine1571" x1="0" y1="0" x2="0" y2="100" stroke="#b6b6b6" stroke-dasharray="3" class="apexcharts-xcrosshairs" x="0" y="0" width="1" height="100" fill="#b1b9c4" filter="none" fill-opacity="0.9" stroke-width="1"></line><g id="SvgjsG1584" class="apexcharts-xaxis" transform="translate(0, 0)"><g id="SvgjsG1585" class="apexcharts-xaxis-texts-g" transform="translate(0, -4)"></g></g><g id="SvgjsG1587" class="apexcharts-grid"><g id="SvgjsG1588" class="apexcharts-gridlines-horizontal" style="display: none;"><line id="SvgjsLine1590" x1="0" y1="0" x2="280" y2="0" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1591" x1="0" y1="20" x2="280" y2="20" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1592" x1="0" y1="40" x2="280" y2="40" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1593" x1="0" y1="60" x2="280" y2="60" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1594" x1="0" y1="80" x2="280" y2="80" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1595" x1="0" y1="100" x2="280" y2="100" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line></g><g id="SvgjsG1589" class="apexcharts-gridlines-vertical" style="display: none;"></g><line id="SvgjsLine1597" x1="0" y1="100" x2="280" y2="100" stroke="transparent" stroke-dasharray="0"></line><line id="SvgjsLine1596" x1="0" y1="1" x2="0" y2="100" stroke="transparent" stroke-dasharray="0"></line></g><g id="SvgjsG1574" class="apexcharts-area-series apexcharts-plot-series"><g id="SvgjsG1575" class="apexcharts-series" seriesName="Revenue" data:longestSeries="true" rel="1" data:realIndex="0"><path id="SvgjsPath1582" d="M 0 100L 0 60C 16.333333333333332 60 30.333333333333332 90 46.666666666666664 90C 63 90 77 40 93.33333333333333 40C 109.66666666666666 40 123.66666666666666 80 140 80C 156.33333333333331 80 170.33333333333331 60 186.66666666666666 60C 203 60 217 80 233.33333333333334 80C 249.66666666666669 80 263.6666666666667 20 280 20C 280 20 280 20 280 100M 280 20z" fill="url(#SvgjsLinearGradient1578)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMaskcnkuciuo)" pathTo="M 0 100L 0 60C 16.333333333333332 60 30.333333333333332 90 46.666666666666664 90C 63 90 77 40 93.33333333333333 40C 109.66666666666666 40 123.66666666666666 80 140 80C 156.33333333333331 80 170.33333333333331 60 186.66666666666666 60C 203 60 217 80 233.33333333333334 80C 249.66666666666669 80 263.6666666666667 20 280 20C 280 20 280 20 280 100M 280 20z" pathFrom="M -1 200L -1 200L 46.666666666666664 200L 93.33333333333333 200L 140 200L 186.66666666666666 200L 233.33333333333334 200L 280 200"></path><path id="SvgjsPath1583" d="M 0 60C 16.333333333333332 60 30.333333333333332 90 46.666666666666664 90C 63 90 77 40 93.33333333333333 40C 109.66666666666666 40 123.66666666666666 80 140 80C 156.33333333333331 80 170.33333333333331 60 186.66666666666666 60C 203 60 217 80 233.33333333333334 80C 249.66666666666669 80 263.6666666666667 20 280 20" fill="none" fill-opacity="1" stroke="#28c76f" stroke-opacity="1" stroke-linecap="butt" stroke-width="2.5" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMaskcnkuciuo)" pathTo="M 0 60C 16.333333333333332 60 30.333333333333332 90 46.666666666666664 90C 63 90 77 40 93.33333333333333 40C 109.66666666666666 40 123.66666666666666 80 140 80C 156.33333333333331 80 170.33333333333331 60 186.66666666666666 60C 203 60 217 80 233.33333333333334 80C 249.66666666666669 80 263.6666666666667 20 280 20" pathFrom="M -1 200L -1 200L 46.666666666666664 200L 93.33333333333333 200L 140 200L 186.66666666666666 200L 233.33333333333334 200L 280 200"></path><g id="SvgjsG1576" class="apexcharts-series-markers-wrap" data:realIndex="0"><g class="apexcharts-series-markers"><circle id="SvgjsCircle1603" r="0" cx="0" cy="0" class="apexcharts-marker wy9ftecroj no-pointer-events" stroke="#ffffff" fill="#28c76f" fill-opacity="1" stroke-width="2" stroke-opacity="0.9" default-marker-size="0"></circle></g></g></g><g id="SvgjsG1577" class="apexcharts-datalabels" data:realIndex="0"></g></g><line id="SvgjsLine1598" x1="0" y1="0" x2="280" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1599" x1="0" y1="0" x2="280" y2="0" stroke-dasharray="0" stroke-width="0" class="apexcharts-ycrosshairs-hidden"></line><g id="SvgjsG1600" class="apexcharts-yaxis-annotations"></g><g id="SvgjsG1601" class="apexcharts-xaxis-annotations"></g><g id="SvgjsG1602" class="apexcharts-point-annotations"></g></g><rect id="SvgjsRect1570" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe"></rect><g id="SvgjsG1586" class="apexcharts-yaxis" rel="0" transform="translate(-18, 0)"></g><g id="SvgjsG1568" class="apexcharts-annotations"></g></svg><div class="apexcharts-legend" style="max-height: 50px;"></div><div class="apexcharts-tooltip apexcharts-theme-light"><div class="apexcharts-tooltip-series-group" style="order: 1;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(40, 199, 111);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-label"></span><span class="apexcharts-tooltip-text-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div><div class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light"><div class="apexcharts-yaxistooltip-text"></div></div></div></div>
+                        <div class="resize-triggers"><div class="expand-trigger"><div style="width: 281px; height: 239px;"></div></div><div class="contract-trigger"></div></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-header flex-column align-items-start pb-0">
+                            <div class="avatar bg-light-danger p-50 m-0">
+                                <div class="avatar-content">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart font-medium-5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                </div>
+                            </div>
+                            <h2 class="fw-bolder mt-1">@ViewBag.Shop</h2>
+                            <p class="card-text">Shops</p>
+                        </div>
+                        <div id="line-area-chart-3" style="min-height: 100px;"><div id="apexcharts380em281" class="apexcharts-canvas apexcharts380em281 apexcharts-theme-light" style="width: 280px; height: 100px;"><svg id="SvgjsSvg1605" width="280" height="100" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" class="apexcharts-svg" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent;"><g id="SvgjsG1607" class="apexcharts-inner apexcharts-graphical" transform="translate(0, 0)"><defs id="SvgjsDefs1606"><clipPath id="gridRectMask380em281"><rect id="SvgjsRect1612" width="286.5" height="102.5" x="-3.25" y="-1.25" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="gridRectMarkerMask380em281"><rect id="SvgjsRect1613" width="284" height="104" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><linearGradient id="SvgjsLinearGradient1618" x1="0" y1="0" x2="0" y2="1"><stop id="SvgjsStop1619" stop-opacity="0.7" stop-color="rgba(234,84,85,0.7)" offset="0"></stop><stop id="SvgjsStop1620" stop-opacity="0.5" stop-color="rgba(253,238,238,0.5)" offset="0.8"></stop><stop id="SvgjsStop1621" stop-opacity="0.5" stop-color="rgba(253,238,238,0.5)" offset="1"></stop></linearGradient></defs><line id="SvgjsLine1611" x1="0" y1="0" x2="0" y2="100" stroke="#b6b6b6" stroke-dasharray="3" class="apexcharts-xcrosshairs" x="0" y="0" width="1" height="100" fill="#b1b9c4" filter="none" fill-opacity="0.9" stroke-width="1"></line><g id="SvgjsG1624" class="apexcharts-xaxis" transform="translate(0, 0)"><g id="SvgjsG1625" class="apexcharts-xaxis-texts-g" transform="translate(0, -4)"></g></g><g id="SvgjsG1627" class="apexcharts-grid"><g id="SvgjsG1628" class="apexcharts-gridlines-horizontal" style="display: none;"><line id="SvgjsLine1630" x1="0" y1="0" x2="280" y2="0" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1631" x1="0" y1="20" x2="280" y2="20" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1632" x1="0" y1="40" x2="280" y2="40" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1633" x1="0" y1="60" x2="280" y2="60" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1634" x1="0" y1="80" x2="280" y2="80" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1635" x1="0" y1="100" x2="280" y2="100" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line></g><g id="SvgjsG1629" class="apexcharts-gridlines-vertical" style="display: none;"></g><line id="SvgjsLine1637" x1="0" y1="100" x2="280" y2="100" stroke="transparent" stroke-dasharray="0"></line><line id="SvgjsLine1636" x1="0" y1="1" x2="0" y2="100" stroke="transparent" stroke-dasharray="0"></line></g><g id="SvgjsG1614" class="apexcharts-area-series apexcharts-plot-series"><g id="SvgjsG1615" class="apexcharts-series" seriesName="Sales" data:longestSeries="true" rel="1" data:realIndex="0"><path id="SvgjsPath1622" d="M 0 100L 0 53.33333333333333C 19.599999999999998 53.33333333333333 36.400000000000006 20 56 20C 75.6 20 92.4 73.33333333333333 112 73.33333333333333C 131.6 73.33333333333333 148.4 40 168 40C 187.6 40 204.4 100 224 100C 243.6 100 260.4 13.333333333333329 280 13.333333333333329C 280 13.333333333333329 280 13.333333333333329 280 100M 280 13.333333333333329z" fill="url(#SvgjsLinearGradient1618)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMask380em281)" pathTo="M 0 100L 0 53.33333333333333C 19.599999999999998 53.33333333333333 36.400000000000006 20 56 20C 75.6 20 92.4 73.33333333333333 112 73.33333333333333C 131.6 73.33333333333333 148.4 40 168 40C 187.6 40 204.4 100 224 100C 243.6 100 260.4 13.333333333333329 280 13.333333333333329C 280 13.333333333333329 280 13.333333333333329 280 100M 280 13.333333333333329z" pathFrom="M -1 120L -1 120L 56 120L 112 120L 168 120L 224 120L 280 120"></path><path id="SvgjsPath1623" d="M 0 53.33333333333333C 19.599999999999998 53.33333333333333 36.400000000000006 20 56 20C 75.6 20 92.4 73.33333333333333 112 73.33333333333333C 131.6 73.33333333333333 148.4 40 168 40C 187.6 40 204.4 100 224 100C 243.6 100 260.4 13.333333333333329 280 13.333333333333329" fill="none" fill-opacity="1" stroke="#ea5455" stroke-opacity="1" stroke-linecap="butt" stroke-width="2.5" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMask380em281)" pathTo="M 0 53.33333333333333C 19.599999999999998 53.33333333333333 36.400000000000006 20 56 20C 75.6 20 92.4 73.33333333333333 112 73.33333333333333C 131.6 73.33333333333333 148.4 40 168 40C 187.6 40 204.4 100 224 100C 243.6 100 260.4 13.333333333333329 280 13.333333333333329" pathFrom="M -1 120L -1 120L 56 120L 112 120L 168 120L 224 120L 280 120"></path><g id="SvgjsG1616" class="apexcharts-series-markers-wrap" data:realIndex="0"><g class="apexcharts-series-markers"><circle id="SvgjsCircle1643" r="0" cx="0" cy="0" class="apexcharts-marker wbhruzcwj no-pointer-events" stroke="#ffffff" fill="#ea5455" fill-opacity="1" stroke-width="2" stroke-opacity="0.9" default-marker-size="0"></circle></g></g></g><g id="SvgjsG1617" class="apexcharts-datalabels" data:realIndex="0"></g></g><line id="SvgjsLine1638" x1="0" y1="0" x2="280" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1639" x1="0" y1="0" x2="280" y2="0" stroke-dasharray="0" stroke-width="0" class="apexcharts-ycrosshairs-hidden"></line><g id="SvgjsG1640" class="apexcharts-yaxis-annotations"></g><g id="SvgjsG1641" class="apexcharts-xaxis-annotations"></g><g id="SvgjsG1642" class="apexcharts-point-annotations"></g></g><rect id="SvgjsRect1610" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe"></rect><g id="SvgjsG1626" class="apexcharts-yaxis" rel="0" transform="translate(-18, 0)"></g><g id="SvgjsG1608" class="apexcharts-annotations"></g></svg><div class="apexcharts-legend" style="max-height: 50px;"></div><div class="apexcharts-tooltip apexcharts-theme-light"><div class="apexcharts-tooltip-series-group" style="order: 1;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(234, 84, 85);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-label"></span><span class="apexcharts-tooltip-text-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div><div class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light"><div class="apexcharts-yaxistooltip-text"></div></div></div></div>
+                        <div class="resize-triggers"><div class="expand-trigger"><div style="width: 281px; height: 239px;"></div></div><div class="contract-trigger"></div></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-header flex-column align-items-start pb-0">
+                            <div class="avatar bg-light-warning p-50 m-0">
+                                <div class="avatar-content">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-package font-medium-5"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                                </div>
+                            </div>
+                            <h2 class="fw-bolder mt-1">@ViewBag.Revenue $</h2>
+                            <p class="card-text">This month's revenue</p>
+                        </div>
+                        <div id="line-area-chart-4" style="min-height: 100px;"><div id="apexcharts69diwycc" class="apexcharts-canvas apexcharts69diwycc apexcharts-theme-light" style="width: 280px; height: 100px;"><svg id="SvgjsSvg1645" width="280" height="100" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" class="apexcharts-svg" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent;"><g id="SvgjsG1647" class="apexcharts-inner apexcharts-graphical" transform="translate(0, 0)"><defs id="SvgjsDefs1646"><clipPath id="gridRectMask69diwycc"><rect id="SvgjsRect1652" width="286.5" height="102.5" x="-3.25" y="-1.25" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="gridRectMarkerMask69diwycc"><rect id="SvgjsRect1653" width="284" height="104" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><linearGradient id="SvgjsLinearGradient1658" x1="0" y1="0" x2="0" y2="1"><stop id="SvgjsStop1659" stop-opacity="0.7" stop-color="rgba(255,159,67,0.7)" offset="0"></stop><stop id="SvgjsStop1660" stop-opacity="0.5" stop-color="rgba(255,245,236,0.5)" offset="0.8"></stop><stop id="SvgjsStop1661" stop-opacity="0.5" stop-color="rgba(255,245,236,0.5)" offset="1"></stop></linearGradient></defs><line id="SvgjsLine1651" x1="0" y1="0" x2="0" y2="100" stroke="#b6b6b6" stroke-dasharray="3" class="apexcharts-xcrosshairs" x="0" y="0" width="1" height="100" fill="#b1b9c4" filter="none" fill-opacity="0.9" stroke-width="1"></line><g id="SvgjsG1664" class="apexcharts-xaxis" transform="translate(0, 0)"><g id="SvgjsG1665" class="apexcharts-xaxis-texts-g" transform="translate(0, -4)"></g></g><g id="SvgjsG1667" class="apexcharts-grid"><g id="SvgjsG1668" class="apexcharts-gridlines-horizontal" style="display: none;"><line id="SvgjsLine1670" x1="0" y1="0" x2="280" y2="0" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1671" x1="0" y1="20" x2="280" y2="20" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1672" x1="0" y1="40" x2="280" y2="40" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1673" x1="0" y1="60" x2="280" y2="60" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1674" x1="0" y1="80" x2="280" y2="80" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1675" x1="0" y1="100" x2="280" y2="100" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line></g><g id="SvgjsG1669" class="apexcharts-gridlines-vertical" style="display: none;"></g><line id="SvgjsLine1677" x1="0" y1="100" x2="280" y2="100" stroke="transparent" stroke-dasharray="0"></line><line id="SvgjsLine1676" x1="0" y1="1" x2="0" y2="100" stroke="transparent" stroke-dasharray="0"></line></g><g id="SvgjsG1654" class="apexcharts-area-series apexcharts-plot-series"><g id="SvgjsG1655" class="apexcharts-series" seriesName="Orders" data:longestSeries="true" rel="1" data:realIndex="0"><path id="SvgjsPath1662" d="M 0 100L 0 60C 16.333333333333332 60 30.333333333333332 10 46.666666666666664 10C 63 10 77 80 93.33333333333333 80C 109.66666666666666 80 123.66666666666666 10 140 10C 156.33333333333331 10 170.33333333333331 90 186.66666666666666 90C 203 90 217 40 233.33333333333334 40C 249.66666666666669 40 263.6666666666667 80 280 80C 280 80 280 80 280 100M 280 80z" fill="url(#SvgjsLinearGradient1658)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMask69diwycc)" pathTo="M 0 100L 0 60C 16.333333333333332 60 30.333333333333332 10 46.666666666666664 10C 63 10 77 80 93.33333333333333 80C 109.66666666666666 80 123.66666666666666 10 140 10C 156.33333333333331 10 170.33333333333331 90 186.66666666666666 90C 203 90 217 40 233.33333333333334 40C 249.66666666666669 40 263.6666666666667 80 280 80C 280 80 280 80 280 100M 280 80z" pathFrom="M -1 160L -1 160L 46.666666666666664 160L 93.33333333333333 160L 140 160L 186.66666666666666 160L 233.33333333333334 160L 280 160"></path><path id="SvgjsPath1663" d="M 0 60C 16.333333333333332 60 30.333333333333332 10 46.666666666666664 10C 63 10 77 80 93.33333333333333 80C 109.66666666666666 80 123.66666666666666 10 140 10C 156.33333333333331 10 170.33333333333331 90 186.66666666666666 90C 203 90 217 40 233.33333333333334 40C 249.66666666666669 40 263.6666666666667 80 280 80" fill="none" fill-opacity="1" stroke="#ff9f43" stroke-opacity="1" stroke-linecap="butt" stroke-width="2.5" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMask69diwycc)" pathTo="M 0 60C 16.333333333333332 60 30.333333333333332 10 46.666666666666664 10C 63 10 77 80 93.33333333333333 80C 109.66666666666666 80 123.66666666666666 10 140 10C 156.33333333333331 10 170.33333333333331 90 186.66666666666666 90C 203 90 217 40 233.33333333333334 40C 249.66666666666669 40 263.6666666666667 80 280 80" pathFrom="M -1 160L -1 160L 46.666666666666664 160L 93.33333333333333 160L 140 160L 186.66666666666666 160L 233.33333333333334 160L 280 160"></path><g id="SvgjsG1656" class="apexcharts-series-markers-wrap" data:realIndex="0"><g class="apexcharts-series-markers"><circle id="SvgjsCircle1683" r="0" cx="0" cy="0" class="apexcharts-marker w0rdo7idkk no-pointer-events" stroke="#ffffff" fill="#ff9f43" fill-opacity="1" stroke-width="2" stroke-opacity="0.9" default-marker-size="0"></circle></g></g></g><g id="SvgjsG1657" class="apexcharts-datalabels" data:realIndex="0"></g></g><line id="SvgjsLine1678" x1="0" y1="0" x2="280" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1679" x1="0" y1="0" x2="280" y2="0" stroke-dasharray="0" stroke-width="0" class="apexcharts-ycrosshairs-hidden"></line><g id="SvgjsG1680" class="apexcharts-yaxis-annotations"></g><g id="SvgjsG1681" class="apexcharts-xaxis-annotations"></g><g id="SvgjsG1682" class="apexcharts-point-annotations"></g></g><rect id="SvgjsRect1650" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe"></rect><g id="SvgjsG1666" class="apexcharts-yaxis" rel="0" transform="translate(-18, 0)"></g><g id="SvgjsG1648" class="apexcharts-annotations"></g></svg><div class="apexcharts-legend" style="max-height: 50px;"></div><div class="apexcharts-tooltip apexcharts-theme-light"><div class="apexcharts-tooltip-series-group" style="order: 1;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(255, 159, 67);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-label"></span><span class="apexcharts-tooltip-text-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div><div class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light"><div class="apexcharts-yaxistooltip-text"></div></div></div></div>
+                        <div class="resize-triggers"><div class="expand-trigger"><div style="width: 281px; height: 239px;"></div></div><div class="contract-trigger"></div></div>
+                    </div>
+                </div>
+
+                <!-- Greetings Card ends -->
             </div>
-        </div>
+
+            <div class="row match-height">
+                <!-- Avg Sessions Chart Card starts -->
+                <div class="col-lg-6 col-12">
+                    <div class="card">
+                        <div class="card-header align-items-start">
+                            <div>
+                                <h4 class="card-title mb-25">Revenue</h4>
+                                <p class="card-text mb-0">2021</p>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings font-medium-3 text-muted cursor-pointer"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </div>
+                        <div class="card-body pb-0" style="position: relative;">
+                            <div id="sales-line-chart" style="min-height: 255px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Avg Sessions Chart Card ends -->
+                <!-- Support Tracker Chart Card starts -->
+                <div class="col-lg-6 col-12">
+                    <div class="card">
+                        <div class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start">
+                            <div>
+                                <p class="card-subtitle text-muted mb-25">Ticket</p>
+                                @*<h4 class="card-title fw-bolder">$74,382.72</h4>*@
+                            </div>
+                            <div class="d-flex align-items-center mt-md-0 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar font-medium-2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                <input type="text" id="ticket-filter" class="form-control flat-picker bg-transparent border-0 shadow-none flatpickr-input" placeholder="YYYY-MM-DD" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="bar-chart" style="min-height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Support Tracker Chart Card ends -->
+            </div>
+            <!-- List DataTable -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card invoice-list-wrapper">
+                        <div class="card-datatable table-responsive">
+                            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                <div class="card-header">
+                                    <h4 class="card-title">Top 10 most watched movies</h4>
+                                </div>
+                                <table class="invoice-list-table table dataTable no-footer dtr-column" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="control sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="display: none;"></th>
+                                            <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 46px;" aria-label="#: activate to sort column ascending" aria-sort="descending">#</th>
+                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 270px;" aria-label="Client: activate to sort column ascending">Movie</th>
+                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 73px;" aria-label="Total: activate to sort column ascending">Total Ticket</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in ViewBag.TopMovie)
+                                        {
+                                            <tr role="row" class="odd">
+                                                <td class=" control" tabindex="0" style="display: none;"></td>
+                                                <td class="sorting_1"><a class="font-weight-bold" href="javascript:void(0);"> @item.MovieId</a></td>
+                                                <td>
+                                                    <div class="d-flex justify-content-left align-items-center">
+                                                        <div class="avatar-wrapper">
+                                                            <div class="avatar-content-row" style="background-image: url('@item.MovieImage');"> </div>
+                                                        </div>
+                                                        <div class="d-flex flex-column">
+                                                            <h6 class="user-name mb-0">@item.MovieName</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    @item.TotalTicket
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/ List DataTable -->
+        </section>
+        <!-- Dashboard Analytics end -->
+
     </div>
-    <!--/ Kick start -->
 
 </div>
 

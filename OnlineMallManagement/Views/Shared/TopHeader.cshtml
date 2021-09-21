@@ -86,7 +86,7 @@
                         <button class="rd-navbar-collapse-toggle d-xl-none d-lg-inline-block" data-rd-navbar-toggle=".rd-navbar-top-panel"><span></span></button>
                     </div>
                 </div>
-                <div class="rd-navbar-right-side">
+                <div class="rd-navbar-right-side" id="menu-top-header">
                     <div class="rd-navbar-nav-wrap d-inline-block">
                         <ul class="rd-navbar-nav">
                             <li class="rd-nav-item active">
@@ -135,7 +135,7 @@
                         <div class="rd-navbar-search-wrap">
                             <div class="rd-navbar-search">
                                 <a class="rd-navbar-search-toggle" data-rd-navbar-toggle=".rd-navbar-search" href="#"><span></span></a>
-                                <form class="rd-search rd-navbar-search-custom" action="search-results.html" data-search-live="rd-search-results-live" method="GET">
+                                <form class="rd-search rd-navbar-search-custom" action="@Url.Action("SearchResults","Home")" data-search-live="rd-search-results-live" method="GET">
                                     <div class="form-group">
                                         <label class="form-label" for="rd-navbar-search-form-input">Search</label>
                                         <input class="rd-navbar-search-form-input form-control form-control-gray-lightest" id="rd-navbar-search-form-input" type="text" name="s" autocomplete="off">

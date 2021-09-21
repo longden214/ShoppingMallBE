@@ -15,7 +15,7 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
         [Authorize(Roles = "Admin,User,Customer")]
         public ActionResult Index()
         {
-            ViewBag.Feedbacks = dbContext.Feedbacks.ToList();
+            ViewBag.Feedbacks = dbContext.Feedbacks.OrderByDescending(x => x.Id).ToList();
             return View();
         }
 

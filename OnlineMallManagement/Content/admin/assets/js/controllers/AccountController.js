@@ -31,6 +31,7 @@ function editAccount(model) {
                 });
 
                 $('.acc-displayName').html(res.displayName);
+                $('.avatar .avatar-content').html(res.displayName.slice(0,1).toUpperCase());
             } else {
                 toastr.error('Update failed!', 'Error!', {
                     closeButton: true,

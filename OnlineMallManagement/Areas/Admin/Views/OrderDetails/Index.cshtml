@@ -1,0 +1,272 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div class="content-header row">
+    <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h2 class="content-header-title float-left mb-0">Order Management</h2>
+                <div class="breadcrumb-wrapper">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Order
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+    </div>
+</div>
+<div class="content-body">
+    <!-- Hoverable rows start -->
+    <div class="row" id="table-hover-row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body border-bottom">
+                    <h4 class="card-title">Order Detail</h4>
+                    <div class="row">
+                        <div class="col-md-4 user_role">
+                            <label class="form-label" for="UserRole">Time </label>
+                            <input type="text" class="form-control" id="Start-time" placeholder="Time">
+                        </div>
+                        <div class="col-md-4 user_plan">
+                            <label class="form-label" for="UserPlan">Start Date</label>
+                            <input type="text" class="form-control" id="Start-date" placeholder="Start Date">
+                        </div>
+                        <div class="col-md-4 user_status">
+                            <label class="form-label" for="FilterTransaction">End Date</label>
+                            <input type="text" class="form-control" id="End-date" placeholder="End Date">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center header-actions row mt-75" style="margin-bottom: 10px; padding-left: 1.5rem; padding-right: 1.5rem;">
+                    <div class="col-sm-12 col-lg-4">
+                        <label>
+                            Room
+                        </label>
+                        <select id="showId" name="showId" aria-controls="DataTables_Table_0" class="form-select form-control">
+                            <option value="-1">Select</option>
+                            @foreach (var item in ViewBag.ShowId)
+                            {
+                                <option value="@item.IdRoom">@item.RoomName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <label>
+                            Search:
+                        </label>
+                        <input type="text" class="form-control" id="txtSearch" placeholder="" aria-controls="DataTables_Table_0">
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class=" d-flex align-items-center justify-content-center">
+                                <button class="dt-button add-new btn btn-primary" tabindex="0" aria-controls="DataTables_Table_0" onclick="search()" type="button" data-bs-toggle="modal" data-bs-target="#modals-slide-in">
+                                    <span>Filter</span>
+                                </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Order Id</th>
+                                <th>Customer</th>
+                                <th>Phone</th>
+                                <th>Movie</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Room</th>
+                                <th>Seat</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-between mx-2 row mb-1">
+                        <div class="col-sm-12 col-md-12">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination mt-3 justify-content-center" id="load-pagination">
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hoverable rows end -->
+</div>
+@section Styles {
+    <link href="~/Content/admin/assets/css/select2.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/admin/assets/js/select2.min.js"></script>
+    <script src="~/Content/admin/assets/js/scripts.js"></script>
+    <script>
+        $(document).ready(function () {
+            loadData();
+            $("body").on("click", ".pagination li a", function (event) {
+                event.preventDefault();
+                var page = $(this).attr('data-page');
+
+                var showId = $("#showId").val();
+                var StartTime = $("#Start-time").val();
+
+                var StartDate = $("#Start-date").val();
+                var EndDate = $("#End-date").val();
+
+                if (StartDate == "") {
+                    StartDate = null;
+                }
+
+                if (EndDate == "") {
+                    EndDate = null;
+                }
+
+                if (showId == -1) {
+                    showId = null;
+                }
+                if (StartTime == "") {
+                    StartTime = null;
+                }
+                //load event pagination
+                var txtSearch = $("#txtSearch").val();
+
+                if (txtSearch != "") {
+                    loadData(txtSearch, showId, StartTime, StartDate, EndDate, page)
+                }
+                else {
+                    loadData(null, showId, StartTime, StartDate, EndDate, page);
+                }
+
+
+            });
+        });
+        //start time
+        $('#Start-time').flatpickr({
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i"
+        });
+        //
+        //start date
+        $('#Start-date').flatpickr({
+            dateFormat: "Y-m-d"
+        });
+        //
+        //end date
+        $('#End-date').flatpickr({
+            dateFormat: "Y-m-d"
+        });
+        //<option value="-1">Show id :</option>
+        // load list data
+        function loadData(txtSearch, showId, StartTime, StartDate, EndDate, page) {
+            $.ajax({
+                url: "/Admin/OrderDetails/Load",
+                type: "GET",
+                data: { txtSearch: txtSearch, showId: showId, StartTime: StartTime, StartDate: StartDate, EndDate: EndDate, page: page },
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    var html = '';
+
+                    $.each(result.detail, function (key, item) {
+                        html += '<tr>';
+                        html += '<td>' + item.OrderId + '</td>';
+                        html += '<td>' + item.FullName + '</td>';
+                        html += '<td>' + item.Phone + '</td>';
+                        html += '<td>' + item.MoviveName + '</td>';
+                        html += '<td>' + item.ScreeningDate + '</td>';
+                        html += '<td>' + item.StartTime + '</td>';
+                        html += '<td>' + item.RoomName + '</td>';
+                        html += '<td>' + item.SeatName + '</td>';
+                        html += '</tr>';
+
+
+                        //create pagination
+                        var pagination_string = "";
+                        var pageCurrent = result.pageCurrent;
+                        var numSize = result.numSize;
+
+                        //create button previous
+                        if (pageCurrent > 1) {
+                            var pagePrevious = pageCurrent - 1;
+                            pagination_string += '<li class="page-item"> <a class="page-link" href="#0" data-page=' + pagePrevious + ' aria-label="Previous"> <span aria-hidden="true">«</span> </a> </li>';
+                        } else {
+                            pagination_string += '<li class="page-item disabled"> <a class="page-link" href="#0"  aria-label="Previous"> <span aria-hidden="true">«</span> </a> </li>'
+                        }
+
+                        for (var i = 1; i <= numSize; i++) {
+                            if (i == pageCurrent) {
+                                pagination_string += '<li class="page-item active"><a class="page-link" data-page=' + i + ' href="#0">' + pageCurrent + '</a></li>';
+                            }
+                            else {
+                                pagination_string += '<li class="page-item "><a class="page-link" data-page=' + i + ' href="#0">' + i + '</a></li>';
+                            }
+                        }
+
+                        //create button next
+                        if (pageCurrent >= 1 && pageCurrent < numSize) {
+                            var pageNext = pageCurrent + 1;
+                            pagination_string += '<li class="page-item"> <a class="page-link" href="#0" data-page=' + pageNext + ' aria-label="Next"> <span aria-hidden="true">»</span> </a> </li>';
+                        } else {
+                            pagination_string += '<li class="page-item disabled"> <a class="page-link" href="#0" aria-label="Next"> <span aria-hidden="true">»</span> </a> </li>';
+                        }
+
+                        //load pagination
+                        $("#load-pagination").html(pagination_string);
+                    });
+
+                    $('#tbody').html(html);
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+        //
+
+        function search() {
+            var showId = document.getElementById("showId").value;
+            var StartTime = $("#Start-time").val();
+            var txtSearch = $("#txtSearch").val();
+            var StartDate = $("#Start-date").val();
+            var EndDate = $("#End-date").val();
+
+            if (StartDate == "") {
+                StartDate = null;
+            }
+
+            if (EndDate == "") {
+                EndDate = null;
+            }
+
+            if (showId == -1) {
+                showId = null;
+            }
+            if (StartTime == "") {
+                StartTime = null;
+            }
+
+            if (txtSearch != "") {
+                loadData(txtSearch, showId, StartTime, StartDate, EndDate)
+            }
+            else {
+                loadData(null, showId, StartTime, StartDate, EndDate);
+            }
+        }
+    </script>
+}

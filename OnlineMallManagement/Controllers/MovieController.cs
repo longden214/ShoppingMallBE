@@ -199,7 +199,7 @@ namespace OnlineMallManagement.Controllers
             return View();
         }
 
-        public ActionResult MovieSeat(int? showId,int? movieId)
+        public ActionResult MovieSeat(int? showId, int? movieId)
         {
             if (showId == null || movieId == null)
             {
@@ -236,11 +236,8 @@ namespace OnlineMallManagement.Controllers
             Session["CartSession"] = null;
             Session["Customer"] = null;
 
-            string convert = DateTime.Now.ToString("yyyy-MM-dd");
-
-            var times = (from p in dbContext.Movies
-                         join s in dbContext.Screenings on p.IdMovie equals s.Movie_Id
-                         where s.ScreeningDate.ToString().Equals(convert) && s.Movie_Id == id
+            var times = (from s in dbContext.Screenings
+                         where s.Movie_Id == id && System.Data.Entity.DbFunctions.CreateDateTime(s.ScreeningDate.Year, s.ScreeningDate.Month, s.ScreeningDate.Day, s.StartTime.Hours, s.StartTime.Minutes, s.StartTime.Seconds) >= DateTime.Now
                          select new ScreeningViewClient
                          {
                              Id = s.Id,
@@ -251,8 +248,22 @@ namespace OnlineMallManagement.Controllers
                          }).ToList();
 
             ViewBag.Times = times;
-            ViewBag.Count = times.Count();
+           
             ViewBag.MovieId = id;
+            ViewBag.MovieName = dbContext.Movies.Find(id).MoviveName;
+
+            var getDate = (from s in dbContext.Screenings
+                           where s.Movie_Id == id && s.ScreeningDate >= DateTime.Today
+                           group s by s.ScreeningDate into b
+                           select new ShowDateView
+                           {
+                               ShowDate = b.FirstOrDefault().ScreeningDate,
+                               ShowCount = b.Count()
+                           }).ToList();
+
+            ViewBag.GetDate = getDate;
+
+            ViewBag.Count = getDate.Count();
 
             var bn = dbContext.Movies.Find(id).banner;
 
@@ -264,28 +275,8 @@ namespace OnlineMallManagement.Controllers
             {
                 ViewBag.MovieBanner = "/Content/client/assets/images/banner/moviebaner2.jpg";
             }
-            
 
             return View();
-        }
-
-        public JsonResult GetTimes(int id,DateTime? day)
-        {
-            string convert = day.Value.ToString("yyyy-MM-dd");
-
-            var times = (from p in dbContext.Movies
-                         join s in dbContext.Screenings on p.IdMovie equals s.Movie_Id
-                         where s.ScreeningDate.ToString().Equals(convert) && s.Movie_Id == id
-                         select new ScreeningViewClient
-                         {
-                             Id = s.Id,
-                             RoomId = s.Room_IdRoom,
-                             MovieId = s.Movie_Id,
-                             Day = s.ScreeningDate.ToString(),
-                             Time = s.StartTime.ToString()
-                         }).ToList();
-
-            return Json(new { timeList = times }, JsonRequestBehavior.AllowGet);
         }
     }
 }

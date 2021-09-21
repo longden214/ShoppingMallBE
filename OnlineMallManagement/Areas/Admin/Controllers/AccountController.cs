@@ -62,7 +62,6 @@ namespace OnlineMallManagement.Areas.Admin.Controllers
                     HttpContext.Application["uId"] = data.FirstOrDefault().Id;
                     HttpContext.Application["displayName"] = data.FirstOrDefault().DisplayName;
 
-
                     HttpContext.Application["favicon"] = dbContext.Configs.Find(15).value;
                     HttpContext.Application["logo"] = dbContext.Configs.Find(16).value;
 

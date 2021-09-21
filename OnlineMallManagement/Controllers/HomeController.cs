@@ -72,7 +72,7 @@ namespace OnlineMallManagement.Controllers
             return View();
         }
 
-        public ActionResult SearchResults()
+        public ActionResult SearchResults(string filter)
         {
             return View();
         }

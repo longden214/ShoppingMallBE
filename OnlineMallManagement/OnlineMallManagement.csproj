@@ -156,6 +156,7 @@
     <Compile Include="Areas\Admin\Controllers\EventsController.cs" />
     <Compile Include="Areas\Admin\Controllers\GalleryController.cs" />
     <Compile Include="Areas\Admin\Controllers\MovieController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderDetailsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
     <Compile Include="Areas\Admin\Controllers\SalesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ScreeningController.cs" />
@@ -167,8 +168,10 @@
     <Compile Include="Areas\Admin\Data\AccountModel.cs" />
     <Compile Include="Areas\Admin\Data\BlogViewModel.cs" />
     <Compile Include="Areas\Admin\Data\MovieViewModel.cs" />
+    <Compile Include="Areas\Admin\Data\OrderDetailsModel.cs" />
     <Compile Include="Areas\Admin\Data\ScreeningViewModel.cs" />
     <Compile Include="Areas\Admin\Data\SeatViewModel.cs" />
+    <Compile Include="Areas\Admin\Data\TopMovieView.cs" />
     <Compile Include="Areas\Admin\Data\UserViewModel.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
@@ -279,6 +282,7 @@
       <DependentUpon>DbONlineMallManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Shop_ProductMetaData.cs" />
+    <Compile Include="Models\ShowDateView.cs" />
     <Compile Include="Models\UserRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -3691,6 +3695,7 @@
     <Content Include="Areas\Admin\Views\CategoryBlog\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Gallery\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderDetails\Index.cshtml" />
     <None Include="Content\client\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\client\fonts\fontawesome-webfont.svg" />
     <None Include="Content\client\fonts\fontawesome-webfont.ttf" />
